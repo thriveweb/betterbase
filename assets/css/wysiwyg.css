@@ -1,0 +1,231 @@
+/*-----------------------------------------------------------------------
+Fonts
+-----------------------------------------------------------------------*/
+
+@import url('https://use.typekit.net/vql0cno.css');
+
+/*-----------------------------------------------------------------------
+Variables
+-----------------------------------------------------------------------*/
+
+:root {
+   --font-primary: 'proxima-nova', sans-serif;
+
+   --white: #ffffff;
+   --white-rgb: 255, 255, 255;
+
+   --black: #000000;
+   --black-rgb: 0, 0, 0;
+
+   --transition: 0.25s ease all;
+}
+
+/*-------------------------------------------------------
+WYSIWYG
+-------------------------------------------------------*/
+
+#tinymce * {
+   font-optical-sizing: auto;
+   -webkit-text-size-adjust: none;
+   -webkit-font-smoothing: antialiased;
+   font-family: var(--font-primary);
+}
+
+#tinymce h1,
+#tinymce h2,
+#tinymce h3,
+#tinymce h4,
+#tinymce h5,
+#tinymce h6,
+#tinymce ul,
+#tinymce ol,
+#tinymce li,
+#tinymce p,
+#tinymce a {
+   margin: 20px 0;
+   padding: 0;
+   color: var(--black);
+   font-weight: 400;
+   line-height: 1.5;
+}
+
+#tinymce h1,
+#tinymce h1 * {
+   font-size: 60px;
+   line-height: 62px;
+}
+
+#tinymce h2,
+#tinymce h2 * {
+   font-size: 50px;
+   line-height: 52px;
+}
+
+#tinymce h3,
+#tinymce h3 * {
+   font-size: 40px;
+   line-height: 42px;
+}
+
+#tinymce h4,
+#tinymce h4 * {
+   font-size: 24px;
+   line-height: 26px;
+}
+
+#tinymce h5,
+#tinymce h5 * {
+   font-size: 18px;
+   line-height: 20px;
+}
+
+#tinymce h6,
+#tinymce h6 * {
+   font-size: 10px;
+   letter-spacing: 1px;
+   text-transform: uppercase;
+   font-weight: 500;
+}
+
+#tinymce p,
+#tinymce li {
+   font-weight: 400;
+   font-size: 16px !important;
+   line-height: 1.5 !important;
+}
+
+#tinymce strong,
+#tinymce strong * {
+   font-weight: 600 !important;
+}
+
+/* Links */
+
+#tinymce a,
+#tinymce a:hover,
+#tinymce a:focus {
+   color: var(--black);
+   text-underline-offset: 3px !important;
+   text-decoration-thickness: 1px !important;
+}
+
+/* Lists */
+
+#tinymce ul,
+#tinymce ol,
+#tinymce li {
+   margin: 0;
+   padding: 0;
+   list-style: none;
+}
+
+#tinymce li {
+   position: relative;
+   text-align: left;
+   padding: 0 0 0 20px;
+}
+
+#tinymce li:not(:last-child) {
+   margin: 0 0 5px !important;
+}
+
+#tinymce ul li:before {
+   content: '';
+   display: block;
+   position: absolute;
+   top: 9px;
+   left: 3px;
+   width: 3px;
+   height: 3px;
+   border-radius: 3px;
+   background: var(--black);
+}
+
+#tinymce ul.list-style-checkmark li {
+   padding: 0 0 0 25px;
+}
+
+#tinymce ul.list-style-checkmark li:before {
+   top: 5px;
+   width: 14px;
+   height: 14px;
+   background: url(../img/icon-checkmark.svg) 50% no-repeat;
+   background-size: 14px;
+}
+
+#tinymce ol {
+   counter-reset: item;
+   list-style-position: outside;
+}
+
+#tinymce ol li:before {
+   content: counter(item) '. ';
+   counter-increment: item;
+   display: block;
+   position: absolute;
+   top: 0;
+   left: 0;
+}
+
+/* Blockquote */
+
+#tinymce blockquote {
+   margin-left: 0;
+   margin-right: 0;
+   padding: 20px 0 20px 20px;
+   border-left: 1px solid var(--black);
+}
+
+/* Hr */
+
+#tinymce hr {
+   width: 100%;
+   border: 0;
+   border-top: 1px solid var(--black);
+   margin: 40px 0 !important;
+}
+
+#tinymce table * {
+   margin: 0 !important;
+}
+
+#tinymce code {
+   padding: 10px;
+   font-size: 14px;
+   color: var(--white);
+   background: var(--black);
+}
+
+/* Images */
+
+#tinymce img {
+   display: block;
+   max-width: 100% !important;
+   height: auto !important;
+}
+
+#tinymce img:not(:first-child) {
+   margin-top: 40px !important;
+}
+
+#tinymce img:not(:last-child) {
+   margin-bottom: 40px !important;
+}
+
+#tinymce img.aligncenter {
+   margin-left: auto !important;
+   margin-right: auto !important;
+   float: none;
+}
+
+#tinymce img.alignleft {
+   float: left;
+}
+
+#tinymce img.alignright {
+   float: right;
+}
+
+#tinymce img.size-full {
+   width: 100% !important;
+}
