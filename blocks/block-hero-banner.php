@@ -11,7 +11,10 @@
    $content = get_field('block_content');
    $add_button = get_field('block_add_button');
    $button_alignment = get_field('block_button_alignment');
+   $background_media = get_field('block_background_media');
    $background_image = get_field('block_background_image');
+   $background_video = get_field('block_background_video');
+   $video_thumbnail = get_field('block_video_thumbnail');
 
    if (!empty($content)): ?>
       <div class="betterbase-theme <?php echo $classes; ?>" <?php echo ($anchor ? 'id="'.$anchor.'"' : ''); ?>>
@@ -22,8 +25,12 @@
                   <?php include(get_template_directory().'/parts/group-button.php'); ?>
                </div>
             </div>
-            <?php if (!empty($background_image)): ?>
+            <?php if ($background_media === 'image' && !empty($background_image)): ?>
                <div class="background-image" style="background-image: url(<?php echo $background_image['sizes']['2048x2048']; ?>);"></div>
+            <?php elseif ($background_media === 'video' && !empty($background_video) && !empty($video_thumbnail)): ?>
+               <div class="background-video">
+                  <video src="<?php echo $background_video['url']; ?>" poster="<?php echo $video_thumbnail['sizes']['2048x2048']; ?>" autoplay muted loop playsinline></video>
+               </div>
             <?php endif; ?>
          </div>
       </div>
