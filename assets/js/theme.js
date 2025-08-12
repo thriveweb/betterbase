@@ -52,6 +52,29 @@ jQuery(document).ready(function ($) {
    });
 
    /*-----------------------------------------------------------------------
+      Copy to clipboard on click
+   -----------------------------------------------------------------------*/
+
+   let clipboard = $('.copy-to-clipboard');
+   let tooltip = $('.copy-to-clipboard .tooltip');
+
+   clipboard.on('click', function (e) {
+      e.preventDefault();
+      let value = clipboard.attr('data-url');
+      tooltip.html('Copied!');
+      navigator.clipboard.writeText(value);
+   });
+
+   clipboard.on('mouseleave', function (e) {
+      e.preventDefault();
+      setTimeout(function () {
+         if (!clipboard.is(':hover')) {
+            tooltip.html('Copy to clipboard');
+         }
+      }, 250);
+   });
+
+   /*-----------------------------------------------------------------------
       Init popups
    -----------------------------------------------------------------------*/
 
@@ -101,65 +124,67 @@ jQuery(document).ready(function ($) {
    }
    initAccordions();
 
+   /*---------------------------------------------------------------------------
+      Init read more content
+   ---------------------------------------------------------------------------*/
+
+   function initReadMore() {
+      $('.toggle-read-more').on('click', function (e) {
+         e.preventDefault();
+
+         var toggle = $(this);
+         var $container = toggle.closest('.has-read-more');
+         var $short = $container.find('.short-content');
+         var $full = $container.find('.full-content');
+
+         $short.toggle();
+         $full.toggle();
+
+         var toggleText = toggle.attr('data-text');
+         toggle.attr('data-text', toggle.text());
+         toggle.text(toggleText);
+      });
+   }
+   initReadMore();
+
    /*-----------------------------------------------------------------------
-      Copy to clipboard on click
+      Init counting numbers
    -----------------------------------------------------------------------*/
 
-   let clipboard = $('.copy-to-clipboard');
-   let tooltip = $('.copy-to-clipboard .tooltip');
+   if ($('.block-counter').length) {
+      var $counters = $('.anim-count');
 
-   clipboard.on('click', function (e) {
-      e.preventDefault();
-      let value = clipboard.attr('data-url');
-      tooltip.html('Copied!');
-      navigator.clipboard.writeText(value);
-   });
+      function countUp($el) {
+         var target = parseInt($el.data('target'), 10);
+         var current = 0;
+         var increment = target / 100;
 
-   clipboard.on('mouseleave', function (e) {
-      e.preventDefault();
-      setTimeout(function () {
-         if (!clipboard.is(':hover')) {
-            tooltip.html('Copy to clipboard');
+         function updateCount() {
+            current += increment;
+            if (current < target) {
+               $el.text(Math.ceil(current));
+               requestAnimationFrame(updateCount);
+            } else {
+               $el.text(target);
+            }
          }
-      }, 250);
-   });
+         updateCount();
+      }
 
-   /*---------------------------------------------------------------------------
-      Toggle read more content on click
-   ---------------------------------------------------------------------------*/
+      function inViewport($el) {
+         var rect = $el[0].getBoundingClientRect();
+         return rect.top >= 0 && rect.bottom <= $(window).height();
+      }
 
-   $('.toggle-read-more').on('click', function (e) {
-      e.preventDefault();
-
-      var toggle = $(this);
-      var $container = toggle.closest('.has-read-more');
-      var $short = $container.find('.short-content');
-      var $full = $container.find('.full-content');
-
-      $short.toggle();
-      $full.toggle();
-
-      var toggleText = toggle.attr('data-text');
-      toggle.attr('data-text', toggle.text());
-      toggle.text(toggleText);
-   });
-
-   /*---------------------------------------------------------------------------
-      Toggle tab content on click
-   ---------------------------------------------------------------------------*/
-
-   $('.tab-title:not(.tab-link)').click(function (e) {
-      e.preventDefault();
-      let tab_id = $(this).attr('data-tab');
-      $('.tab-title').removeClass('tab-active');
-      $('.tab-content').removeClass('tab-active');
-      $(this).addClass('tab-active');
-      $('.tab-content[data-tab="' + tab_id + '"]').addClass('tab-active');
-   });
-
-   let first_tab_id = $('.tab-titles-wrap .tab-title:first').attr('data-tab');
-   $('.tab-title[data-tab="' + first_tab_id + '"]').addClass('tab-active');
-   $('.tab-content[data-tab="' + first_tab_id + '"]').addClass('tab-active');
+      $(window).on('load scroll', function () {
+         $counters.each(function () {
+            var $counter = $(this);
+            if (inViewport($counter) && $counter.text() === '0') {
+               countUp($counter);
+            }
+         });
+      });
+   }
 
    /*-----------------------------------------------------------------------
       Init Swiper
