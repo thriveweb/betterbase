@@ -280,6 +280,30 @@ function acf_register_custom_blocks() {
       ),
    ));
 
+   /* Counter */
+
+   acf_register_block_type(array(
+      'name' => 'block-counter',
+      'title' => __('Counter'),
+      'description' => __('Animated counting numbers to show your metrics.'),
+      'keywords' => array('number', 'statistics', 'counter'),
+      'render_template' => 'blocks/block-counter.php',
+      'category' => 'general',
+      'icon' => 'chart-bar',
+      'mode' => 'edit',
+      'supports' => array('anchor' => true, 'align' => false),
+      'validation' => true,
+      'example' => array(
+         'attributes' => array(
+            'mode' => 'preview',
+            'data' => array(
+               'has_preview' => true,
+               'preview_image_help' => '',
+            ),
+         ),
+      ),
+   ));
+
    /* Post Feed */
 
    acf_register_block_type(array(
@@ -347,6 +371,7 @@ function acf_custom_block_list($allowed_block_types, $post) {
       'acf/block-page-banner',
       'acf/block-split-content',
       'acf/block-reviews',
+      'acf/block-counter',
       'acf/block-post-feed',
       'acf/block-contact-form',
    );
