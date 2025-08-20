@@ -6,10 +6,12 @@
                <?php echo $accordion['title']; ?>
                <?php include_asset('/assets/img/icon-plus.svg'); ?>
             </h5>
-            <div class="wysiwyg-content" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-               <br><?php echo $accordion['content']; ?>
-               <?php $add_button = $accordion['add_button'];
-               include(get_template_directory().'/parts/group-button.php'); ?>
+            <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+               <div class="wysiwyg-content" itemprop="text">
+                  <br><?php echo $accordion['content']; ?>
+                  <?php $add_button = $accordion['add_button'];
+                  include(get_template_directory().'/parts/group-button.php'); ?>
+               </div>
             </div>
          </div>
       <?php endforeach; ?>
