@@ -2140,6 +2140,15 @@ body.betterbase-theme.admin-bar .site-search {
 }
 
 /*-----------------------------------------------------------------------
+   Block - Video
+-----------------------------------------------------------------------*/
+
+.block-video video {
+   aspect-ratio: 16 / 9;
+   object-fit: cover;
+}
+
+/*-----------------------------------------------------------------------
    Block - Separator
 -----------------------------------------------------------------------*/
 
@@ -2162,11 +2171,11 @@ body.betterbase-theme.admin-bar .site-search {
 /* Responsive */
 
 @media (max-width: 860px) {
-   .block-split-content .column-content {
+   .block-split-content .col-content {
       order: 9;
    }
 
-   .block-split-content .column-image {
+   .block-split-content .col-image {
       order: 1;
    }
 }

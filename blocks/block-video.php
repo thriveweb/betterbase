@@ -11,6 +11,7 @@
    $video_type = get_field('block_video_type');
    $embed_video = get_field('block_embed_video');
    $upload_video = get_field('block_upload_video');
+   $video_thumbnail = get_field('block_video_thumbnail');
 
    if (!empty($embed_video) || !empty($upload_video)): ?>
       <div class="betterbase-theme <?php echo $classes; ?>" <?php echo ($anchor ? 'id="'.$anchor.'"' : ''); ?>>
@@ -21,7 +22,7 @@
                      <?php echo $embed_video; ?>
                   </div>
                <?php elseif ($video_type === 'upload' && !empty($upload_video)): ?>
-                  <video width="100%" playsinline controls>
+                  <video width="100%" playsinline controls poster="<?php echo ($video_thumbnail ? $video_thumbnail['sizes']['large'] : ''); ?>">
                      <source src="<?php echo $upload_video['url']; ?>" type="video/mp4">
                   </video>
                <?php endif; ?>
