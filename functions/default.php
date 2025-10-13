@@ -55,6 +55,13 @@ function console_log($data) {
 }
 
 /*-----------------------------------------------------------------------
+   Disable theme/plugin autoupdate emails
+-----------------------------------------------------------------------*/
+
+add_filter('auto_plugin_update_send_email', '__return_false');
+add_filter('auto_theme_update_send_email', '__return_false');
+
+/*-----------------------------------------------------------------------
    Fix SSL attachment URL
 -----------------------------------------------------------------------*/
 
