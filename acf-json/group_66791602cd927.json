@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_66791603c2629",
-            "label": "Company Info",
+            "label": "Contact Information",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -19,22 +19,6 @@
             "placement": "top",
             "endpoint": 0,
             "selected": 0
-        },
-        {
-            "key": "field_667a231e62a2c",
-            "label": "Header Button",
-            "name": "header_button",
-            "aria-label": "",
-            "type": "link",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array"
         },
         {
             "key": "field_6679161dc262a",
@@ -52,8 +36,9 @@
             },
             "default_value": "",
             "maxlength": "",
+            "allow_in_bindings": 1,
             "placeholder": "",
-            "prepend": "",
+            "prepend": "<span class=\"dashicons dashicons-phone\"><\/span>",
             "append": ""
         },
         {
@@ -72,8 +57,9 @@
             },
             "default_value": "",
             "maxlength": "",
+            "allow_in_bindings": 1,
             "placeholder": "",
-            "prepend": "",
+            "prepend": "<span class=\"dashicons dashicons-email\"><\/span>",
             "append": ""
         },
         {
@@ -81,7 +67,7 @@
             "label": "Street Address",
             "name": "street_address",
             "aria-label": "",
-            "type": "textarea",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -92,9 +78,10 @@
             },
             "default_value": "",
             "maxlength": "",
-            "rows": 3,
+            "allow_in_bindings": 0,
             "placeholder": "",
-            "new_lines": "br"
+            "prepend": "<span class=\"dashicons dashicons-location\"><\/span>",
+            "append": ""
         },
         {
             "key": "field_6679163ac262e",
@@ -188,6 +175,82 @@
                     "default_value": "",
                     "placeholder": "",
                     "parent_repeater": "field_66791644c262f"
+                }
+            ]
+        },
+        {
+            "key": "field_699fa726ec13f",
+            "label": "Header & Footer",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_667a231e62a2c",
+            "label": "Header Button",
+            "name": "header_button",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_699fa761ec140",
+            "label": "Add Policy Link",
+            "name": "add_policy_link",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Policy Link",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_699fa77aec143",
+                    "label": "Link",
+                    "name": "link",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "allow_in_bindings": 0,
+                    "parent_repeater": "field_699fa761ec140"
                 }
             ]
         },
@@ -344,5 +407,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1753331730
+    "display_title": "",
+    "modified": 1772071045
 }

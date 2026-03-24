@@ -37,7 +37,7 @@
                 "id": ""
             },
             "clone": [
-                "group_661491f489c42"
+                "group_699fa14ce98e1"
             ],
             "display": "seamless",
             "layout": "block",
@@ -63,5 +63,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1724804336
+    "display_title": "",
+    "modified": 1772069323
 }

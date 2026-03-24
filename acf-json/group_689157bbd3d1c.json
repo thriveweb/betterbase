@@ -20,7 +20,7 @@
             "maxlength": "",
             "allow_in_bindings": 0,
             "placeholder": "",
-            "prepend": "",
+            "prepend": "<span class=\"dashicons dashicons-heading\"><\/span>",
             "append": ""
         },
         {
@@ -68,5 +68,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1754356207
+    "display_title": "",
+    "modified": 1772070658
 }

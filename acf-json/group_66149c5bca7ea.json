@@ -40,8 +40,9 @@
                     },
                     "default_value": "",
                     "maxlength": "",
+                    "allow_in_bindings": 1,
                     "placeholder": "",
-                    "prepend": "",
+                    "prepend": "<span class=\"dashicons dashicons-heading\"><\/span>",
                     "append": "",
                     "parent_repeater": "field_66149c6cd3380"
                 },
@@ -81,7 +82,7 @@
                         "id": ""
                     },
                     "clone": [
-                        "group_661491f489c42"
+                        "field_661491f5daa29"
                     ],
                     "display": "seamless",
                     "layout": "block",
@@ -110,5 +111,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1752800646
+    "display_title": "",
+    "modified": 1772071096
 }

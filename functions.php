@@ -7,4 +7,3 @@ require_once('functions/media.php');
 require_once('functions/breadcrumbs.php');
 require_once('functions/pagination.php');
 require_once('functions/acf-blocks.php');
-require_once('functions/ajax-filters.php');
