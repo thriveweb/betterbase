@@ -67,8 +67,8 @@ add_filter('auto_theme_update_send_email', '__return_false');
 function fix_ssl_attachment_url($url) {
     if (is_ssl()) {
         $url = str_replace('http://', 'https://', $url);
-        return $url;
     }
+    return $url;
 }
 add_filter('wp_get_attachment_url', 'fix_ssl_attachment_url');
 
