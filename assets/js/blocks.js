@@ -191,12 +191,11 @@ jQuery(document).ready(function ($) {
     }, "globalBlockFields");
 
     const blockSettingDefaults = {
-        "acf/block-hero-banner": {
-            padding_top: 220,
-            padding_bottom: 220,
-        },
         "acf/block-image-gallery": {
             container: "xl",
+        },
+        "acf/block-video": {
+            container: "sm",
         },
         "acf/block-page-banner": {
             padding_top: 120,
@@ -210,9 +209,6 @@ jQuery(document).ready(function ($) {
             container: "xl",
             padding_top: 0,
             padding_bottom: 0,
-        },
-        "acf/block-video": {
-            container: "sm",
         },
     };
 

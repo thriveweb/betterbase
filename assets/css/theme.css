@@ -2022,19 +2022,18 @@ body.wp-admin .betterbase-theme .swiper-carousel-wrap {
 }
 
 /*-----------------------------------------------------------------------
-    Block - Separator
+    Block - Hero Banner
 -----------------------------------------------------------------------*/
 
-.block-separator .separator {
-    display: block;
-    margin: 0;
-    width: 100%;
-    height: 1px;
-    background: var(--block-background-colour);
+.block-hero-banner > div[class*="block-setting-"] {
+    height: calc (100vh - var(--header-height));
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.block-editor .block-separator {
-    padding: 5px 0;
+body.betterbase-theme.admin-bar .block-hero-banner > div[class*="block-setting-"] {
+    height: calc(100vh - var(--header-height) - var(--admin-height));
 }
 
 /*-----------------------------------------------------------------------
@@ -2052,4 +2051,20 @@ body.wp-admin .betterbase-theme .swiper-carousel-wrap {
 
 .betterbase-theme .entry-review .toggle-read-more {
     text-decoration: underline;
+}
+
+/*-----------------------------------------------------------------------
+    Block - Separator
+-----------------------------------------------------------------------*/
+
+.block-separator .separator {
+    display: block;
+    margin: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--block-background-colour);
+}
+
+.block-editor .block-separator {
+    padding: 5px 0;
 }

@@ -6,8 +6,8 @@
     $anchor = (isset($block['anchor']) ? $block['anchor'] : '');
     $background = (isset($block['settings_background_colour']) ? $block['settings_background_colour'] : 'none');
     $container = (isset($block['settings_container']) ? $block['settings_container'] : 'md');
-    $padding_top = (isset($block['settings_padding_top']) ? $block['settings_padding_top'] : '220');
-    $padding_bottom = (isset($block['settings_padding_bottom']) ? $block['settings_padding_bottom'] : '220');
+    $padding_top = (isset($block['settings_padding_top']) ? $block['settings_padding_top'] : '80');
+    $padding_bottom = (isset($block['settings_padding_bottom']) ? $block['settings_padding_bottom'] : '80');
 
     $content = get_field('block_content');
     $add_button = get_field('block_add_button');
@@ -17,7 +17,7 @@
     $background_video = get_field('block_background_video');
     $video_thumbnail = get_field('block_video_thumbnail');
 
-    if (!empty($content)): ?>
+    if (!empty($background_image) || !empty($background_video)): ?>
         <div class="betterbase-theme <?php echo $classes; ?>" <?php echo ($anchor ? 'id="'.$anchor.'"' : ''); ?>>
             <div class="block-setting-padding block-setting-background-colour" style="--block-padding-top: <?php echo $padding_top; ?>px; --block-padding-bottom: <?php echo $padding_bottom; ?>px; --block-background-colour: var(--<?php echo $background; ?>);">
                 <div class="container-<?php echo $container; ?>">
