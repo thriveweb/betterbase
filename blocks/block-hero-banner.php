@@ -1,4 +1,5 @@
 <?php if (isset($block['data']['has_preview']) && $block['data']['has_preview']): ?>
+    <img src="<?php echo get_template_directory_uri(); ?>/blocks/preview/block-hero-banner.jpg" class="acf_pre" style="width: 100%;">
 <?php else:
     $classes = 'block-hero-banner';
     $classes .= (isset($block['className']) ? ' '.$block['className'] : '');
