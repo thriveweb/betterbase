@@ -43,7 +43,7 @@ function acf_register_custom_blocks() {
         'render_template' => 'blocks/block-content.php',
         'category' => 'general',
         'icon' => 'editor-paragraph',
-        'mode' => 'edit',
+        'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
         'example' => array(
@@ -66,7 +66,7 @@ function acf_register_custom_blocks() {
         'render_template' => 'blocks/block-multicolumn.php',
         'category' => 'general',
         'icon' => 'columns',
-        'mode' => 'edit',
+        'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
     ));
@@ -80,7 +80,7 @@ function acf_register_custom_blocks() {
         'render_template' => 'blocks/block-split-content.php',
         'category' => 'general',
         'icon' => 'align-left',
-        'mode' => 'edit',
+        'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
         'example' => array(
@@ -103,7 +103,7 @@ function acf_register_custom_blocks() {
         'render_template' => 'blocks/block-accordion.php',
         'category' => 'general',
         'icon' => 'align-center',
-        'mode' => 'edit',
+        'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
         'example' => array(
@@ -126,7 +126,7 @@ function acf_register_custom_blocks() {
         'render_template' => 'blocks/block-image-gallery.php',
         'category' => 'general',
         'icon' => 'format-gallery',
-        'mode' => 'edit',
+        'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
         'example' => array(
@@ -149,7 +149,7 @@ function acf_register_custom_blocks() {
         'render_template' => 'blocks/block-video.php',
         'category' => 'general',
         'icon' => 'video-alt2',
-        'mode' => 'edit',
+        'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
         'example' => array(
@@ -161,20 +161,6 @@ function acf_register_custom_blocks() {
                 ),
             ),
         ),
-    ));
-
-    /* Separator */
-    acf_register_block_type(array(
-        'name' => 'block-separator',
-        'title' => __('Separator'),
-        'description' => __(''),
-        'keywords' => array('separator', 'break'),
-        'render_template' => 'blocks/block-separator.php',
-        'category' => 'general',
-        'icon' => 'minus',
-        'mode' => 'preview',
-        'supports' => array('anchor' => true, 'align' => false),
-        'validation' => true,
     ));
 
     /* Hero Banner */
@@ -232,7 +218,7 @@ function acf_register_custom_blocks() {
         'render_template' => 'blocks/block-reviews.php',
         'category' => 'general',
         'icon' => 'admin-comments',
-        'mode' => 'edit',
+        'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
         'example' => array(
@@ -255,7 +241,7 @@ function acf_register_custom_blocks() {
         'render_template' => 'blocks/block-post-feed.php',
         'category' => 'general',
         'icon' => 'admin-post',
-        'mode' => 'edit',
+        'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
         'example' => array(
@@ -278,7 +264,7 @@ function acf_register_custom_blocks() {
         'render_template' => 'blocks/block-contact-form.php',
         'category' => 'general',
         'icon' => 'feedback',
-        'mode' => 'edit',
+        'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
         'example' => array(
@@ -290,6 +276,20 @@ function acf_register_custom_blocks() {
                 ),
             ),
         ),
+    ));
+
+    /* Separator */
+    acf_register_block_type(array(
+        'name' => 'block-separator',
+        'title' => __('Separator'),
+        'description' => __(''),
+        'keywords' => array('separator', 'break'),
+        'render_template' => 'blocks/block-separator.php',
+        'category' => 'general',
+        'icon' => 'minus',
+        'mode' => 'preview',
+        'supports' => array('anchor' => true, 'align' => false),
+        'validation' => true,
     ));
 }
 add_action('acf/init', 'acf_register_custom_blocks');
@@ -306,12 +306,12 @@ function acf_custom_block_list($allowed_block_types, $post) {
         'acf/block-accordion',
         'acf/block-image-gallery',
         'acf/block-video',
-        'acf/block-separator',
         'acf/block-hero-banner',
         'acf/block-page-banner',
         'acf/block-reviews',
         'acf/block-post-feed',
         'acf/block-contact-form',
+        'acf/block-separator',
     );
 
     return $allowed_blocks;

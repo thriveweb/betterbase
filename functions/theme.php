@@ -172,3 +172,16 @@ function betterbase_custom_wysiwyg_formats($init_array) {
     return $init_array;
 }
 add_filter('tiny_mce_before_init', 'betterbase_custom_wysiwyg_formats');
+
+
+/*---------------------------------------------------------------------------
+    Force attributes on Gravity Forms shortcodes
+---------------------------------------------------------------------------*/
+
+function betterbase_gf_force_shortcode_atts($form_args) {
+    $form_args['display_title'] = false;
+    $form_args['display_description'] = false;
+    $form_args['ajax'] = true;
+    return $form_args;
+}
+add_filter('gform_form_args', 'betterbase_gf_force_shortcode_atts', 99);
