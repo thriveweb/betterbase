@@ -24,9 +24,9 @@
                 </div>
             </div>
             <?php if (!empty($image)): ?>
-                <div class="background-image" style="background-image: url(<?php echo $image['sizes']['2048x2048']; ?>"></div>
+                <div class="background-image" style="background-image: url(<?php echo $image['sizes']['2048x2048']; ?>);"></div>
             <?php elseif (!empty($page_image)): ?>
-                <div class="background-image" style="background-image: url(<?php echo $page_image; ?>"></div>
+                <div class="background-image" style="background-image: url(<?php echo $page_image; ?>);"></div>
             <?php endif; ?>
         </div>
     </div>

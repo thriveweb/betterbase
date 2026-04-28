@@ -20,7 +20,7 @@ $categories = get_terms(array(
             <div class="container-lg">
                 <?php if (!empty($categories)): ?>
                     <div class="listing-categories flex-layout flex-align-center flex-gap padding-md-bot">
-                        <a href="<?php echo get_permalink($archive_ID); ?>">All</a>
+                        <a href="<?php echo get_permalink($archive_ID); ?>">View All</a>
                         <?php foreach ($categories as $term): ?>
                             <a class="<?php echo ($term_ID === $term->term_id ? 'is-active' : ''); ?>" href="<?php echo get_term_link($term->term_id); ?>"><?php echo $term->name; ?></a>
                         <?php endforeach; ?>
