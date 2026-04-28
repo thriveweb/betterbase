@@ -544,16 +544,16 @@ body.betterbase-theme.admin-bar {
 }
 
 @media (max-width: 770px) {
-    .anotherlevel-theme h1 br,
-    .anotherlevel-theme .h1 br,
-    .anotherlevel-theme h2 br,
-    .anotherlevel-theme .h2 br,
-    .anotherlevel-theme h3 br,
-    .anotherlevel-theme .h3 br,
-    .anotherlevel-theme h4 br,
-    .anotherlevel-theme .h4 br,
-    .anotherlevel-theme h5 br,
-    .anotherlevel-theme .h5 br {
+    .betterbase-theme h1 br,
+    .betterbase-theme .h1 br,
+    .betterbase-theme h2 br,
+    .betterbase-theme .h2 br,
+    .betterbase-theme h3 br,
+    .betterbase-theme .h3 br,
+    .betterbase-theme h4 br,
+    .betterbase-theme .h4 br,
+    .betterbase-theme h5 br,
+    .betterbase-theme .h5 br {
         display: none;
     }
 }
@@ -782,6 +782,7 @@ body.betterbase-theme.admin-bar {
     display: block;
     width: 100%;
     height: auto;
+    min-height: 0 !important;
     border: 0;
     border-radius: 0;
     border: 1px solid var(--grey);
@@ -789,12 +790,13 @@ body.betterbase-theme.admin-bar {
     padding: 14px 16px;
     color: var(--black);
     font-size: 14px;
-    line-height: 20px;
+    line-height: 20px !important;
     font-weight: 400;
     text-align: left;
     text-decoration: none;
     transition: none;
     resize: none;
+    outline: 0 !important;
 }
 
 .betterbase-theme textarea {
@@ -875,7 +877,7 @@ body.betterbase-theme.admin-bar {
 .betterbase-theme input[type="radio"] {
     position: relative;
     display: inline-block;
-    padding: 0;
+    padding: 0 !important;
     margin: 0 10px 0 0;
     min-height: 25px !important;
     min-width: 25px !important;
@@ -1102,7 +1104,14 @@ body.betterbase-theme.admin-bar {
 
 .gravity-theme form .gform-footer,
 .gravity-theme form .gform-page-footer {
-    padding-bottom: 0 !important;
+    padding: 0 !important;
+    margin-top: 25px !important;
+}
+
+.gravity-theme form .gform-page-footer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .gravity-theme form .gform-footer .button,
@@ -1137,7 +1146,7 @@ body.betterbase-theme.admin-bar {
     appearance: none;
     -webkit-appearance: none;
     position: relative;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -1146,13 +1155,13 @@ body.betterbase-theme.admin-bar {
     width: auto;
     height: auto;
     min-width: 100px;
-    min-height: 0;
+    min-height: 0 !important;
     padding: 14px 30px;
     font-size: 15px;
     font-family: var(--font-primary);
     color: var(--black);
     font-weight: 600;
-    line-height: 20px;
+    line-height: 20px !important;
     text-align: center;
     text-decoration: none;
     background: transparent;
@@ -2026,10 +2035,14 @@ body.wp-admin .betterbase-theme .swiper-carousel-wrap {
 -----------------------------------------------------------------------*/
 
 .block-hero-banner > div[class*="block-setting-"] {
-    height: calc (100vh - var(--header-height));
+    height: calc(100vh - var(--header-height));
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.wp-block .block-hero-banner > div[class*="block-setting-"] {
+    height: 990px;
 }
 
 body.betterbase-theme.admin-bar .block-hero-banner > div[class*="block-setting-"] {
