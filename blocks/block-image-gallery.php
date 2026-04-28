@@ -11,6 +11,20 @@
 
     $add_images = get_field('block_add_images');
 
+    if (!empty($add_images)) {
+        $min_slides = 12;
+        $slide_count = count($add_images);
+        if ($slide_count > 0 && $slide_count < $min_slides) {
+            $multi = (int) ceil($min_slides / $slide_count);
+            $target = $multi * $slide_count;
+            $i = 0;
+            while (count($add_images) < $target) {
+                $add_images[] = $add_images[$i % $slide_count];
+                $i++;
+            }
+        }
+    }
+
     if (!empty($add_images)): ?>
         <div class="betterbase-theme <?php echo $classes; ?>" <?php echo ($anchor ? 'id="'.$anchor.'"' : ''); ?>>
             <div class="block-setting-padding block-setting-background-colour" style="--block-padding-top: <?php echo $padding_top; ?>px; --block-padding-bottom: <?php echo $padding_bottom; ?>px; --block-background-colour: var(--<?php echo $background; ?>);">
