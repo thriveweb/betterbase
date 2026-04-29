@@ -837,6 +837,7 @@ body.betterbase-theme.admin-bar {
     height: auto;
     padding: 14px 16px !important;
     border: 1px solid var(--grey);
+    border-radius: 0;
     color: var(--black);
     font-size: 15px;
     line-height: 18px !important;
@@ -880,7 +881,6 @@ body.betterbase-theme.admin-bar {
     max-width: 24px !important;
     max-height: 24px !important;
     border: 1px solid var(--grey);
-    border-radius: var(--border-radius-sm);
     background: var(--white);
     box-shadow: none;
     transition: none;
