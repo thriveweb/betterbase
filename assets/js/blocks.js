@@ -10,13 +10,13 @@ jQuery(document).ready(function ($) {
             const $navPrev = $slider.find(".swiper-nav-prev");
             const $navNext = $slider.find(".swiper-nav-next");
             new Swiper(element, {
-                loop: true,
+                loop: false,
                 spaceBetween: 10,
                 slidesPerView: "auto",
-                centeredSlides: true,
                 pagination: {
                     el: $pagination[0],
                     clickable: true,
+                    type: "progressbar",
                 },
                 navigation: {
                     prevEl: $navPrev[0],
@@ -60,6 +60,10 @@ jQuery(document).ready(function ($) {
     const { PanelBody, SelectControl, RangeControl, TextControl, ButtonGroup, Button } = wp.components;
 
     const allowedBlocks = [
+        "acf/block-post-header",
+        "acf/block-post-content",
+        "acf/block-post-footer",
+        "acf/block-related-posts",
         "acf/block-content",
         "acf/block-multicolumn",
         "acf/block-split-content",
@@ -71,7 +75,7 @@ jQuery(document).ready(function ($) {
         "acf/block-page-banner",
         "acf/block-reviews",
         "acf/block-post-feed",
-        "acf/block-contact-form",
+        "acf/block-contact",
     ];
 
     const globalBlockFields = createHigherOrderComponent(function (BlockEdit) {
@@ -158,19 +162,6 @@ jQuery(document).ready(function ($) {
                                 max: 6,
                                 step: 1,
                             }),
-                            attributes.multicolumn_count === 2 &&
-                                createElement(SelectControl, {
-                                    label: "Column Style",
-                                    value: attributes.multicolumn_style || "",
-                                    options: [
-                                        { label: "Equal Width", value: "equal-width" },
-                                        { label: "Sidebar Left", value: "sidebar-left" },
-                                        { label: "Sidebar Right", value: "sidebar-right" },
-                                    ],
-                                    onChange: function (value) {
-                                        setAttributes({ multicolumn_style: value });
-                                    },
-                                }),
                             createElement(SelectControl, {
                                 label: "Column Alignment",
                                 value: attributes.multicolumn_alignment || "",
@@ -191,6 +182,16 @@ jQuery(document).ready(function ($) {
     }, "globalBlockFields");
 
     const blockSettingDefaults = {
+        "acf/block-post-header": {
+            // container: "sm",
+            padding_top: 40,
+            padding_bottom: 40,
+        },
+        "acf/block-post-footer": {
+            // container: "lg",
+            padding_top: 40,
+            padding_bottom: 40,
+        },
         "acf/block-image-gallery": {
             container: "xl",
         },
@@ -244,13 +245,9 @@ jQuery(document).ready(function ($) {
                         type: "number",
                         default: 2,
                     },
-                    multicolumn_style: {
-                        type: "string",
-                        default: "equal-width",
-                    },
                     multicolumn_alignment: {
                         type: "string",
-                        default: "align-top",
+                        default: "align-start",
                     },
                 }),
             });

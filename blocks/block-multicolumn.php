@@ -22,7 +22,7 @@
                             <div class="col-<?php echo $i; ?>">
                                 <div class="wysiwyg-content <?php echo get_text_colour($background); ?>">
                                     <?php echo ($col['column_content'] ? $col['column_content'] : ''); ?>
-                                    <?php $add_button = $col['column_add_button']; $button_alignment = $col['column_button_alignment']; 
+                                    <?php $add_button = $col['button_group']['add_button']; $button_alignment = $col['button_group']['button_alignment']; 
                                     include(get_template_directory().'/parts/group-button.php'); ?>
                                 </div>
                             </div>

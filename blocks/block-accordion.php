@@ -9,11 +9,21 @@
     $padding_top = (isset($block['settings_padding_top']) ? $block['settings_padding_top'] : '80');
     $padding_bottom = (isset($block['settings_padding_bottom']) ? $block['settings_padding_bottom'] : '80');
 
+    $title = get_field('block_title');
     $add_accordion = get_field('block_add_accordion');
 
     if (!empty($add_accordion)): ?>
         <div class="betterbase-theme <?php echo $classes; ?>" <?php echo ($anchor ? 'id="'.$anchor.'"' : ''); ?>>
             <div class="block-setting-padding block-setting-background-colour" style="--block-padding-top: <?php echo $padding_top; ?>px; --block-padding-bottom: <?php echo $padding_bottom; ?>px; --block-background-colour: var(--<?php echo $background; ?>);">
+                <?php if (!empty($title)): ?>
+                    <div class="container-sm">
+                        <div class="inner-block-head">
+                            <div class="wysiwyg-content text-center <?php echo get_text_colour($background); ?>">
+                                <h3><?php echo $title; ?></h3>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
                 <div class="container-<?php echo $container; ?> <?php echo get_text_colour($background); ?>">
                     <?php include(get_template_directory().'/parts/group-accordion.php'); ?>
                 </div>

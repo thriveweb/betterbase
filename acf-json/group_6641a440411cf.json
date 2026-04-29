@@ -3,6 +3,27 @@
     "title": "Block — Video",
     "fields": [
         {
+            "key": "field_69f168949c48f",
+            "label": "Title",
+            "name": "block_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "<span class=\"dashicons dashicons-heading\"><\/span>",
+            "append": ""
+        },
+        {
             "key": "field_6641a45635ac1",
             "label": "Video Type",
             "name": "block_video_type",
@@ -132,5 +153,8 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1755653382
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1777428642
 }

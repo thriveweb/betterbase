@@ -1,13 +1,13 @@
 {
     "key": "group_667d0a85f24ae",
-    "title": "Block — Contact Form",
+    "title": "Block — Contact",
     "fields": [
         {
             "key": "field_667d0a8604937",
-            "label": "Content",
-            "name": "block_content",
+            "label": "Title",
+            "name": "block_title",
             "aria-label": "",
-            "type": "wysiwyg",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -17,10 +17,32 @@
                 "id": ""
             },
             "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "<span class=\"dashicons dashicons-heading\"><\/span>",
+            "append": ""
+        },
+        {
+            "key": "field_69f16cf939ffc",
+            "label": "Description",
+            "name": "block_description",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": 3,
+            "placeholder": "",
+            "new_lines": "br"
         },
         {
             "key": "field_671af0500d6b1",
@@ -39,12 +61,14 @@
             "choices": {
                 "phone": "Phone Number",
                 "email": "Email Address",
-                "address": "Street Address"
+                "address": "Street Address",
+                "social": "Social Media"
             },
             "default_value": [
                 "phone",
                 "email",
-                "address"
+                "address",
+                "social"
             ],
             "return_format": "value",
             "allow_custom": 0,
@@ -80,7 +104,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/block-contact-form"
+                "value": "acf\/block-contact"
             }
         ]
     ],
@@ -93,5 +117,8 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1734072108
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1777429830
 }

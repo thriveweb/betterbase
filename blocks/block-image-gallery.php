@@ -38,10 +38,16 @@
                                     </div>
                                 <?php endforeach; ?>
                             </div>
-                            <div class="swiper-pagination"></div>
-                            <div class="swiper-navigation">
-                                <div class="swiper-nav-prev"><?php include_asset('icon-arrow-left.svg'); ?></div>
-                                <div class="swiper-nav-next"><?php include_asset('icon-arrow-right.svg'); ?></div>
+                            <div class="swiper-footer <?php echo get_text_colour($background); ?>">
+                                <div class="swiper-pagination"></div>
+                                <div class="swiper-navigation">
+                                    <div class="swiper-nav-prev">
+                                        <?php include_asset('icon-arrow-left.svg'); ?>
+                                    </div>
+                                    <div class="swiper-nav-next">
+                                        <?php include_asset('icon-arrow-right.svg'); ?>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -20,7 +20,7 @@ $add_policy_link = get_field('add_policy_link', 'options'); ?>
                     <?php wp_nav_menu(array('theme_location' => 'footer', 'container' => false)); ?>
                 </div>
             <?php endif; ?>
-            <?php if (!empty($phone_number) || !empty($email_address) || !empty($street_address)): ?>
+            <?php if (!empty($phone_number) || !empty($email_address) || !empty($street_address) || !empty($add_social_media)): ?>
                 <div class="footer-contact">
                     <h6>Contact</h6>
                     <ul>
@@ -54,7 +54,7 @@ $add_policy_link = get_field('add_policy_link', 'options'); ?>
                     <?php endforeach; ?>
                 </p>
             <?php endif; ?>
-            <p class="text-small">Site by <a href="https://thriveweb.com.au" target="_blank" title="Thrive Digital Web Design & Development Gold Coast">Thrive Digital</a></p>
+            <p class="text-small">Site by <a href="https://thriveweb.com.au" target="_blank" title="Thrive Digital Web Design & Development Gold Coast">Thrive</a></p>
         </div>
     </div>
 </footer>

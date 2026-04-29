@@ -33,6 +33,97 @@ add_filter('block_categories_all', 'acf_create_custom_block_categories', 10, 2);
 -----------------------------------------------------------------------*/
 
 function acf_register_custom_blocks() {
+    /* Post Header */
+    acf_register_block_type(array(
+        'name' => 'block-post-header',
+        'title' => __('Post Header'),
+        'description' => __('Display title, date, and assigned categories for current post.'),
+        'keywords' => array('post', 'blog', 'wysiwyg'),
+        'render_template' => 'blocks/block-post-header.php',
+        'category' => 'blog',
+        'icon' => 'info',
+        'mode' => 'preview',
+        'supports' => array('anchor' => true, 'align' => false),
+        'validation' => true,
+        'example' => array(
+            'attributes' => array(
+                'mode' => 'preview',
+                'data' => array(
+                    'has_preview' => true,
+                    'preview_image_help' => '',
+                ),
+            ),
+        ),
+    ));
+
+    /* Post Content */
+    acf_register_block_type(array(
+        'name' => 'block-post-content',
+        'title' => __('Post Content'),
+        'description' => __('Use the WYSIWYG editor to create and format post content.'),
+        'keywords' => array('post', 'blog', 'wysiwyg'),
+        'render_template' => 'blocks/block-content.php',
+        'category' => 'blog',
+        'icon' => 'editor-paragraph',
+        'mode' => 'preview',
+        'supports' => array('anchor' => true, 'align' => false),
+        'validation' => true,
+        'example' => array(
+            'attributes' => array(
+                'mode' => 'preview',
+                'data' => array(
+                    'has_preview' => true,
+                    'preview_image_help' => '',
+                ),
+            ),
+        ),
+    ));
+
+    /* Post Footer */
+    acf_register_block_type(array(
+        'name' => 'block-post-footer',
+        'title' => __('Post Footer'),
+        'description' => __('Display post pagaintion and social media share icons.'),
+        'keywords' => array('post', 'blog', 'pagiantion', 'social', 'share'),
+        'render_template' => 'blocks/block-post-footer.php',
+        'category' => 'blog',
+        'icon' => 'share',
+        'mode' => 'preview',
+        'supports' => array('anchor' => true, 'align' => false),
+        'validation' => true,
+        'example' => array(
+            'attributes' => array(
+                'mode' => 'preview',
+                'data' => array(
+                    'has_preview' => true,
+                    'preview_image_help' => '',
+                ),
+            ),
+        ),
+    ));
+
+    /* Related Posts */
+    acf_register_block_type(array(
+        'name' => 'block-related-posts',
+        'title' => __('Related Posts'),
+        'description' => __('Feed displaying related posts.'),
+        'keywords' => array('post', 'blog', 'feed'),
+        'render_template' => 'blocks/block-related-posts.php',
+        'category' => 'blog',
+        'icon' => 'admin-post',
+        'mode' => 'edit',
+        'supports' => array('anchor' => true, 'align' => false),
+        'validation' => true,
+        'example' => array(
+            'attributes' => array(
+                'mode' => 'preview',
+                'data' => array(
+                    'has_preview' => true,
+                    'preview_image_help' => '',
+                ),
+            ),
+        ),
+    ));
 
     /* Content */
     acf_register_block_type(array(
@@ -117,11 +208,11 @@ function acf_register_custom_blocks() {
         ),
     ));
 
-    /* Image Gallery */
+    /* Gallery */
     acf_register_block_type(array(
         'name' => 'block-image-gallery',
-        'title' => __('Image Gallery'),
-        'description' => __('Sliding image gallery.'),
+        'title' => __('Gallery'),
+        'description' => __('Sliding image carousel.'),
         'keywords' => array('carousel', 'image', 'gallery', 'slider'),
         'render_template' => 'blocks/block-image-gallery.php',
         'category' => 'general',
@@ -255,13 +346,13 @@ function acf_register_custom_blocks() {
         ),
     ));
 
-    /* Contact Form */
+    /* Contact */
     acf_register_block_type(array(
-        'name' => 'block-contact-form',
-        'title' => __('Contact Form'),
+        'name' => 'block-contact',
+        'title' => __('Contact'),
         'description' => __('Embed a form built in Gravity Forms with your contact details.'),
         'keywords' => array('form', 'contact', 'Gravity Forms', 'embed'),
-        'render_template' => 'blocks/block-contact-form.php',
+        'render_template' => 'blocks/block-contact.php',
         'category' => 'general',
         'icon' => 'feedback',
         'mode' => 'preview',
@@ -299,20 +390,36 @@ add_action('acf/init', 'acf_register_custom_blocks');
 -----------------------------------------------------------------------*/
 
 function acf_custom_block_list($allowed_block_types, $post) {
-    $allowed_blocks = array(
-        'acf/block-content',
-        'acf/block-multicolumn',
-        'acf/block-split-content',
-        'acf/block-accordion',
-        'acf/block-image-gallery',
-        'acf/block-video',
-        'acf/block-hero-banner',
-        'acf/block-page-banner',
-        'acf/block-reviews',
-        'acf/block-post-feed',
-        'acf/block-contact-form',
-        'acf/block-separator',
-    );
+    $post_type = $post->post->post_type;
+
+    if (!empty($post_type) && $post_type === 'post') {
+        $allowed_blocks = array(
+            'acf/block-post-header',
+            'acf/block-post-content',
+            'acf/block-post-footer',
+            'acf/block-related-posts',
+            // 'acf/block-image-gallery',
+            // 'acf/block-image',
+            // 'acf/block-video',
+        );
+    } else {
+
+        $allowed_blocks = array(
+            'acf/block-content',
+            'acf/block-multicolumn',
+            'acf/block-split-content',
+            'acf/block-accordion',
+            'acf/block-image-gallery',
+            'acf/block-video',
+            'acf/block-hero-banner',
+            'acf/block-page-banner',
+            'acf/block-reviews',
+            'acf/block-post-feed',
+            'acf/block-contact',
+            'acf/block-separator',
+            // 'core/shortcode',
+        );
+    }
 
     return $allowed_blocks;
 }

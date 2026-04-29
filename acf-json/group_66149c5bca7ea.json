@@ -3,6 +3,27 @@
     "title": "Block — Accordion",
     "fields": [
         {
+            "key": "field_69f15d0e66077",
+            "label": "Title",
+            "name": "block_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "<span class=\"dashicons dashicons-heading\"><\/span>",
+            "append": ""
+        },
+        {
             "key": "field_66149c6cd3380",
             "label": "Add Accordion",
             "name": "block_add_accordion",
@@ -69,8 +90,8 @@
                 },
                 {
                     "key": "field_6614d7f7027ed",
-                    "label": "Add Button",
-                    "name": "add_button",
+                    "label": "Button Group",
+                    "name": "button_group",
                     "aria-label": "",
                     "type": "clone",
                     "instructions": "",
@@ -84,7 +105,7 @@
                     "clone": [
                         "field_661491f5daa29"
                     ],
-                    "display": "seamless",
+                    "display": "group",
                     "layout": "block",
                     "prefix_label": 0,
                     "prefix_name": 0,
@@ -112,5 +133,7 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1772071096
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1777425708
 }

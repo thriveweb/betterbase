@@ -130,7 +130,7 @@ function is_active_woocommerce() {
 
 function enable_active_state_archive_menu_links($classes = array(), $menu_item = false) {
     global $post;
-    $current_ID = (isset( $post->ID ) ? get_the_ID() : NULL);
+    $current_ID = (isset($post->ID) ? get_the_ID() : NULL);
 
     if (isset($current_ID)){
         $classes[] = ($menu_item->url == get_post_type_archive_link($post->post_type)) ? 'current-menu-item' : '';
@@ -145,10 +145,10 @@ add_filter('nav_menu_css_class', 'enable_active_state_archive_menu_links', 10, 2
 -----------------------------------------------------------------------*/
 
 function customised_wp_search_form($form) {
-    $form = '<form role="search" method="get" id="searchform" class="search-form" action="'.home_url('/').'">
-        <label class="screen-reader-text" for="s">Search for</label>
-        <input type="text" value="'.get_search_query().'" name="s" id="s" placeholder="Search for something..." />
-        <button type="submit">Search</button>
+    $form = '<form role="search" method="get" class="search-form" action="'. esc_url(home_url('/')) .'">
+        <label class="screen-reader-text" for="s">' . __( 'Search for:' ) . '</label>
+        <input type="text" value="'. (!is_search() ? esc_attr(get_search_query()) : '') .'" name="s" id="s" placeholder="Search for something..." />
+        <button type="submit">Submit</button>
     </form>';
 
     return $form;
@@ -166,20 +166,6 @@ add_filter('embed_oembed_html', function ($html, $url, $attr, $post_id) {
         return $html;
     }
 }, 10, 4);
-
-/*-----------------------------------------------------------------------
-    Autoresize WYSIWYG editor based on content
------------------------------------------------------------------------*/
-
-function resize_tinymce_wysiwyg_area() {  ?>
-    <script>
-        acf.add_filter('wysiwyg_tinymce_settings', function(mceInit, id, $field) {
-            mceInit.wp_autoresize_on = true;
-            return mceInit;
-        });
-    </script>
-<?php }
-add_action('acf/input/admin_footer', 'resize_tinymce_wysiwyg_area');
 
 /*-----------------------------------------------------------------------
     Tidy admin bar
@@ -202,7 +188,7 @@ add_action('wp_before_admin_bar_render', function() {
     Tidy user profile pages
 -----------------------------------------------------------------------*/
 
-function remove_profile_fields() { ?>
+function tidy_profile_fields() { ?>
     <style>
         #your-profile h2,
         #your-profile .application-passwords,
@@ -241,8 +227,8 @@ function remove_profile_fields() { ?>
         }
     </style>
 <?php }
-add_action('admin_head-user-edit.php', 'remove_profile_fields');
-add_action('admin_head-profile.php', 'remove_profile_fields');
+add_action('admin_head-user-edit.php', 'tidy_profile_fields');
+add_action('admin_head-profile.php', 'tidy_profile_fields');
 
 /*-----------------------------------------------------------------------
     Register user manual
@@ -301,7 +287,7 @@ function thrive_credit_console() {
             888 .  888   888   888     888    '888'    888    .o
             "888" o888o o888o d888b   o888o    '8'     'Y8bod8P'
 
-                         Built by Thrive Digital
+                        Built by Thrive Digital
             `);
         </script>
     <?php }

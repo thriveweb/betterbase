@@ -26,6 +26,20 @@
             {
                 "param": "block",
                 "operator": "==",
+                "value": "acf\/block-post-header"
+            }
+        ],
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/block-post-footer"
+            }
+        ],
+        [
+            {
+                "param": "block",
+                "operator": "==",
                 "value": "acf\/block-separator"
             }
         ]
@@ -39,5 +53,8 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1731910847
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1777426480
 }

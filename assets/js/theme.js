@@ -55,24 +55,66 @@ jQuery(document).ready(function ($) {
         Copy to clipboard on click
     -----------------------------------------------------------------------*/
 
-    let clipboard = $(".copy-to-clipboard");
-    let tooltip = $(".copy-to-clipboard .tooltip");
+    function clipboardCopy() {
+        let clipboard = $(".copy-to-clipboard");
+        let tooltip = $(".copy-to-clipboard .tooltip");
 
-    clipboard.on("click", function (e) {
-        e.preventDefault();
-        let value = clipboard.attr("data-url");
-        tooltip.html("Copied!");
-        navigator.clipboard.writeText(value);
-    });
+        clipboard.on("click", function (e) {
+            e.preventDefault();
+            let value = clipboard.attr("data-url");
+            tooltip.html("Copied!");
+            navigator.clipboard.writeText(value);
+        });
 
-    clipboard.on("mouseleave", function (e) {
-        e.preventDefault();
-        setTimeout(function () {
-            if (!clipboard.is(":hover")) {
-                tooltip.html("Copy to clipboard");
+        clipboard.on("mouseleave", function (e) {
+            e.preventDefault();
+            setTimeout(function () {
+                if (!clipboard.is(":hover")) {
+                    tooltip.html("Copy to clipboard");
+                }
+            }, 250);
+        });
+    }
+    clipboardCopy();
+
+    /*-----------------------------------------------------------------------
+        Animate numbers to count up
+    -----------------------------------------------------------------------*/
+
+    if ($(".block-counter").length) {
+        var $counters = $(".anim-count");
+
+        function countUp($el) {
+            var target = parseInt($el.data("target"), 10);
+            var current = 0;
+            var increment = target / 100;
+
+            function updateCount() {
+                current += increment;
+                if (current < target) {
+                    $el.text(Math.ceil(current));
+                    requestAnimationFrame(updateCount);
+                } else {
+                    $el.text(target);
+                }
             }
-        }, 250);
-    });
+            updateCount();
+        }
+
+        function inViewport($el) {
+            var rect = $el[0].getBoundingClientRect();
+            return rect.top >= 0 && rect.bottom <= $(window).height();
+        }
+
+        $(window).on("load scroll", function () {
+            $counters.each(function () {
+                var $counter = $(this);
+                if (inViewport($counter) && $counter.text() === "0") {
+                    countUp($counter);
+                }
+            });
+        });
+    }
 
     /*-----------------------------------------------------------------------
         Init popups
@@ -125,6 +167,27 @@ jQuery(document).ready(function ($) {
     initAccordions();
 
     /*-----------------------------------------------------------------------
+        Init video embed
+    -----------------------------------------------------------------------*/
+
+    function initVideoEmbed() {
+        $(".video-wrapper").each(function () {
+            const $wrapper = $(this);
+            const $video = $wrapper.find("video");
+
+            $video.on("play", function () {
+                $wrapper.removeClass("is-paused");
+                this.controls = true;
+            });
+
+            $video.on("click", function () {
+                this.controls = true;
+            });
+        });
+    }
+    initVideoEmbed();
+
+    /*-----------------------------------------------------------------------
         Init read more content
     -----------------------------------------------------------------------*/
 
@@ -148,45 +211,6 @@ jQuery(document).ready(function ($) {
     initReadMore();
 
     /*-----------------------------------------------------------------------
-        Init counting numbers
-    -----------------------------------------------------------------------*/
-
-    if ($(".block-counter").length) {
-        var $counters = $(".anim-count");
-
-        function countUp($el) {
-            var target = parseInt($el.data("target"), 10);
-            var current = 0;
-            var increment = target / 100;
-
-            function updateCount() {
-                current += increment;
-                if (current < target) {
-                    $el.text(Math.ceil(current));
-                    requestAnimationFrame(updateCount);
-                } else {
-                    $el.text(target);
-                }
-            }
-            updateCount();
-        }
-
-        function inViewport($el) {
-            var rect = $el[0].getBoundingClientRect();
-            return rect.top >= 0 && rect.bottom <= $(window).height();
-        }
-
-        $(window).on("load scroll", function () {
-            $counters.each(function () {
-                var $counter = $(this);
-                if (inViewport($counter) && $counter.text() === "0") {
-                    countUp($counter);
-                }
-            });
-        });
-    }
-
-    /*-----------------------------------------------------------------------
         Init Swiper
     -----------------------------------------------------------------------*/
 
@@ -196,13 +220,13 @@ jQuery(document).ready(function ($) {
         const $navPrev = $slider.find(".swiper-nav-prev");
         const $navNext = $slider.find(".swiper-nav-next");
         new Swiper(element, {
-            loop: true,
+            loop: false,
             spaceBetween: 10,
             slidesPerView: "auto",
-            centeredSlides: true,
             pagination: {
                 el: $pagination[0],
                 clickable: true,
+                type: "progressbar",
             },
             navigation: {
                 prevEl: $navPrev[0],

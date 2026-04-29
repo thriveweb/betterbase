@@ -44,7 +44,9 @@ $header_button = get_field('header_button', 'options'); ?>
                 </div>
             <?php endif; ?>
             <?php if (!empty($header_button['url']) && !empty($header_button['title'])): ?>
-                <a class="button" href="<?php echo $header_button['url']; ?>" target="<?php echo $header_button['target']; ?>" title="<?php echo $header_button['title']; ?>"><?php echo $header_button['title']; ?></a>
+                <a class="button" href="<?php echo $header_button['url']; ?>" target="<?php echo $header_button['target']; ?>" title="<?php echo $header_button['title']; ?>">
+                    <?php echo $header_button['title']; ?>
+                </a>
             <?php endif; ?>
             <div class="icon-hamburger trigger-menu">
                 <span></span>
@@ -56,11 +58,7 @@ $header_button = get_field('header_button', 'options'); ?>
 <div class="site-responsive-menu">
     <div class="container-xl">
         <?php if ($enable_search): ?>
-            <div class="menu-search">
-                <div class="flex-layout flex-align-center">
-                    <?php get_search_form(); ?>
-                </div>
-            </div>
+            <?php get_search_form(); ?>
         <?php endif; ?>
         <?php if (has_nav_menu('header')): ?>
             <div class="main-menu">
@@ -69,7 +67,9 @@ $header_button = get_field('header_button', 'options'); ?>
         <?php endif; ?>
         <?php if (!empty($header_button['url']) && !empty($header_button['title'])): ?>
             <div class="button-group flex-justify-start">
-                <a class="button" href="<?php echo $header_button['url']; ?>" target="<?php echo $header_button['target']; ?>" title="<?php echo $header_button['title']; ?>"><?php echo $header_button['title']; ?></a>
+                <a class="button" href="<?php echo $header_button['url']; ?>" target="<?php echo $header_button['target']; ?>" title="<?php echo $header_button['title']; ?>">
+                    <?php echo $header_button['title']; ?>
+                </a>
             </div>
         <?php endif; ?>
     </div>
@@ -79,7 +79,9 @@ $header_button = get_field('header_button', 'options'); ?>
     <div class="site-search">
         <div class="container-sm flex-layout flex-align-center">
             <?php get_search_form(); ?>
-            <div class="close-search"><?php include_asset('icon-close.svg'); ?></div>
+            <div class="close-search">
+                <?php include_asset('icon-close.svg'); ?>
+            </div>
         </div>
     </div>
 <?php endif; ?>

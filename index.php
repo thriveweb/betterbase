@@ -13,7 +13,7 @@ $categories = get_terms(array(
 
 <div class="archive-index">
     <?php echo (!empty($archive_object) ? apply_filters('the_content', $archive_object->post_content) : ''); ?>
-    <div class="block-post-feed">
+    <div class="betterbase-theme block-post-feed">
         <div class="block-setting-padding" style="--block-padding-top: 80px; --block-padding-bottom: 80px;">
             <div class="container-lg">
                 <?php if (!empty($categories)): ?>

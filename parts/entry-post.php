@@ -11,7 +11,9 @@ $post_categories = get_the_category($post_ID); ?>
     </div>
     <div class="inner-entry-content">
         <?php if (!empty($post_categories)): ?>
-            <h6><?php echo $post_categories[0]->name; ?></h6>
+            <div class="group-tags">
+                <span><?php echo $post_categories[0]->name; ?></span>
+            </div>
         <?php endif; ?>
         <h5><?php echo $post_title; ?></h5>
     </div>

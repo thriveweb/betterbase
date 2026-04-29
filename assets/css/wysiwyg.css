@@ -14,10 +14,20 @@
     --white: #ffffff;
     --white-rgb: 255, 255, 255;
 
+    --grey: #aaaaaa;
+    --grey-rgb: 170, 170, 170;
+
     --black: #000000;
     --black-rgb: 0, 0, 0;
 
-    --transition: 0.25s ease all;
+    --red: #ff1414;
+    --red-rgb: 255, 20, 20;
+
+    --border-radius-sm: 5px;
+    --border-radius-md: 15px;
+    --border-radius-lg: 30px;
+
+    --transition: 0.25s ease;
 }
 
 /*-----------------------------------------------------------------------
@@ -42,56 +52,67 @@
 #tinymce li,
 #tinymce p,
 #tinymce a {
-    margin: 20px 0;
     padding: 0;
+    margin: 20px 0;
     color: var(--black);
-    font-weight: 400;
     line-height: 1.5;
+    font-weight: 400;
 }
+
+#tinymce img,
+#tinymce hr {
+    margin: 40px 0;
+}
+
+#tinymce li:not(:last-child) {
+    margin: 0 0 5px !important;
+}
+
+/* Typography */
 
 #tinymce h1,
 #tinymce h1 * {
     font-size: 60px;
-    line-height: 62px;
+    line-height: 1.2;
 }
 
 #tinymce h2,
 #tinymce h2 * {
     font-size: 50px;
-    line-height: 52px;
+    line-height: 1.2;
 }
 
 #tinymce h3,
 #tinymce h3 * {
     font-size: 40px;
-    line-height: 42px;
+    line-height: 1.2;
 }
 
 #tinymce h4,
 #tinymce h4 * {
     font-size: 24px;
-    line-height: 26px;
+    line-height: 1.2;
 }
 
 #tinymce h5,
 #tinymce h5 * {
     font-size: 18px;
-    line-height: 20px;
+    line-height: 1.2;
 }
 
 #tinymce h6,
 #tinymce h6 * {
-    font-size: 10px;
-    letter-spacing: 1px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     font-weight: 500;
 }
 
 #tinymce p,
 #tinymce li {
-    font-weight: 400;
     font-size: 16px !important;
     line-height: 1.5 !important;
+    font-weight: 400;
 }
 
 #tinymce strong,
@@ -104,9 +125,13 @@
 #tinymce a,
 #tinymce a:hover,
 #tinymce a:focus {
-    color: var(--black);
     text-underline-offset: 3px !important;
     text-decoration-thickness: 1px !important;
+}
+
+#tinymce a:hover,
+#tinymce a:focus {
+    color: inherit;
 }
 
 /* Lists */
@@ -125,10 +150,6 @@
     padding: 0 0 0 20px;
 }
 
-#tinymce li:not(:last-child) {
-    margin: 0 0 5px !important;
-}
-
 #tinymce ul > li:before {
     content: "";
     display: block;
@@ -141,7 +162,7 @@
     background: var(--black);
 }
 
-#tinymce ul.list-style-checkmark > li {
+#tinymce ul.list-style-checkmark li {
     padding: 0 0 0 25px;
 }
 
@@ -176,40 +197,13 @@
     border-left: 1px solid var(--black);
 }
 
-/* Hr */
-
-#tinymce hr {
-    width: 100%;
-    border: 0;
-    border-top: 1px solid var(--black);
-    margin: 40px 0 !important;
-}
-
-#tinymce table * {
-    margin: 0 !important;
-}
-
-#tinymce code {
-    padding: 10px;
-    font-size: 14px;
-    color: var(--white);
-    background: var(--black);
-}
-
 /* Images */
 
 #tinymce img {
     display: block;
-    max-width: 100% !important;
+    width: auto !important;
     height: auto !important;
-}
-
-#tinymce img:not(:first-child) {
-    margin-top: 40px !important;
-}
-
-#tinymce img:not(:last-child) {
-    margin-bottom: 40px !important;
+    max-width: 100% !important;
 }
 
 #tinymce img.aligncenter {
@@ -228,4 +222,22 @@
 
 #tinymce img.size-full {
     width: 100% !important;
+}
+
+/* Misc */
+
+#tinymce code {
+    padding: 10px;
+    color: var(--white);
+    background: var(--black);
+}
+
+#tinymce mark {
+    background: none;
+}
+
+#tinymce hr {
+    width: 100%;
+    border: 0;
+    border-top: 1px solid var(--black);
 }

@@ -3,6 +3,27 @@
     "title": "Block — Reviews",
     "fields": [
         {
+            "key": "field_69f17f32ce619",
+            "label": "Title",
+            "name": "block_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "<span class=\"dashicons dashicons-heading\"><\/span>",
+            "append": ""
+        },
+        {
             "key": "field_6879ac6b9e352",
             "label": "Select Reviews",
             "name": "block_select_reviews",
@@ -53,5 +74,8 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1752804489
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1777434440
 }

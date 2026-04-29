@@ -3,11 +3,11 @@
     "title": "Block — Hero Banner",
     "fields": [
         {
-            "key": "field_667babdfbf6de",
-            "label": "Content",
-            "name": "block_content",
+            "key": "field_69f156feab74e",
+            "label": "Title",
+            "name": "block_title",
             "aria-label": "",
-            "type": "wysiwyg",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -17,11 +17,32 @@
                 "id": ""
             },
             "default_value": "",
-            "allow_in_bindings": 1,
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "<span class=\"dashicons dashicons-heading\"><\/span>",
+            "append": ""
+        },
+        {
+            "key": "field_667babdfbf6de",
+            "label": "Description",
+            "name": "block_description",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": 3,
+            "placeholder": "",
+            "new_lines": "br"
         },
         {
             "key": "field_667babdfbf728",
@@ -38,7 +59,7 @@
                 "id": ""
             },
             "clone": [
-                "group_661491f489c42"
+                "field_661491f5daa29"
             ],
             "display": "seamless",
             "layout": "block",
@@ -185,5 +206,8 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1754543863
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1777424170
 }

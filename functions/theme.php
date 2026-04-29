@@ -36,7 +36,7 @@ add_action('init', 'betterbase_register_menus');
     Customise login page logo
 -----------------------------------------------------------------------*/
 
-function init_custom_login_logo() { ?>
+function betterbase_login_logo() { ?>
     <style type="text/css">
         #login h1 a {
             background-image: url('<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/logo-theme.svg'); ?>');
@@ -46,13 +46,13 @@ function init_custom_login_logo() { ?>
         }
     </style>
 <?php }
-add_action('login_enqueue_scripts', 'init_custom_login_logo');
+add_action('login_enqueue_scripts', 'betterbase_login_logo');
 
 /*-----------------------------------------------------------------------
     Tidy admin dashboard menu
 -----------------------------------------------------------------------*/
 
-function tidy_dashboard_menu_ordering($menu_ord) {
+function betterbase_tidy_dashboard_menu_items($menu_ord) {
     if (!$menu_ord) return true;
 
     return array(
@@ -84,22 +84,22 @@ function tidy_dashboard_menu_ordering($menu_ord) {
         'wpseo_dashboard', // Yoast SEO
     );
 }
-add_filter('menu_order', 'tidy_dashboard_menu_ordering', 10, 1);
-add_filter('custom_menu_order', 'tidy_dashboard_menu_ordering', 10, 1);
+add_filter('menu_order', 'betterbase_tidy_dashboard_menu_items', 10, 1);
+add_filter('custom_menu_order', 'betterbase_tidy_dashboard_menu_items', 10, 1);
 
-function betterbase_remove_dashboard_items() {
+function betterbase_remove_dashboard_menu_items() {
     remove_menu_page('edit-comments.php'); // Comments
     remove_menu_page('password-protected'); // Password Protected
     remove_menu_page('options-general.php?page=updraftplus'); // UpdraftPlus
     remove_menu_page('wsal-auditlog'); // WP Activity Log
 }
-add_action('admin_menu', 'betterbase_remove_dashboard_items', 100);
+add_action('admin_menu', 'betterbase_remove_dashboard_menu_items', 100);
 
 /*-----------------------------------------------------------------------
     Customised menu output
 -----------------------------------------------------------------------*/
 
-function add_menu_icon_to_parent_link($items, $args) {
+function betterbase_add_submenu_icon($items, $args) {
     if ($args->theme_location == 'header') {
         foreach ($items as &$item) {
             if (in_array('menu-item-has-children', $item->classes)) {
@@ -113,7 +113,7 @@ function add_menu_icon_to_parent_link($items, $args) {
     }
     return $items;
 }
-add_filter('wp_nav_menu_objects', 'add_menu_icon_to_parent_link', 10, 2);
+add_filter('wp_nav_menu_objects', 'betterbase_add_submenu_icon', 10, 2);
 
 class Submenu_Wrap extends Walker_Nav_Menu {
     function start_lvl(&$output, $depth = 0, $args = array()) {
@@ -150,9 +150,9 @@ function betterbase_mce_text_colours($init) {
 }
 add_filter('tiny_mce_before_init', 'betterbase_mce_text_colours');
 
-/*---------------------------------------------------------------------------
+/*-----------------------------------------------------------------------
     Add custom format options to WYSIWYG editor
----------------------------------------------------------------------------*/
+-----------------------------------------------------------------------*/
 
 function betterbase_add_format_buttons($buttons) {
     array_unshift($buttons, 'styleselect');
@@ -174,9 +174,9 @@ function betterbase_custom_wysiwyg_formats($init_array) {
 add_filter('tiny_mce_before_init', 'betterbase_custom_wysiwyg_formats');
 
 
-/*---------------------------------------------------------------------------
+/*-----------------------------------------------------------------------
     Force attributes on Gravity Forms shortcodes
----------------------------------------------------------------------------*/
+-----------------------------------------------------------------------*/
 
 function betterbase_gf_force_shortcode_atts($form_args) {
     $form_args['display_title'] = false;
