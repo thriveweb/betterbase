@@ -183,12 +183,10 @@ jQuery(document).ready(function ($) {
 
     const blockSettingDefaults = {
         "acf/block-post-header": {
-            // container: "sm",
             padding_top: 40,
             padding_bottom: 40,
         },
         "acf/block-post-footer": {
-            // container: "lg",
             padding_top: 40,
             padding_bottom: 40,
         },
@@ -199,6 +197,7 @@ jQuery(document).ready(function ($) {
             container: "sm",
         },
         "acf/block-page-banner": {
+            background: "black",
             padding_top: 120,
             padding_bottom: 120,
         },

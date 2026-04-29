@@ -4,7 +4,7 @@
     $classes = 'block-page-banner';
     $classes .= (isset($block['className']) ? ' '.$block['className'] : '');
     $anchor = (isset($block['anchor']) ? $block['anchor'] : '');
-    $background = (isset($block['settings_background_colour']) ? $block['settings_background_colour'] : 'none');
+    $background = (isset($block['settings_background_colour']) ? $block['settings_background_colour'] : 'black');
     $container = (isset($block['settings_container']) ? $block['settings_container'] : 'md');
     $padding_top = (isset($block['settings_padding_top']) ? $block['settings_padding_top'] : '120');
     $padding_bottom = (isset($block['settings_padding_bottom']) ? $block['settings_padding_bottom'] : '120');
