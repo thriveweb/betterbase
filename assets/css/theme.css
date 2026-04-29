@@ -18,6 +18,9 @@
     --white: #ffffff;
     --white-rgb: 255, 255, 255;
 
+    --light-grey: #e0e0e0;
+    --light-grey-rgb: 224, 224, 224;
+
     --grey: #aaaaaa;
     --grey-rgb: 170, 170, 170;
 
@@ -1597,7 +1600,7 @@ body.betterbase-theme.admin-bar .site-search {
 .betterbase-theme .image-square,
 .betterbase-theme .image-portrait,
 .betterbase-theme .image-landscape {
-    background: var(--grey);
+    background: var(--light-grey);
     position: relative;
     object-fit: cover;
     width: 100%;
@@ -2001,13 +2004,8 @@ body.betterbase-theme.admin-bar .site-search {
 
 .betterbase-theme .group-categories a,
 .betterbase-theme .group-categories span {
-    padding: 12px 22px;
+    padding: 10px 20px;
     color: var(--black);
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 18px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
     border: 1px solid var(--grey);
     text-decoration: none;
 }
