@@ -198,6 +198,7 @@ jQuery(document).ready(function ($) {
         },
         "acf/block-page-banner": {
             background: "black",
+            container: "lg",
             padding_top: 120,
             padding_bottom: 120,
         },
