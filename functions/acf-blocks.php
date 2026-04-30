@@ -23,6 +23,11 @@ function acf_create_custom_block_categories($categories, $post) {
             'title' => 'General',
             'icon'  => 'dashicons-block-default',
         ),
+        array(
+            'slug'  => 'blog',
+            'title' => 'Blog',
+            'icon'  => 'dashicons-block-default',
+        ),
     );
     return array_merge($categories, $custom_categories);
 }
@@ -185,15 +190,15 @@ function acf_register_custom_blocks() {
         ),
     ));
 
-    /* Accordion */
+    /* Gallery */
     acf_register_block_type(array(
-        'name' => 'block-accordion',
-        'title' => __('Accordion'),
-        'description' => __('Repeatable accordion fields for additional information.'),
-        'keywords' => array('accordion', 'faq', 'content'),
-        'render_template' => 'blocks/block-accordion.php',
+        'name' => 'block-image-gallery',
+        'title' => __('Gallery'),
+        'description' => __('Sliding image carousel.'),
+        'keywords' => array('carousel', 'image', 'gallery', 'slider'),
+        'render_template' => 'blocks/block-image-gallery.php',
         'category' => 'general',
-        'icon' => 'align-center',
+        'icon' => 'format-gallery',
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
@@ -208,15 +213,15 @@ function acf_register_custom_blocks() {
         ),
     ));
 
-    /* Gallery */
+    /* Image */
     acf_register_block_type(array(
-        'name' => 'block-image-gallery',
-        'title' => __('Gallery'),
-        'description' => __('Sliding image carousel.'),
-        'keywords' => array('carousel', 'image', 'gallery', 'slider'),
-        'render_template' => 'blocks/block-image-gallery.php',
+        'name' => 'block-image',
+        'title' => __('Image'),
+        'description' => __('Feature large image.'),
+        'keywords' => array('image'),
+        'render_template' => 'blocks/block-image.php',
         'category' => 'general',
-        'icon' => 'format-gallery',
+        'icon' => 'format-image',
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
@@ -300,6 +305,29 @@ function acf_register_custom_blocks() {
         ),
     ));
 
+    /* Accordion */
+    acf_register_block_type(array(
+        'name' => 'block-accordion',
+        'title' => __('Accordion'),
+        'description' => __('Repeatable accordion fields for additional information.'),
+        'keywords' => array('accordion', 'faq', 'content'),
+        'render_template' => 'blocks/block-accordion.php',
+        'category' => 'general',
+        'icon' => 'align-center',
+        'mode' => 'preview',
+        'supports' => array('anchor' => true, 'align' => false),
+        'validation' => true,
+        'example' => array(
+            'attributes' => array(
+                'mode' => 'preview',
+                'data' => array(
+                    'has_preview' => true,
+                    'preview_image_help' => '',
+                ),
+            ),
+        ),
+    ));
+
     /* Reviews */
     acf_register_block_type(array(
         'name' => 'block-reviews',
@@ -369,6 +397,29 @@ function acf_register_custom_blocks() {
         ),
     ));
 
+    /* Instagram */
+    acf_register_block_type(array(
+        'name' => 'block-instagram',
+        'title' => __('Instagram'),
+        'description' => __('Embed a an Instagram feed displaying your latest posts.'),
+        'keywords' => array('embed', 'social', 'Instagram'),
+        'render_template' => 'blocks/block-instagram.php',
+        'category' => 'general',
+        'icon' => 'instagram',
+        'mode' => 'preview',
+        'supports' => array('anchor' => true, 'align' => false),
+        'validation' => true,
+        'example' => array(
+            'attributes' => array(
+                'mode' => 'preview',
+                'data' => array(
+                    'has_preview' => true,
+                    'preview_image_help' => '',
+                ),
+            ),
+        ),
+    ));
+
     /* Separator */
     acf_register_block_type(array(
         'name' => 'block-separator',
@@ -398,9 +449,9 @@ function acf_custom_block_list($allowed_block_types, $post) {
             'acf/block-post-content',
             'acf/block-post-footer',
             'acf/block-related-posts',
-            // 'acf/block-image-gallery',
-            // 'acf/block-image',
-            // 'acf/block-video',
+            'acf/block-image-gallery',
+            'acf/block-image',
+            'acf/block-video',
         );
     } else {
 
@@ -408,14 +459,16 @@ function acf_custom_block_list($allowed_block_types, $post) {
             'acf/block-content',
             'acf/block-multicolumn',
             'acf/block-split-content',
-            'acf/block-accordion',
             'acf/block-image-gallery',
+            'acf/block-image',
             'acf/block-video',
             'acf/block-hero-banner',
             'acf/block-page-banner',
+            'acf/block-accordion',
             'acf/block-reviews',
             'acf/block-post-feed',
             'acf/block-contact',
+            'acf/block-instagram',
             'acf/block-separator',
             // 'core/shortcode',
         );

@@ -67,15 +67,17 @@ jQuery(document).ready(function ($) {
         "acf/block-content",
         "acf/block-multicolumn",
         "acf/block-split-content",
-        "acf/block-accordion",
         "acf/block-image-gallery",
+        "acf/block-image",
         "acf/block-video",
-        "acf/block-separator",
         "acf/block-hero-banner",
         "acf/block-page-banner",
+        "acf/block-accordion",
         "acf/block-reviews",
         "acf/block-post-feed",
         "acf/block-contact",
+        "acf/block-instagram",
+        "acf/block-separator",
     ];
 
     const globalBlockFields = createHigherOrderComponent(function (BlockEdit) {

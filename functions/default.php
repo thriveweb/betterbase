@@ -167,6 +167,37 @@ add_filter('embed_oembed_html', function ($html, $url, $attr, $post_id) {
     }
 }, 10, 4);
 
+/*---------------------------------------------------------------------------
+    Return Instagram username and URL
+---------------------------------------------------------------------------*/
+
+function get_instagram($social_media_array) {
+    if (empty($social_media_array) || !is_array($social_media_array)) {
+        return ['url' => '', 'username' => ''];
+    }
+
+    foreach ($social_media_array as $media) {
+        if (($media['platform']['value'] ?? '') !== 'instagram' || empty($media['url'])) {
+            continue;
+        }
+
+        $url = $media['url'];
+        $path = trim(parse_url($url, PHP_URL_PATH) ?? '', '/');
+        $username = strtok($path, '/');
+
+        if (!$username || in_array($username, ['p', 'reel', 'stories', 'explore'], true)) {
+            continue;
+        }
+
+        return [
+            'url' => esc_url($url),
+            'username' => sanitize_text_field($username),
+        ];
+    }
+
+    return ['url' => '', 'username' => ''];
+}
+
 /*-----------------------------------------------------------------------
     Tidy admin bar
 -----------------------------------------------------------------------*/

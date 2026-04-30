@@ -38,15 +38,17 @@ $header_button = get_field('header_button', 'options'); ?>
             <?php if (has_nav_menu('header')): ?>
                 <?php wp_nav_menu(array('theme_location' => 'header', 'container' => false, 'walker' => new Submenu_Wrap)); ?>
             <?php endif; ?>
+            <?php if (!empty($header_button['url']) && !empty($header_button['title'])): ?>
+                <div class="button-group">
+                    <a class="button" href="<?php echo $header_button['url']; ?>" target="<?php echo $header_button['target']; ?>" title="<?php echo $header_button['title']; ?>">
+                        <?php echo $header_button['title']; ?>
+                    </a>
+                </div>
+            <?php endif; ?>
             <?php if ($enable_search): ?>
                 <div class="icon-search trigger-search">
                     <?php include_asset('icon-search.svg'); ?>
                 </div>
-            <?php endif; ?>
-            <?php if (!empty($header_button['url']) && !empty($header_button['title'])): ?>
-                <a class="button" href="<?php echo $header_button['url']; ?>" target="<?php echo $header_button['target']; ?>" title="<?php echo $header_button['title']; ?>">
-                    <?php echo $header_button['title']; ?>
-                </a>
             <?php endif; ?>
             <div class="icon-hamburger trigger-menu">
                 <span></span>
