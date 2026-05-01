@@ -15,7 +15,7 @@
     $args = array(
         'post_type' => 'review',
         'post_status' => 'publish',
-        'posts_per_page' => 3,
+        'posts_per_page' => 5,
         'order' => 'desc',
     ); 
 

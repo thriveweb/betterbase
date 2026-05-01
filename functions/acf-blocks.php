@@ -263,8 +263,8 @@ function acf_register_custom_blocks() {
     acf_register_block_type(array(
         'name' => 'block-hero-banner',
         'title' => __('Hero Banner'),
-        'description' => __('Large hero banner with WYSIWYG editor, buttons, and background image.'),
-        'keywords' => array('banner', 'hero', 'image', 'wysiwyg'),
+        'description' => __('Large hero banner with text, buttons, and background image.'),
+        'keywords' => array('banner', 'hero', 'image', 'text'),
         'render_template' => 'blocks/block-hero-banner.php',
         'category' => 'general',
         'icon' => 'welcome-view-site',
