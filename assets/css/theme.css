@@ -2181,7 +2181,7 @@ body.betterbase-theme.admin-bar .block-hero-banner > div[class*="block-setting-"
 }
 
 .wp-block .block-hero-banner > div[class*="block-setting-"] {
-    height: 990px;
+    min-height: 990px;
 }
 
 /*-----------------------------------------------------------------------

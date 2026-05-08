@@ -35,12 +35,20 @@ jQuery(document).ready(function ($) {
 
     /* Toggle responsive submenus on click */
 
-    $(".site-responsive-menu li.menu-item-has-children > a > .trigger-sub-menu").on("click", function (e) {
-        if ($(this).next(".sub-menu-").is(":visible")) {
-            $(this).parent().parent().removeClass("has-active-sub-menu");
-        } else {
-            $(this).parent().parent().toggleClass("has-active-sub-menu");
+    $(".site-responsive-menu li.menu-item-has-children > a ").on("click", function (e) {
+        var $link = $(this);
+        var href = $link.attr("href");
+
+        if (href !== "#" && !$(e.target).closest(".trigger-sub-menu").length) {
+            return;
         }
+
+        if ($link.next(".sub-menu-").is(":visible")) {
+            $link.parent().removeClass("has-active-sub-menu");
+        } else {
+            $link.parent().toggleClass("has-active-sub-menu");
+        }
+
         e.stopPropagation();
         e.preventDefault();
     });

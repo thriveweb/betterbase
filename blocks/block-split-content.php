@@ -32,7 +32,7 @@
                             <?php if ($left_type === 'content' && !empty($left_content)): ?>
                                 <div class="wysiwyg-content <?php echo get_text_colour($background); ?>">
                                     <?php echo $left_content; ?>
-                                    <?php $add_button = $left_add_button; $button_alignment = $right_button_alignment;
+                                    <?php $add_button = $left_add_button; $button_alignment = $left_button_alignment;
                                     include(get_template_directory().'/parts/group-button.php'); ?>
                                 </div>
                             <?php elseif ($left_type === 'image' && !empty($left_image)): ?>
