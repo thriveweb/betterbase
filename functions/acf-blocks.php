@@ -454,7 +454,6 @@ function acf_custom_block_list($allowed_block_types, $post) {
             'acf/block-video',
         );
     } else {
-
         $allowed_blocks = array(
             'acf/block-content',
             'acf/block-multicolumn',

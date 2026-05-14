@@ -181,15 +181,14 @@ jQuery(document).ready(function ($) {
     function initVideoEmbed() {
         $(".video-wrapper").each(function () {
             const $wrapper = $(this);
-            const $video = $wrapper.find("video");
+            const video = $wrapper.find("video").get(0);
 
-            $video.on("play", function () {
+            $wrapper.on("click", function () {
+                if (!$wrapper.hasClass("is-paused")) return;
+
                 $wrapper.removeClass("is-paused");
-                this.controls = true;
-            });
-
-            $video.on("click", function () {
-                this.controls = true;
+                video.controls = true;
+                video.play();
             });
         });
     }
