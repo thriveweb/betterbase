@@ -11,7 +11,6 @@ function betterbase_theme_support() {
 add_action('after_setup_theme', 'betterbase_theme_support');
 
 /* Disable post type support for comments */
-
 function betterbase_disable_post_support() {
     foreach (get_post_types() as $post_type) {
         remove_post_type_support($post_type, 'comments');

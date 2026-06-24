@@ -33,7 +33,7 @@ $review_image = get_the_post_thumbnail_url($review_ID, 'large'); ?>
     <div class="inner-entry-author flex-layout flex-align-center flex-justify-center flex-gap">
         <div class="inner-entry-image image-square">
             <?php if (!empty($review_image)): ?>
-                <div class="background-image" style="background-image: url(<?php echo $review_image; ?>);"></div>
+                <img src="<?php echo esc_url($review_image); ?>" alt="<?php echo esc_url($review_title); ?>">
             <?php endif; ?>
         </div>
         <div>

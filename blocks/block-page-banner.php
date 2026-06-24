@@ -1,13 +1,16 @@
-<?php if (isset($block['data']['has_preview']) && $block['data']['has_preview']): ?>
-    <img src="<?php echo get_template_directory_uri(); ?>/blocks/preview/block-page-banner.jpg" class="acf_pre" style="width: 100%;">
+<?php if (isset($block['data']['preview_image']) && $block['data']['preview_image']): ?>
+    <img src="<?php echo get_template_directory_uri(); ?>/blocks/preview/<?php echo $block['data']['preview_image']; ?>" style="width: 100%; height: auto; display: block;">
 <?php else:
-    $classes = 'block-page-banner';
-    $classes .= (isset($block['className']) ? ' '.$block['className'] : '');
-    $anchor = (isset($block['anchor']) ? $block['anchor'] : '');
-    $background = (isset($block['settings_background_colour']) ? $block['settings_background_colour'] : 'black');
-    $container = (isset($block['settings_container']) ? $block['settings_container'] : 'lg');
-    $padding_top = (isset($block['settings_padding_top']) ? $block['settings_padding_top'] : '120');
-    $padding_bottom = (isset($block['settings_padding_bottom']) ? $block['settings_padding_bottom'] : '120');
+    $block_name = 'block-page-banner';
+    $block_classes = ['betterbase-theme', $block_name, $block['className'] ?? null];
+    $block_anchor = $block['anchor'] ?? '';
+    $block_css = $block['css'] ?? '';
+    $padding_top = $block['settings_padding_top'] ?? '120';
+    $padding_bottom = $block['settings_padding_bottom'] ?? '120';
+    $background_colour = $block['settings_background_colour'] ?? 'black';
+    $container = $block['settings_container'] ?? 'lg';
+    $setting_classes = ['block-setting-padding', 'block-setting-background-color'];
+    $setting_styles = ['--block-padding-top: '.$padding_top.'px', '--block-padding-bottom: '.$padding_bottom.'px', '--block-background-color: var(--'.$background_colour.')'];
 
     $page_ID = get_the_ID();
     $page_title = get_the_title($page_ID);
@@ -16,17 +19,17 @@
     $title = get_field('block_title');
     $image = get_field('block_image'); ?>
 
-    <div class="betterbase-theme <?php echo $classes; ?>" <?php echo ($anchor ? 'id="'.$anchor.'"' : ''); ?>>
-        <div class="block-setting-padding block-setting-background-colour" style="--block-padding-top: <?php echo $padding_top; ?>px; --block-padding-bottom: <?php echo $padding_bottom; ?>px; --block-background-colour: var(--<?php echo $background; ?>);">
+    <div class="<?php echo implode(' ', array_filter($block_classes)); ?>" <?php echo ($block_anchor ? 'id="'.esc_attr($block_anchor).'"' : ''); ?> <?php echo ($block_css ? 'style="'.esc_attr($block_css).'"' : ''); ?>>
+        <div class="<?php echo implode(' ', $setting_classes); ?>" style="<?php echo implode('; ', $setting_styles); ?>">
             <div class="container-<?php echo $container; ?>">
                 <div class="wysiwyg-content text-white">
-                    <h1><?php echo ($title ? $title : $page_title); ?></h1>
+                    <h1><?php echo ($title ?? $page_title); ?></h1>
                 </div>
             </div>
             <?php if (!empty($image)): ?>
-                <div class="background-image" style="background-image: url(<?php echo $image['sizes']['2048x2048']; ?>);"></div>
+                <div class="background-image has-overlay" style="background-image: url(<?php echo esc_url($image['sizes']['2048x2048']); ?>);"></div>
             <?php elseif (!empty($page_image)): ?>
-                <div class="background-image" style="background-image: url(<?php echo $page_image; ?>);"></div>
+                <div class="background-image has-overlay" style="background-image: url(<?php echo esc_url($page_image); ?>);"></div>
             <?php endif; ?>
         </div>
     </div>

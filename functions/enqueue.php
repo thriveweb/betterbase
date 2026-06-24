@@ -52,6 +52,10 @@ function init_admin_styles() { ?>
         .postbox-header {
             text-transform: capitalize;
         }
+        .acf-input input:not([type="checkbox"], [type="radio"]),
+        .acf-input select {
+            min-height: 30px;
+        }
         .acf-input select {
             max-width: 100%;
         }

@@ -6,7 +6,6 @@
 
 function register_custom_post_types() {
     /* Post Type: Services */
-
     $labels = array(
         'name'                  => __('Services'),
         'menu_name'             => __('Services'),
@@ -39,7 +38,6 @@ function register_custom_post_types() {
     register_post_type('service', $args);
 
     /* "Services" Taxonomy: Category */
-
     $labels = array(
         'name'                  => __('Categories'),
         'menu_name'             => __('Categories'),
@@ -47,7 +45,6 @@ function register_custom_post_types() {
         'add_new_item'          => __('Add New Category'),
         'all_items'             => __('All Categories'),
     );
-
     $args = array(
         'labels'                => $labels,
         'hierarchical'          => true,
@@ -59,9 +56,8 @@ function register_custom_post_types() {
         'rewrite'               => array('slug' => 'service-category'),
     );
     register_taxonomy('service-category', 'service', $args);
-    
-    /* Post Type: Reviews */
 
+    /* Post Type: Reviews */
     $labels = array(
         'name'                  => __('Reviews'),
         'menu_name'             => __('Reviews'),
@@ -83,9 +79,9 @@ function register_custom_post_types() {
         'show_in_menu'          => true,
         'query_var'             => true,
         'has_archive'           => false,
-        'hierarchical'          => true,
+        'hierarchical'          => false,
         'menu_position'         => null,
-        'exclude_from_search'   => false,
+        'exclude_from_search'   => true,
         'show_in_rest'          => true,
         'menu_icon'             => 'dashicons-admin-comments',
         'rewrite'               => false,

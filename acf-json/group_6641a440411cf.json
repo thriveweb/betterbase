@@ -89,7 +89,7 @@
                 ]
             ],
             "wrapper": {
-                "width": "50",
+                "width": "",
                 "class": "",
                 "id": ""
             },
@@ -118,7 +118,7 @@
                 ]
             ],
             "wrapper": {
-                "width": "50",
+                "width": "",
                 "class": "",
                 "id": ""
             },
@@ -156,5 +156,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1777428642
+    "modified": 1782268350
 }

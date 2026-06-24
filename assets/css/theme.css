@@ -2,7 +2,7 @@
     Fonts
 -----------------------------------------------------------------------*/
 
-@import url("https://use.typekit.net/vql0cno.css");
+@import url("https://use.typekit.net/ptp7qkq.css");
 
 /*-----------------------------------------------------------------------
     Variables
@@ -49,7 +49,7 @@
     }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 761px) {
     :root {
         --header-height: 70px;
     }
@@ -309,13 +309,13 @@ body.betterbase-theme.admin-bar {
     padding-bottom: var(--block-padding-bottom);
 }
 
-.betterbase-theme .block-setting-background-colour {
-    background-color: var(--block-background-colour);
+.betterbase-theme .block-setting-background-color {
+    background-color: var(--block-background-color);
 }
 
 /* Responsive */
 
-@media (max-width: 1200px) {
+@media (max-width: 1201px) {
     .betterbase-theme .grid-col-5 {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -325,7 +325,7 @@ body.betterbase-theme.admin-bar {
     }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 761px) {
     .betterbase-theme .container-lg,
     .betterbase-theme .container-md,
     .betterbase-theme .container-sm,
@@ -365,13 +365,6 @@ body.betterbase-theme.admin-bar {
         padding-top: calc(var(--block-padding-top) / 1.5);
         padding-bottom: calc(var(--block-padding-bottom) / 1.5);
     }
-}
-
-@media (max-width: 770px) {
-    .betterbase-theme .grid-col-5,
-    .betterbase-theme .grid-col-6 {
-        grid-template-columns: repeat(2, 1fr);
-    }
 
     .betterbase-theme .is-desktop-only {
         display: none;
@@ -382,7 +375,7 @@ body.betterbase-theme.admin-bar {
     }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 641px) {
     .betterbase-theme .grid-col-3,
     .betterbase-theme .grid-col-4,
     .betterbase-theme .grid-col-5 {
@@ -441,6 +434,7 @@ body.betterbase-theme.admin-bar {
 .betterbase-theme .h1 * {
     font-size: 60px;
     line-height: 1.2;
+    font-weight: 500;
 }
 
 .betterbase-theme h2,
@@ -449,6 +443,7 @@ body.betterbase-theme.admin-bar {
 .betterbase-theme .h2 * {
     font-size: 50px;
     line-height: 1.2;
+    font-weight: 500;
 }
 
 .betterbase-theme h3,
@@ -457,6 +452,7 @@ body.betterbase-theme.admin-bar {
 .betterbase-theme .h3 * {
     font-size: 40px;
     line-height: 1.2;
+    font-weight: 500;
 }
 
 .betterbase-theme h4,
@@ -465,6 +461,7 @@ body.betterbase-theme.admin-bar {
 .betterbase-theme .h4 * {
     font-size: 32px;
     line-height: 1.2;
+    font-weight: 500;
 }
 
 .betterbase-theme h5,
@@ -473,6 +470,7 @@ body.betterbase-theme.admin-bar {
 .betterbase-theme .h5 * {
     font-size: 22px;
     line-height: 1.2;
+    font-weight: 400;
 }
 
 .betterbase-theme h6,
@@ -539,7 +537,7 @@ body.betterbase-theme.admin-bar {
 
 /* Responsive */
 
-@media (max-width: 990px) {
+@media (max-width: 991px) {
     .betterbase-theme h1,
     .betterbase-theme h1 *,
     .betterbase-theme .h1,
@@ -548,7 +546,7 @@ body.betterbase-theme.admin-bar {
     }
 }
 
-@media (max-width: 770px) {
+@media (max-width: 761px) {
     .betterbase-theme h1 br,
     .betterbase-theme .h1 br,
     .betterbase-theme h2 br,
@@ -1121,17 +1119,17 @@ body.betterbase-theme.admin-bar {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    margin: 0;
+    margin: 0 !important;
     outline: 0;
     width: auto;
     height: auto;
     min-width: 70px;
     min-height: 0 !important;
     padding: 14px 30px;
-    font-size: 15px;
-    font-family: var(--font-primary);
     color: var(--black);
-    font-weight: 600;
+    font-family: var(--font-primary);
+    font-size: 15px;
+    font-weight: 500;
     line-height: 18px !important;
     text-align: center;
     text-decoration: none;
@@ -1165,7 +1163,7 @@ body.betterbase-theme.admin-bar {
 
 /* Responsive */
 
-@media (max-width: 640px) {
+@media (max-width: 641px) {
     .betterbase-theme .button-group {
         width: 100%;
     }
@@ -1459,7 +1457,7 @@ body.betterbase-theme.admin-bar .site-responsive-menu {
     }
 }
 
-@media (max-width: 990px) {
+@media (max-width: 991px) {
     .site-header .main-menu ul {
         display: none !important;
     }
@@ -1527,7 +1525,7 @@ body.betterbase-theme.admin-bar .site-search {
 
 /* Responsive */
 
-@media (max-width: 990px) {
+@media (max-width: 991px) {
     .site-search {
         display: none !important;
     }
@@ -1600,19 +1598,28 @@ body.betterbase-theme.admin-bar .site-search {
 .betterbase-theme .image-landscape {
     background: var(--grey);
     position: relative;
+    width: 100%;
+}
+
+.betterbase-theme .image-square img,
+.betterbase-theme .image-portrait img,
+.betterbase-theme .image-landscape img {
     object-fit: cover;
     width: 100%;
 }
 
-.betterbase-theme .image-square {
+.betterbase-theme .image-square,
+.betterbase-theme .image-square img {
     aspect-ratio: 1 / 1;
 }
 
-.betterbase-theme .image-portrait {
+.betterbase-theme .image-portrait,
+.betterbase-theme .image-portrait img {
     aspect-ratio: 2 / 3;
 }
 
-.betterbase-theme .image-landscape {
+.betterbase-theme .image-landscape,
+.betterbase-theme .image-landscape img {
     aspect-ratio: 3 / 2;
 }
 
@@ -1773,7 +1780,7 @@ body.betterbase-theme.admin-bar .site-search {
 
 /* Responsive */
 
-@media (max-width: 860px) {
+@media (max-width: 761px) {
     .betterbase-theme .swiper-footer {
         margin-top: 20px;
     }
@@ -2036,12 +2043,34 @@ body.betterbase-theme.admin-bar .site-search {
     margin-bottom: 60px;
 }
 
+.betterbase-theme .inner-block-foot {
+    margin-top: 60px;
+}
+
 /* Responsive */
 
-@media (max-width: 770px) {
+@media (max-width: 761px) {
     .betterbase-theme .inner-block-head {
         margin-bottom: 40px;
     }
+
+    .betterbase-theme .inner-block-foot {
+        margin-top: 40px;
+    }
+}
+
+/*-----------------------------------------------------------------------
+    Block - Empty
+-----------------------------------------------------------------------*/
+
+.block-empty p {
+    padding: 8px 20px;
+    margin: 20px auto;
+    width: fit-content;
+    background: #f1f1f1;
+    font-size: 12px;
+    text-align: center;
+    font-style: italic;
 }
 
 /*-----------------------------------------------------------------------
@@ -2058,7 +2087,7 @@ body.betterbase-theme.admin-bar .site-search {
 
 /* Responsive */
 
-@media (max-width: 860px) {
+@media (max-width: 761px) {
     .block-split-content .col-content {
         order: 9;
     }
@@ -2263,7 +2292,7 @@ body.betterbase-theme.admin-bar .block-hero-banner > div[class*="block-setting-"
     margin: 0;
     width: 100%;
     height: 1px;
-    background: var(--block-background-colour);
+    background: var(--block-background-color);
 }
 
 .block-editor .block-separator {

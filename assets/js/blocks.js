@@ -104,14 +104,14 @@ jQuery(document).ready(function ($) {
                         { title: "Block Settings" },
                         createElement(SelectControl, {
                             label: "Background Colour",
-                            value: attributes.settings_background_colour || "",
+                            value: attributes.settings_background_color || "",
                             options: [
                                 { label: "None", value: "none" },
                                 { label: "Grey (#AAAAAA)", value: "grey" },
                                 { label: "Black (#000000)", value: "black" },
                             ],
                             onChange: function (value) {
-                                setAttributes({ settings_background_colour: value });
+                                setAttributes({ settings_background_color: value });
                             },
                         }),
                         createElement(SelectControl, {
@@ -195,6 +195,10 @@ jQuery(document).ready(function ($) {
         "acf/block-image-gallery": {
             container: "xl",
         },
+        "acf/block-image": {
+            padding_top: 40,
+            padding_bottom: 40,
+        },
         "acf/block-video": {
             container: "sm",
         },
@@ -225,7 +229,7 @@ jQuery(document).ready(function ($) {
         if (typeof settings.attributes !== "undefined") {
             settings.attributes = Object.assign(settings.attributes, {
                 // Add default values to all blocks
-                settings_background_colour: {
+                settings_background_color: {
                     type: "string",
                     default: getDefault("background", "none"),
                 },

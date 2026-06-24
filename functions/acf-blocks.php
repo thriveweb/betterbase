@@ -54,8 +54,7 @@ function acf_register_custom_blocks() {
             'attributes' => array(
                 'mode' => 'preview',
                 'data' => array(
-                    'has_preview' => true,
-                    'preview_image_help' => '',
+                    'preview_image' => 'block-post-header.jpg',
                 ),
             ),
         ),
@@ -77,8 +76,7 @@ function acf_register_custom_blocks() {
             'attributes' => array(
                 'mode' => 'preview',
                 'data' => array(
-                    'has_preview' => true,
-                    'preview_image_help' => '',
+                    'preview_image' => 'block-content.jpg',
                 ),
             ),
         ),
@@ -100,8 +98,7 @@ function acf_register_custom_blocks() {
             'attributes' => array(
                 'mode' => 'preview',
                 'data' => array(
-                    'has_preview' => true,
-                    'preview_image_help' => '',
+                    'preview_image' => 'block-post-footer.jpg',
                 ),
             ),
         ),
@@ -123,8 +120,7 @@ function acf_register_custom_blocks() {
             'attributes' => array(
                 'mode' => 'preview',
                 'data' => array(
-                    'has_preview' => true,
-                    'preview_image_help' => '',
+                    'preview_image' => 'block-post-feed.jpg',
                 ),
             ),
         ),
@@ -146,8 +142,7 @@ function acf_register_custom_blocks() {
             'attributes' => array(
                 'mode' => 'preview',
                 'data' => array(
-                    'has_preview' => true,
-                    'preview_image_help' => '',
+                    'preview_image' => 'block-content.jpg',
                 ),
             ),
         ),
@@ -183,8 +178,7 @@ function acf_register_custom_blocks() {
             'attributes' => array(
                 'mode' => 'preview',
                 'data' => array(
-                    'has_preview' => true,
-                    'preview_image_help' => '',
+                    'preview_image' => 'block-split-content.jpg',
                 ),
             ),
         ),
@@ -206,8 +200,7 @@ function acf_register_custom_blocks() {
             'attributes' => array(
                 'mode' => 'preview',
                 'data' => array(
-                    'has_preview' => true,
-                    'preview_image_help' => '',
+                    'preview_image' => 'block-image-gallery.jpg',
                 ),
             ),
         ),
@@ -229,8 +222,7 @@ function acf_register_custom_blocks() {
             'attributes' => array(
                 'mode' => 'preview',
                 'data' => array(
-                    'has_preview' => true,
-                    'preview_image_help' => '',
+                    'preview_image' => 'block-image.jpg',
                 ),
             ),
         ),
@@ -252,8 +244,7 @@ function acf_register_custom_blocks() {
             'attributes' => array(
                 'mode' => 'preview',
                 'data' => array(
-                    'has_preview' => true,
-                    'preview_image_help' => '',
+                    'preview_image' => 'block-video.jpg',
                 ),
             ),
         ),
@@ -275,8 +266,7 @@ function acf_register_custom_blocks() {
             'attributes' => array(
                 'mode' => 'preview',
                 'data' => array(
-                    'has_preview' => true,
-                    'preview_image_help' => '',
+                    'preview_image' => 'block-hero-banner.jpg',
                 ),
             ),
         ),
@@ -298,8 +288,7 @@ function acf_register_custom_blocks() {
             'attributes' => array(
                 'mode' => 'preview',
                 'data' => array(
-                    'has_preview' => true,
-                    'preview_image_help' => '',
+                    'preview_image' => 'block-page-banner.jpg',
                 ),
             ),
         ),
@@ -321,8 +310,7 @@ function acf_register_custom_blocks() {
             'attributes' => array(
                 'mode' => 'preview',
                 'data' => array(
-                    'has_preview' => true,
-                    'preview_image_help' => '',
+                    'preview_image' => 'block-accordion.jpg',
                 ),
             ),
         ),
@@ -344,8 +332,7 @@ function acf_register_custom_blocks() {
             'attributes' => array(
                 'mode' => 'preview',
                 'data' => array(
-                    'has_preview' => true,
-                    'preview_image_help' => '',
+                    'preview_image' => 'block-reviews.jpg',
                 ),
             ),
         ),
@@ -367,8 +354,7 @@ function acf_register_custom_blocks() {
             'attributes' => array(
                 'mode' => 'preview',
                 'data' => array(
-                    'has_preview' => true,
-                    'preview_image_help' => '',
+                    'preview_image' => 'block-post-feed.jpg',
                 ),
             ),
         ),
@@ -390,8 +376,7 @@ function acf_register_custom_blocks() {
             'attributes' => array(
                 'mode' => 'preview',
                 'data' => array(
-                    'has_preview' => true,
-                    'preview_image_help' => '',
+                    'preview_image' => 'block-contact.jpg',
                 ),
             ),
         ),
@@ -409,15 +394,6 @@ function acf_register_custom_blocks() {
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
-        'example' => array(
-            'attributes' => array(
-                'mode' => 'preview',
-                'data' => array(
-                    'has_preview' => true,
-                    'preview_image_help' => '',
-                ),
-            ),
-        ),
     ));
 
     /* Separator */
@@ -476,3 +452,34 @@ function acf_custom_block_list($allowed_block_types, $post) {
     return $allowed_blocks;
 }
 add_filter('allowed_block_types_all', 'acf_custom_block_list', 10, 2);
+
+/*-----------------------------------------------------------------------
+    Set default blocks per post type
+-----------------------------------------------------------------------*/
+
+function acf_set_default_blocks($args, $post_type) {
+    if ($post_type === 'post') {
+        $args['template'] = array(
+            array('acf/block-post-header'),
+            array('acf/block-post-content',
+                array(
+                    'data' => ['field_661490a216965' => '<p>Enter post content here...</p>'],
+                    'settings_padding_top' => 40,
+                ),
+            ),
+            array('acf/block-post-footer'),
+        );
+    }
+    return $args;
+}
+add_filter('register_post_type_args', 'acf_set_default_blocks', 10, 2);
+
+/*-----------------------------------------------------------------------
+    Display message for empty block
+-----------------------------------------------------------------------*/
+
+function get_empty_block_message() {
+    if (is_admin()) {
+        echo '<div class="block-empty"><p>Add content to preview this block.</p></div>';
+    }
+}

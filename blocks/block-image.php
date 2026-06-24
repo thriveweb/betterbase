@@ -1,24 +1,27 @@
-<?php if (isset($block['data']['has_preview']) && $block['data']['has_preview']): ?>
-    <img src="<?php echo get_template_directory_uri(); ?>/blocks/preview/block-image.jpg" class="acf_pre" style="width: 100%;">
+<?php if (isset($block['data']['preview_image']) && $block['data']['preview_image']): ?>
+    <img src="<?php echo get_template_directory_uri(); ?>/blocks/preview/<?php echo $block['data']['preview_image']; ?>" style="width: 100%; height: auto; display: block;">
 <?php else:
-    $classes = 'block-image';
-    $classes .= (isset($block['className']) ? ' '.$block['className'] : '');
-    $anchor = (isset($block['anchor']) ? $block['anchor'] : '');
-    $background = (isset($block['settings_background_colour']) ? $block['settings_background_colour'] : 'cream');
-    $container = (isset($block['settings_container']) ? $block['settings_container'] : 'md');
-    $padding_top = (isset($block['settings_padding_top']) ? $block['settings_padding_top'] : '40');
-    $padding_bottom = (isset($block['settings_padding_bottom']) ? $block['settings_padding_bottom'] : '40');
+    $block_name = 'block-image';
+    $block_classes = ['betterbase-theme', $block_name, $block['className'] ?? null];
+    $block_anchor = $block['anchor'] ?? '';
+    $block_css = $block['css'] ?? '';
+    $padding_top = $block['settings_padding_top'] ?? '40';
+    $padding_bottom = $block['settings_padding_bottom'] ?? '40';
+    $background_colour = $block['settings_background_colour'] ?? 'none';
+    $container = $block['settings_container'] ?? 'md';
+    $setting_classes = ['block-setting-padding', 'block-setting-background-color'];
+    $setting_styles = ['--block-padding-top: '.$padding_top.'px', '--block-padding-bottom: '.$padding_bottom.'px', '--block-background-color: var(--'.$background_colour.')'];
 
-    $select_orientation = get_field('block_select_orientation');
+    $orientation = get_field('block_select_orientation') ?? 'landscape';
     $image = get_field('block_image');
 
     if (!empty($image)): ?>
-        <div class="betterbase-theme <?php echo $classes; ?>" <?php echo ($anchor ? 'id="'.$anchor.'"' : ''); ?>>
-            <div class="block-setting-padding block-setting-background-colour" style="--block-padding-top: <?php echo $padding_top; ?>px; --block-padding-bottom: <?php echo $padding_bottom; ?>px; --block-background-colour: var(--<?php echo $background; ?>);">
+        <div class="<?php echo implode(' ', array_filter($block_classes)); ?>" <?php echo ($block_anchor ? 'id="'.esc_attr($block_anchor).'"' : ''); ?> <?php echo ($block_css ? 'style="'.esc_attr($block_css).'"' : ''); ?>>
+            <div class="<?php echo implode(' ', $setting_classes); ?>" style="<?php echo implode('; ', $setting_styles); ?>">
                 <div class="container-<?php echo $container; ?>">
-                    <img class="image-<?php echo ($select_orientation ? $select_orientation : 'landscape'); ?>" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>">
+                    <img class="image-<?php echo $orientation; ?>" src="<?php echo $image['sizes']['1536x1536']; ?>" alt="<?php echo $image['alt']; ?>">
                 </div>
             </div>
         </div>
-    <?php else: ?><p style="text-align: center;">No preview available.</p><?php endif; ?>
+    <?php else: get_empty_block_message(); endif; ?>
 <?php endif; ?>
