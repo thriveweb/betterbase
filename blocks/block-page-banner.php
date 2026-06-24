@@ -7,10 +7,10 @@
     $block_css = $block['css'] ?? '';
     $padding_top = $block['settings_padding_top'] ?? '120';
     $padding_bottom = $block['settings_padding_bottom'] ?? '120';
-    $background_colour = $block['settings_background_colour'] ?? 'black';
+    $background_color = $block['settings_background_color'] ?? 'black';
     $container = $block['settings_container'] ?? 'lg';
     $setting_classes = ['block-setting-padding', 'block-setting-background-color'];
-    $setting_styles = ['--block-padding-top: '.$padding_top.'px', '--block-padding-bottom: '.$padding_bottom.'px', '--block-background-color: var(--'.$background_colour.')'];
+    $setting_styles = ['--block-padding-top: '.$padding_top.'px', '--block-padding-bottom: '.$padding_bottom.'px', '--block-background-color: var(--'.$background_color.')'];
 
     $page_ID = get_the_ID();
     $page_title = get_the_title($page_ID);

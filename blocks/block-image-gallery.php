@@ -7,10 +7,10 @@
     $block_css = $block['css'] ?? '';
     $padding_top = $block['settings_padding_top'] ?? '80';
     $padding_bottom = $block['settings_padding_bottom'] ?? '80';
-    $background_colour = $block['settings_background_colour'] ?? 'none';
+    $background_color = $block['settings_background_color'] ?? 'none';
     $container = $block['settings_container'] ?? 'xl';
     $setting_classes = ['block-setting-padding', 'block-setting-background-color'];
-    $setting_styles = ['--block-padding-top: '.$padding_top.'px', '--block-padding-bottom: '.$padding_bottom.'px', '--block-background-color: var(--'.$background_colour.')'];
+    $setting_styles = ['--block-padding-top: '.$padding_top.'px', '--block-padding-bottom: '.$padding_bottom.'px', '--block-background-color: var(--'.$background_color.')'];
 
     $add_images = get_field('block_add_images');
 
@@ -41,7 +41,7 @@
                                     </div>
                                 <?php endforeach; ?>
                             </div>
-                            <div class="swiper-footer <?php echo get_text_colour($background_colour); ?>">
+                            <div class="swiper-footer <?php echo get_text_colour($background_color); ?>">
                                 <div class="swiper-pagination"></div>
                                 <div class="swiper-navigation">
                                     <div class="swiper-nav-prev">

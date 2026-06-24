@@ -7,10 +7,10 @@
     $block_css = $block['css'] ?? '';
     $padding_top = $block['settings_padding_top'] ?? '40';
     $padding_bottom = $block['settings_padding_bottom'] ?? '40';
-    $background_colour = $block['settings_background_colour'] ?? 'none';
+    $background_color = $block['settings_background_color'] ?? 'none';
     $container = $block['settings_container'] ?? 'md';
     $setting_classes = ['block-setting-padding', 'block-setting-background-color'];
-    $setting_styles = ['--block-padding-top: '.$padding_top.'px', '--block-padding-bottom: '.$padding_bottom.'px', '--block-background-color: var(--'.$background_colour.')'];
+    $setting_styles = ['--block-padding-top: '.$padding_top.'px', '--block-padding-bottom: '.$padding_bottom.'px', '--block-background-color: var(--'.$background_color.')'];
 
     $orientation = get_field('block_select_orientation') ?? 'landscape';
     $image = get_field('block_image');

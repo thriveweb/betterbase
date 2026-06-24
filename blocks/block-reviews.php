@@ -7,10 +7,10 @@
     $block_css = $block['css'] ?? '';
     $padding_top = $block['settings_padding_top'] ?? '80';
     $padding_bottom = $block['settings_padding_bottom'] ?? '80';
-    $background_colour = $block['settings_background_colour'] ?? 'none';
+    $background_color = $block['settings_background_color'] ?? 'none';
     $container = $block['settings_container'] ?? 'sm';
     $setting_classes = ['block-setting-padding', 'block-setting-background-color'];
-    $setting_styles = ['--block-padding-top: '.$padding_top.'px', '--block-padding-bottom: '.$padding_bottom.'px', '--block-background-color: var(--'.$background_colour.')'];
+    $setting_styles = ['--block-padding-top: '.$padding_top.'px', '--block-padding-bottom: '.$padding_bottom.'px', '--block-background-color: var(--'.$background_color.')'];
 
     $title = get_field('block_title');
     $select_reviews = get_field('block_select_reviews');
@@ -37,13 +37,13 @@
                 <?php if (!empty($title)): ?>
                     <div class="container-sm">
                         <div class="inner-block-head">
-                            <div class="wysiwyg-content text-center <?php echo get_text_colour($background_colour); ?>">
+                            <div class="wysiwyg-content text-center <?php echo get_text_colour($background_color); ?>">
                                 <h3><?php echo $title; ?></h3>
                             </div>
                         </div>
                     </div>
                 <?php endif; ?>
-                <div class="container-<?php echo $container; ?> <?php echo get_text_colour($background_colour); ?>">
+                <div class="container-<?php echo $container; ?> <?php echo get_text_colour($background_color); ?>">
                     <div class="swiper-carousel-wrap">
                         <div class="carousel-reviews swiper">
                             <div class="swiper-wrapper">

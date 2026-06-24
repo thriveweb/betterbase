@@ -7,7 +7,7 @@
     $block_css = $block['css'] ?? '';
     $padding_top = $block['settings_padding_top'] ?? '80';
     $padding_bottom = $block['settings_padding_bottom'] ?? '80';
-    $background_colour = $block['settings_background_colour'] ?? 'black';
+    $background_color = $block['settings_background_color'] ?? 'black';
     $container = $block['settings_container'] ?? 'xl';
     $setting_classes = ['block-setting-padding'];
     $setting_styles = ['--block-padding-top: '.$padding_top.'px', '--block-padding-bottom: '.$padding_bottom.'px']; ?>
@@ -15,7 +15,7 @@
     <div class="<?php echo implode(' ', array_filter($block_classes)); ?>" <?php echo ($block_anchor ? 'id="'.esc_attr($block_anchor).'"' : ''); ?> <?php echo ($block_css ? 'style="'.esc_attr($block_css).'"' : ''); ?>>
         <div class="<?php echo implode(' ', $setting_classes); ?>" style="<?php echo implode('; ', $setting_styles); ?>">
             <div class="container-<?php echo $container; ?>">
-                <div class="separator" style="--block-background-color: var(--<?php echo $background_colour; ?>);"></div>
+                <div class="separator" style="--block-background-color: var(--<?php echo $background_color; ?>);"></div>
             </div>
         </div>
     </div>

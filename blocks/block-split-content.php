@@ -7,10 +7,10 @@
     $block_css = $block['css'] ?? '';
     $padding_top = $block['settings_padding_top'] ?? '80';
     $padding_bottom = $block['settings_padding_bottom'] ?? '80';
-    $background_colour = $block['settings_background_colour'] ?? 'none';
+    $background_color = $block['settings_background_color'] ?? 'none';
     $container = $block['settings_container'] ?? 'md';
     $setting_classes = ['block-setting-padding', 'block-setting-background-color'];
-    $setting_styles = ['--block-padding-top: '.$padding_top.'px', '--block-padding-bottom: '.$padding_bottom.'px', '--block-background-color: var(--'.$background_colour.')'];
+    $setting_styles = ['--block-padding-top: '.$padding_top.'px', '--block-padding-bottom: '.$padding_bottom.'px', '--block-background-color: var(--'.$background_color.')'];
 
     $left_column = get_field('block_left_column');
     $left_type = $left_column['column_type'];
@@ -33,7 +33,7 @@
                     <div class="grid-col-2 flex-align-center">
                         <div class="col-1 col-<?php echo $left_type; ?>">
                             <?php if ($left_type === 'content' && !empty($left_content)): ?>
-                                <div class="wysiwyg-content <?php echo get_text_colour($background_colour); ?>">
+                                <div class="wysiwyg-content <?php echo get_text_colour($background_color); ?>">
                                     <?php echo $left_content; ?>
                                     <?php $add_button = $left_add_button; $button_alignment = $left_button_alignment;
                                     include(get_template_directory().'/parts/group-button.php'); ?>
@@ -44,7 +44,7 @@
                         </div>
                         <div class="col-2 col-<?php echo $right_type; ?>">
                             <?php if ($right_type === 'content' && !empty($right_content)): ?>
-                                <div class="wysiwyg-content <?php echo get_text_colour($background_colour); ?>">
+                                <div class="wysiwyg-content <?php echo get_text_colour($background_color); ?>">
                                     <?php echo $right_content; ?>
                                     <?php $add_button = $right_add_button; $button_alignment = $right_button_alignment;
                                     include(get_template_directory().'/parts/group-button.php'); ?>

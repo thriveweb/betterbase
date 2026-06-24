@@ -7,10 +7,10 @@
     $block_css = $block['css'] ?? '';
     $padding_top = $block['settings_padding_top'] ?? '80';
     $padding_bottom = $block['settings_padding_bottom'] ?? '80';
-    $background_colour = $block['settings_background_colour'] ?? 'none';
+    $background_color = $block['settings_background_color'] ?? 'none';
     $container = $block['settings_container'] ?? 'md';
     $setting_classes = ['block-setting-padding', 'block-setting-background-color'];
-    $setting_styles = ['--block-padding-top: '.$padding_top.'px', '--block-padding-bottom: '.$padding_bottom.'px', '--block-background-color: var(--'.$background_colour.')'];
+    $setting_styles = ['--block-padding-top: '.$padding_top.'px', '--block-padding-bottom: '.$padding_bottom.'px', '--block-background-color: var(--'.$background_color.')'];
 
     $column_count = $block['multicolumn_count'] ?? '2';
     $column_style = $block['multicolumn_style'] ?? 'equal-width';
@@ -25,7 +25,7 @@
                     <div class="grid-col-<?php echo $column_count; ?> has-<?php echo $column_style; ?> flex-<?php echo $column_alignment; ?>">
                         <?php $i = 0; foreach ($add_column as $col): $i++; ?>
                             <div class="col-<?php echo $i; ?>">
-                                <div class="wysiwyg-content <?php echo get_text_colour($background_colour); ?>">
+                                <div class="wysiwyg-content <?php echo get_text_colour($background_color); ?>">
                                     <?php echo ($col['column_content'] ? $col['column_content'] : ''); ?>
                                     <?php $add_button = $col['button_group']['add_button']; $button_alignment = $col['button_group']['button_alignment']; 
                                     include(get_template_directory().'/parts/group-button.php'); ?>

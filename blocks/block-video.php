@@ -7,10 +7,10 @@
     $block_css = $block['css'] ?? '';
     $padding_top = $block['settings_padding_top'] ?? '80';
     $padding_bottom = $block['settings_padding_bottom'] ?? '80';
-    $background_colour = $block['settings_background_colour'] ?? 'none';
+    $background_color = $block['settings_background_color'] ?? 'none';
     $container = $block['settings_container'] ?? 'sm';
     $setting_classes = ['block-setting-padding', 'block-setting-background-color'];
-    $setting_styles = ['--block-background-color: var(--'.$background_colour.')', '--block-padding-top: '.$padding_top.'px', '--block-padding-bottom: '.$padding_bottom.'px'];
+    $setting_styles = ['--block-background-color: var(--'.$background_color.')', '--block-padding-top: '.$padding_top.'px', '--block-padding-bottom: '.$padding_bottom.'px'];
 
     $title = get_field('block_title');
     $video_type = get_field('block_video_type');
@@ -24,7 +24,7 @@
                 <?php if (!empty($title)): ?>
                     <div class="container-sm">
                         <div class="inner-block-head">
-                            <div class="wysiwyg-content text-center <?php echo get_text_colour($background_colour); ?>">
+                            <div class="wysiwyg-content text-center <?php echo get_text_colour($background_color); ?>">
                                 <h3><?php echo $title; ?></h3>
                             </div>
                         </div>

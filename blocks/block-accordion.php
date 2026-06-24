@@ -7,10 +7,10 @@
     $block_css = $block['css'] ?? '';
     $padding_top = $block['settings_padding_top'] ?? '80';
     $padding_bottom = $block['settings_padding_bottom'] ?? '80';
-    $background_colour = $block['settings_background_colour'] ?? 'none';
+    $background_color = $block['settings_background_color'] ?? 'none';
     $container = $block['settings_container'] ?? 'md';
     $setting_classes = ['block-setting-padding', 'block-setting-background-color'];
-    $setting_styles = ['--block-padding-top: '.$padding_top.'px', '--block-padding-bottom: '.$padding_bottom.'px', '--block-background-color: var(--'.$background_colour.')'];
+    $setting_styles = ['--block-padding-top: '.$padding_top.'px', '--block-padding-bottom: '.$padding_bottom.'px', '--block-background-color: var(--'.$background_color.')'];
 
     $title = get_field('block_title');
     $add_accordion = get_field('block_add_accordion');
@@ -21,13 +21,13 @@
                 <?php if (!empty($title)): ?>
                     <div class="container-sm">
                         <div class="inner-block-head">
-                            <div class="wysiwyg-content text-center <?php echo get_text_colour($background_colour); ?>">
+                            <div class="wysiwyg-content text-center <?php echo get_text_colour($background_color); ?>">
                                 <h3><?php echo $title; ?></h3>
                             </div>
                         </div>
                     </div>
                 <?php endif; ?>
-                <div class="container-<?php echo $container; ?> <?php echo get_text_colour($background_colour); ?>">
+                <div class="container-<?php echo $container; ?> <?php echo get_text_colour($background_color); ?>">
                     <?php include(get_template_directory().'/parts/group-accordion.php'); ?>
                 </div>
             </div>
