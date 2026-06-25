@@ -62,7 +62,7 @@
                     "clone": [
                         "group_661491f489c42"
                     ],
-                    "display": "group",
+                    "display": "seamless",
                     "layout": "block",
                     "prefix_label": 0,
                     "prefix_name": 0,
@@ -92,5 +92,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1777425403
+    "modified": 1782363783
 }

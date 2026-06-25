@@ -105,7 +105,7 @@
                     "clone": [
                         "field_661491f5daa29"
                     ],
-                    "display": "group",
+                    "display": "seamless",
                     "layout": "block",
                     "prefix_label": 0,
                     "prefix_name": 0,
@@ -135,5 +135,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1777425708
+    "modified": 1782363765
 }

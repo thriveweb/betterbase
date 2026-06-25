@@ -9,7 +9,7 @@
                 <div class="inner-entry-content" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
                     <div class="wysiwyg-content" itemprop="text">
                         <?php echo $accordion['content']; ?>
-                        <?php $add_button = $accordion['button_group']['add_button'];
+                        <?php $add_button = $accordion['add_button'];
                         include(get_template_directory().'/parts/group-button.php'); ?>
                     </div>
                 </div>
