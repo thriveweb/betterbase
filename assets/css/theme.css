@@ -46,11 +46,6 @@
 @media (max-width: 782px) {
     :root {
         --admin-height: 46px;
-    }
-}
-
-@media (max-width: 761px) {
-    :root {
         --header-height: 70px;
     }
 }
@@ -325,7 +320,7 @@ body.betterbase-theme.admin-bar {
     }
 }
 
-@media (max-width: 761px) {
+@media (max-width: 782px) {
     .betterbase-theme .container-lg,
     .betterbase-theme .container-md,
     .betterbase-theme .container-sm,
@@ -546,7 +541,7 @@ body.betterbase-theme.admin-bar {
     }
 }
 
-@media (max-width: 761px) {
+@media (max-width: 782px) {
     .betterbase-theme h1 br,
     .betterbase-theme .h1 br,
     .betterbase-theme h2 br,
@@ -1780,7 +1775,7 @@ body.betterbase-theme.admin-bar .site-search {
 
 /* Responsive */
 
-@media (max-width: 761px) {
+@media (max-width: 782px) {
     .betterbase-theme .swiper-footer {
         margin-top: 20px;
     }
@@ -2049,7 +2044,7 @@ body.betterbase-theme.admin-bar .site-search {
 
 /* Responsive */
 
-@media (max-width: 761px) {
+@media (max-width: 782px) {
     .betterbase-theme .inner-block-head {
         margin-bottom: 40px;
     }
@@ -2087,7 +2082,7 @@ body.betterbase-theme.admin-bar .site-search {
 
 /* Responsive */
 
-@media (max-width: 761px) {
+@media (max-width: 782px) {
     .block-split-content .col-content {
         order: 9;
     }
