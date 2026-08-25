@@ -50,6 +50,8 @@ function acf_register_custom_blocks() {
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
+        'api_version' => 3,
+        'acf_block_version' => 3,
         'example' => array(
             'attributes' => array(
                 'mode' => 'preview',
@@ -72,6 +74,8 @@ function acf_register_custom_blocks() {
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
+        'api_version' => 3,
+        'acf_block_version' => 3,
         'example' => array(
             'attributes' => array(
                 'mode' => 'preview',
@@ -94,6 +98,8 @@ function acf_register_custom_blocks() {
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
+        'api_version' => 3,
+        'acf_block_version' => 3,
         'example' => array(
             'attributes' => array(
                 'mode' => 'preview',
@@ -116,6 +122,8 @@ function acf_register_custom_blocks() {
         'mode' => 'edit',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
+        'api_version' => 3,
+        'acf_block_version' => 3,
         'example' => array(
             'attributes' => array(
                 'mode' => 'preview',
@@ -138,6 +146,8 @@ function acf_register_custom_blocks() {
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
+        'api_version' => 3,
+        'acf_block_version' => 3,
         'example' => array(
             'attributes' => array(
                 'mode' => 'preview',
@@ -160,6 +170,8 @@ function acf_register_custom_blocks() {
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
+        'api_version' => 3,
+        'acf_block_version' => 3,
     ));
 
     /* Split Content */
@@ -174,6 +186,8 @@ function acf_register_custom_blocks() {
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
+        'api_version' => 3,
+        'acf_block_version' => 3,
         'example' => array(
             'attributes' => array(
                 'mode' => 'preview',
@@ -196,6 +210,8 @@ function acf_register_custom_blocks() {
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
+        'api_version' => 3,
+        'acf_block_version' => 3,
         'example' => array(
             'attributes' => array(
                 'mode' => 'preview',
@@ -218,6 +234,8 @@ function acf_register_custom_blocks() {
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
+        'api_version' => 3,
+        'acf_block_version' => 3,
         'example' => array(
             'attributes' => array(
                 'mode' => 'preview',
@@ -240,6 +258,8 @@ function acf_register_custom_blocks() {
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
+        'api_version' => 3,
+        'acf_block_version' => 3,
         'example' => array(
             'attributes' => array(
                 'mode' => 'preview',
@@ -262,6 +282,8 @@ function acf_register_custom_blocks() {
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
+        'api_version' => 3,
+        'acf_block_version' => 3,
         'example' => array(
             'attributes' => array(
                 'mode' => 'preview',
@@ -284,6 +306,8 @@ function acf_register_custom_blocks() {
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
+        'api_version' => 3,
+        'acf_block_version' => 3,
         'example' => array(
             'attributes' => array(
                 'mode' => 'preview',
@@ -306,6 +330,8 @@ function acf_register_custom_blocks() {
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
+        'api_version' => 3,
+        'acf_block_version' => 3,
         'example' => array(
             'attributes' => array(
                 'mode' => 'preview',
@@ -328,6 +354,8 @@ function acf_register_custom_blocks() {
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
+        'api_version' => 3,
+        'acf_block_version' => 3,
         'example' => array(
             'attributes' => array(
                 'mode' => 'preview',
@@ -350,6 +378,8 @@ function acf_register_custom_blocks() {
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
+        'api_version' => 3,
+        'acf_block_version' => 3,
         'example' => array(
             'attributes' => array(
                 'mode' => 'preview',
@@ -372,6 +402,8 @@ function acf_register_custom_blocks() {
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
+        'api_version' => 3,
+        'acf_block_version' => 3,
         'example' => array(
             'attributes' => array(
                 'mode' => 'preview',
@@ -394,6 +426,8 @@ function acf_register_custom_blocks() {
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
+        'api_version' => 3,
+        'acf_block_version' => 3,
     ));
 
     /* Separator */
@@ -408,6 +442,8 @@ function acf_register_custom_blocks() {
         'mode' => 'preview',
         'supports' => array('anchor' => true, 'align' => false),
         'validation' => true,
+        'api_version' => 3,
+        'acf_block_version' => 3,
     ));
 }
 add_action('acf/init', 'acf_register_custom_blocks');
