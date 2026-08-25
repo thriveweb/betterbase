@@ -21,7 +21,7 @@ $review_image = get_the_post_thumbnail_url($review_ID, 'large'); ?>
             </div>
         <?php endif; ?>
     </div>
-    <div class="inner-entry-content has-read-more text-center">
+    <div class="inner-entry-content has-read-more text-align-center">
         <?php if (count($review_quote_count) <= 40): ?>
             <h5>"<?php echo $review_full_quote; ?>"</h5>
         <?php else: ?>

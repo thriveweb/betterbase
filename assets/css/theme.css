@@ -579,15 +579,15 @@ body.betterbase-theme.admin-bar {
 
 /* Alignment */
 
-.betterbase-theme .text-left {
+.betterbase-theme .text-align-left {
     text-align: left;
 }
 
-.betterbase-theme .text-center {
+.betterbase-theme .text-align-center {
     text-align: center;
 }
 
-.betterbase-theme .text-right {
+.betterbase-theme .text-align-right {
     text-align: right;
 }
 
@@ -597,8 +597,8 @@ body.betterbase-theme.admin-bar {
     opacity: 50%;
 }
 
-.betterbase-theme .text-white,
-.betterbase-theme .text-white *:not(.button, button, .button *, button *, [class*="text-"], [style*="color"], .gform_validation_errors *) {
+.betterbase-theme .text-color-white,
+.betterbase-theme .text-color-white *:not(.button, button, .button *, button *, [class*="text-"], [style*="color"], .gform_validation_errors *) {
     color: var(--white) !important;
     border-color: var(--white);
 }
@@ -1748,7 +1748,7 @@ body.betterbase-theme.admin-bar .site-search {
     background: var(--black);
 }
 
-.betterbase-theme .text-white .swiper-pagination-progressbar span {
+.betterbase-theme .text-color-white .swiper-pagination-progressbar span {
     background: var(--white);
 }
 

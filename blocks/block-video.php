@@ -24,7 +24,7 @@
                 <?php if (!empty($title)): ?>
                     <div class="container-sm">
                         <div class="inner-block-head">
-                            <div class="wysiwyg-content text-center <?php echo get_text_colour($background_color); ?>">
+                            <div class="wysiwyg-content text-align-center <?php echo get_text_colour($background_color); ?>">
                                 <h3><?php echo $title; ?></h3>
                             </div>
                         </div>

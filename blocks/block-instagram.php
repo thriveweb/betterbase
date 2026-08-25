@@ -19,7 +19,7 @@
         <div class="<?php echo implode(' ', $setting_classes); ?>" style="<?php echo implode('; ', $setting_styles); ?>">
             <div class="container-sm">
                 <div class="inner-block-head">
-                    <div class="wysiwyg-content text-center <?php echo get_text_colour($background_color); ?>">
+                    <div class="wysiwyg-content text-align-center <?php echo get_text_colour($background_color); ?>">
                         <h4>
                             Follow us 
                             <?php if (!empty($instagram['url']) && !empty($instagram['username'])): ?>
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="container-<?php echo $container; ?>">
-                <p class="text-center <?php echo get_text_colour($background_color); ?>">[instagram-feed]</p> <?php /* Replace with shortcode */ ?>
+                <p class="text-align-center <?php echo get_text_colour($background_color); ?>">[instagram-feed]</p> <?php /* Replace with shortcode */ ?>
             </div>
         </div>
     </div>

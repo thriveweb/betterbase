@@ -131,7 +131,7 @@ class Submenu_Wrap extends Walker_Nav_Menu {
 
 function get_text_colour($background_color) {
     $array = array('black');
-    return (in_array($background_color, $array) ? 'text-white' : 'text-default');
+    return (in_array($background_color, $array) ? 'text-color-white' : 'text-default');
 }
 
 /*-----------------------------------------------------------------------
@@ -172,7 +172,6 @@ function betterbase_custom_wysiwyg_formats($init_array) {
 }
 add_filter('tiny_mce_before_init', 'betterbase_custom_wysiwyg_formats');
 
-
 /*-----------------------------------------------------------------------
     Force attributes on Gravity Forms shortcodes
 -----------------------------------------------------------------------*/
@@ -184,3 +183,22 @@ function betterbase_gf_force_shortcode_atts($form_args) {
     return $form_args;
 }
 add_filter('gform_form_args', 'betterbase_gf_force_shortcode_atts', 99);
+
+/*-----------------------------------------------------------------------
+    Customise Gravity Forms submit button output
+-----------------------------------------------------------------------*/
+
+function betterbase_gf_customise_submit_button($button, $form) {
+   if (!is_admin()) {
+        $label = ($form['button']['text'] ? $form['button']['text'] : 'Submit');
+        $icon = file_get_contents(get_template_directory().'/assets/img/icon-arrow-right.svg');
+
+        $button = '<button type="submit" id="gform_submit_button_'.esc_attr($form['id']).'" class="gform_button button button-default" onclick="gform.submission.handleButtonClick(this);" data-submission-type="submit">';
+        $button .= esc_html($label);
+        $button .= $icon;
+        $button .= '</button>';
+   }
+
+   return $button;
+}
+// add_filter('gform_submit_button', 'betterbase_gf_customise_submit_button', 10, 2);
