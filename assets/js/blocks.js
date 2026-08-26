@@ -101,7 +101,7 @@ jQuery(document).ready(function ($) {
                     // Create fields for all blocks
                     createElement(
                         PanelBody,
-                        { title: "Block Settings" },
+                        { title: "Block Settings", initialOpen: false },
                         createElement(SelectControl, {
                             label: "Background Colour",
                             value: attributes.settings_background_color || "",
