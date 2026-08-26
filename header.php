@@ -25,7 +25,7 @@ $header_button = get_field('header_button', 'options'); ?>
 <header class="site-header">
     <?php if ($enable_notice && !empty($notice_text)): ?>
         <div class="site-notice">
-            <div class="container-lg wysiwyg-content text-small text-align-center text-color-white">
+            <div class="container-lg wysiwyg-content text-size-small text-align-center text-color-white">
                 <p><?php echo $notice_text; ?></p>
             </div>
         </div>

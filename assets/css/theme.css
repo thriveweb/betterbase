@@ -562,13 +562,13 @@ body.betterbase-theme.admin-bar {
 
 /* Sizes */
 
-.betterbase-theme .text-small,
-.betterbase-theme .text-small * {
+.betterbase-theme .text-size-small,
+.betterbase-theme .text-size-small * {
     font-size: 14px !important;
 }
 
-.betterbase-theme .text-sub,
-.betterbase-theme .text-sub * {
+.betterbase-theme .text-size-sub,
+.betterbase-theme .text-size-sub * {
     font-size: 12px !important;
 }
 

@@ -7,8 +7,8 @@ $add_social_media = get_field('add_social_media', 'options');
 $add_policy_link = get_field('add_policy_link', 'options'); ?>
 
 <footer class="site-footer">
-    <div class="container-lg padding-md">
-        <div class="footer-columns grid-col-3">
+    <div class="container-lg">
+        <div class="footer-columns grid-col-3 padding-md">
             <div class="footer-logo">
                 <a class="site-logo" href="<?php echo get_bloginfo('url'); ?>" title="<?php echo get_bloginfo('name'); ?>">
                     <?php include_asset('logo-theme.svg'); ?>
@@ -40,21 +40,21 @@ $add_policy_link = get_field('add_policy_link', 'options'); ?>
                 </div>
             <?php endif; ?>
         </div>
-    </div>
-    <div class="footer-copyright padding-sm">
-        <div class="container-lg flex-layout flex-align-center flex-justify-between flex-gap">
-            <p class="text-small"><a href="<?php echo get_bloginfo('url'); ?>" title="<?php echo get_bloginfo('name'); ?>"><?php echo get_bloginfo('name'); ?></a> &copy; <?php echo date('Y'); ?></p>
-            <?php if (!empty($add_policy_link)): ?>
-                <p class="footer-policies text-small">
-                    <?php $i = 0; foreach ($add_policy_link as $policy): $i++; ?>
-                        <a href="<?php echo $policy['link']['url']; ?>" target="<?php echo $policy['link']['target']; ?>" title="<?php echo $policy['link']['title']; ?>"><?php echo $policy['link']['title']; ?></a>
-                        <?php if ($i < count($add_policy_link)): ?>
-                            &nbsp;<span>|</span>&nbsp;
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </p>
-            <?php endif; ?>
-            <p class="text-small">Site by <a href="https://thriveweb.com.au" target="_blank" title="Thrive Digital Web Design & Development Gold Coast">Thrive</a></p>
+        <div class="footer-copyright padding-sm-bot">
+            <div class="flex-layout flex-align-center flex-justify-between flex-gap">
+                <p class="text-size-small"><a href="<?php echo get_bloginfo('url'); ?>" title="<?php echo get_bloginfo('name'); ?>"><?php echo get_bloginfo('name'); ?></a> &copy; <?php echo date('Y'); ?></p>
+                <?php if (!empty($add_policy_link)): ?>
+                    <p class="footer-policies text-size-small">
+                        <?php $i = 0; foreach ($add_policy_link as $policy): $i++; ?>
+                            <a href="<?php echo $policy['link']['url']; ?>" target="<?php echo $policy['link']['target']; ?>" title="<?php echo $policy['link']['title']; ?>"><?php echo $policy['link']['title']; ?></a>
+                            <?php if ($i < count($add_policy_link)): ?>
+                                &nbsp;<span>|</span>&nbsp;
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </p>
+                <?php endif; ?>
+                <p class="text-size-small">Site by <a href="https://thriveweb.com.au" target="_blank" title="Thrive Digital Web Design & Development Gold Coast">Thrive</a></p>
+            </div>
         </div>
     </div>
 </footer>
