@@ -17,8 +17,8 @@
 
     <div class="<?php echo implode(' ', array_filter($block_classes)); ?>" <?php echo ($block_anchor ? 'id="'.esc_attr($block_anchor).'"' : ''); ?> <?php echo ($block_css ? 'style="'.esc_attr($block_css).'"' : ''); ?>>
         <div class="<?php echo implode(' ', $setting_classes); ?>" style="<?php echo implode('; ', $setting_styles); ?>">
-            <div class="container-sm">
-                <div class="inner-block-head">
+            <div class="inner-block-head">
+                <div class="container-sm">
                     <div class="wysiwyg-content text-align-center <?php echo get_text_colour($background_color); ?>">
                         <h4>
                             Follow us 
