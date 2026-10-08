@@ -1,55 +1,5 @@
-jQuery(document).ready(function ($) {
-    var initializeBlock = function ($block) {
-        /*-----------------------------------------------------------------------
-            Init Swiper
-        -----------------------------------------------------------------------*/
-
-        $(".carousel-gallery").each(function (index, element) {
-            const $slider = $(element);
-            const $pagination = $slider.find(".swiper-pagination");
-            const $navPrev = $slider.find(".swiper-nav-prev");
-            const $navNext = $slider.find(".swiper-nav-next");
-            new Swiper(element, {
-                loop: false,
-                spaceBetween: 10,
-                slidesPerView: "auto",
-                pagination: {
-                    el: $pagination[0],
-                    clickable: true,
-                    type: "progressbar",
-                },
-                navigation: {
-                    prevEl: $navPrev[0],
-                    nextEl: $navNext[0],
-                },
-            });
-        });
-
-        $(".carousel-reviews").each(function (index, element) {
-            const $slider = $(element);
-            const $navPrev = $slider.find(".swiper-nav-prev");
-            const $navNext = $slider.find(".swiper-nav-next");
-            new Swiper(element, {
-                loop: true,
-                slidesPerView: 1,
-                spaceBetween: 20,
-                navigation: {
-                    prevEl: $navPrev[0],
-                    nextEl: $navNext[0],
-                },
-            });
-        });
-    };
-
-    if (window.acf) {
-        window.acf.addAction("render_block_preview", initializeBlock);
-    } else {
-        initializeBlock();
-    }
-});
-
 /*-----------------------------------------------------------------------
-    Init Global Block Settings
+    Init global block setting fields
 -----------------------------------------------------------------------*/
 
 (function (wp) {
@@ -82,26 +32,27 @@ jQuery(document).ready(function ($) {
 
     const globalBlockFields = createHigherOrderComponent(function (BlockEdit) {
         return function (props) {
-            const { attributes, setAttributes, isSelected, name } = props;
+            const { attributes, setAttributes, name } = props;
 
             if (!allowedBlocks.includes(name)) {
-                return createElement(BlockEdit, props);
-            }
-
-            if (!isSelected) {
                 return createElement(BlockEdit, props);
             }
 
             return createElement(
                 Fragment,
                 null,
+
                 createElement(
                     InspectorControls,
                     null,
-                    // Create fields for all blocks
+
                     createElement(
                         PanelBody,
-                        { title: "Block Settings", initialOpen: false },
+                        {
+                            title: "Block Settings",
+                            initialOpen: false,
+                        },
+
                         createElement(SelectControl, {
                             label: "Background Colour",
                             value: attributes.settings_background_color || "",
@@ -111,9 +62,12 @@ jQuery(document).ready(function ($) {
                                 { label: "Black (#000000)", value: "black" },
                             ],
                             onChange: function (value) {
-                                setAttributes({ settings_background_color: value });
+                                setAttributes({
+                                    settings_background_color: value,
+                                });
                             },
                         }),
+
                         createElement(SelectControl, {
                             label: "Container Size",
                             value: attributes.settings_container || "",
@@ -125,45 +79,60 @@ jQuery(document).ready(function ($) {
                                 { label: "Full Width", value: "xl" },
                             ],
                             onChange: function (value) {
-                                setAttributes({ settings_container: value });
+                                setAttributes({
+                                    settings_container: value,
+                                });
                             },
                         }),
+
                         createElement(RangeControl, {
                             label: "Padding Top",
                             value: attributes.settings_padding_top || 0,
                             onChange: function (value) {
-                                setAttributes({ settings_padding_top: value });
+                                setAttributes({
+                                    settings_padding_top: value,
+                                });
                             },
                             min: 0,
                             max: 300,
                             step: 10,
                         }),
+
                         createElement(RangeControl, {
                             label: "Padding Bottom",
                             value: attributes.settings_padding_bottom || 0,
                             onChange: function (value) {
-                                setAttributes({ settings_padding_bottom: value });
+                                setAttributes({
+                                    settings_padding_bottom: value,
+                                });
                             },
                             min: 0,
                             max: 300,
                             step: 10,
                         }),
                     ),
-                    // Create fields specific to 'multicolumn' block
+
                     name === "acf/block-multicolumn" &&
                         createElement(
                             PanelBody,
-                            { title: "Multicolumn Settings", initialOpen: false },
+                            {
+                                title: "Multicolumn Settings",
+                                initialOpen: false,
+                            },
+
                             createElement(RangeControl, {
                                 label: "Column Count",
                                 value: attributes.multicolumn_count || 2,
                                 onChange: function (value) {
-                                    setAttributes({ multicolumn_count: value });
+                                    setAttributes({
+                                        multicolumn_count: value,
+                                    });
                                 },
                                 min: 1,
                                 max: 6,
                                 step: 1,
                             }),
+
                             createElement(SelectControl, {
                                 label: "Column Alignment",
                                 value: attributes.multicolumn_alignment || "",
@@ -173,11 +142,14 @@ jQuery(document).ready(function ($) {
                                     { label: "Bottom", value: "align-end" },
                                 ],
                                 onChange: function (value) {
-                                    setAttributes({ multicolumn_alignment: value });
+                                    setAttributes({
+                                        multicolumn_alignment: value,
+                                    });
                                 },
                             }),
                         ),
                 ),
+
                 createElement(BlockEdit, props),
             );
         };
@@ -264,3 +236,53 @@ jQuery(document).ready(function ($) {
     addFilter("blocks.registerBlockType", "betterbase/custom-attributes", addCustomAttributes);
     addFilter("editor.BlockEdit", "betterbase/custom-fields", globalBlockFields);
 })(window.wp);
+
+/*-----------------------------------------------------------------------
+    Init block-specific scripts
+-----------------------------------------------------------------------*/
+
+jQuery(document).ready(function ($) {
+    var initializeBlock = function ($block) {
+        $block.find(".carousel-gallery").each(function (index, element) {
+            const $slider = $(element);
+            const $pagination = $slider.find(".swiper-pagination");
+            const $navPrev = $slider.find(".swiper-nav-prev");
+            const $navNext = $slider.find(".swiper-nav-next");
+            new Swiper(element, {
+                loop: false,
+                spaceBetween: 10,
+                slidesPerView: "auto",
+                pagination: {
+                    el: $pagination[0],
+                    clickable: true,
+                    type: "progressbar",
+                },
+                navigation: {
+                    prevEl: $navPrev[0],
+                    nextEl: $navNext[0],
+                },
+            });
+        });
+
+        $block.find(".carousel-reviews").each(function (index, element) {
+            const $slider = $(element);
+            const $navPrev = $slider.find(".swiper-nav-prev");
+            const $navNext = $slider.find(".swiper-nav-next");
+            new Swiper(element, {
+                loop: true,
+                slidesPerView: 1,
+                spaceBetween: 20,
+                navigation: {
+                    prevEl: $navPrev[0],
+                    nextEl: $navNext[0],
+                },
+            });
+        });
+    };
+
+    if (window.acf) {
+        window.acf.addAction("render_block_preview", initializeBlock);
+    } else {
+        initializeBlock();
+    }
+});
