@@ -1,0 +1,27 @@
+{
+    "name": "acf/block-video",
+    "title": "Video",
+    "description": "Embed or upload a video.",
+    "category": "general",
+    "icon": "video-alt2",
+    "keywords": [
+        "video",
+        "embed"
+    ],
+    "apiVersion": 3,
+    "acf": {
+        "mode": "preview",
+        "blockVersion": 3,
+        "renderTemplate": "block-video.php",
+        "validate": true
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    },
+    "betterbase": {
+        "settings": {
+            "container": "sm"
+        }
+    }
+}

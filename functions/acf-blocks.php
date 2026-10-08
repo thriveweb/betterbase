@@ -1,521 +1,305 @@
 <?php
 
 /*-----------------------------------------------------------------------
-    Register ACF options page
+    ACF fallback
 -----------------------------------------------------------------------*/
 
-if (function_exists('acf_add_options_page')) {
-    $parent = acf_add_options_page(array(
-        'page_title' => __('Global Options'),
-        'menu_title' => __('Global Options'),
-        'redirect'   => false,
-    ));
+if (!function_exists('get_field')) {
+    function get_field($selector = '', $post_id = false, $format_value = true) {
+        return null;
+    }
+
+    function betterbase_acf_inactive_notice() {
+        echo '<div class="notice notice-error"><p>This theme requires <strong>Advanced Custom Fields PRO</strong>. Please install and activate it.</p></div>';
+    }
+    add_action('admin_notices', 'betterbase_acf_inactive_notice');
 }
 
 /*-----------------------------------------------------------------------
-    Register block categories
+    Options
 -----------------------------------------------------------------------*/
 
-function acf_create_custom_block_categories($categories, $post) {
-    $custom_categories = array(
-        array(
-            'slug'  => 'general',
-            'title' => 'General',
-            'icon'  => 'dashicons-block-default',
+add_action('acf/init', function () {
+    if (function_exists('acf_add_options_page')) {
+        acf_add_options_page(array(
+            'page_title' => __('Global Options'),
+            'menu_title' => __('Global Options'),
+            'redirect'   => false,
+        ));
+    }
+});
+
+/*-----------------------------------------------------------------------
+    Force thumbnail preview on image / gallery fields
+-----------------------------------------------------------------------*/
+
+function betterbase_acf_image_preview_thumbnail($field) {
+    $field['preview_size'] = 'thumbnail';
+    return $field;
+}
+add_filter('acf/load_field/type=image', 'betterbase_acf_image_preview_thumbnail');
+add_filter('acf/load_field/type=gallery', 'betterbase_acf_image_preview_thumbnail');
+add_filter('acf/load_field_defaults/type=image', 'betterbase_acf_image_preview_thumbnail');
+add_filter('acf/load_field_defaults/type=gallery', 'betterbase_acf_image_preview_thumbnail');
+
+/*-----------------------------------------------------------------------
+    Config allowed blocks, categories, and setting defaults
+-----------------------------------------------------------------------*/
+
+function betterbase_blocks_config() {
+    return array(
+        'categories' => array(
+            array('slug' => 'general', 'title' => 'General', 'icon' => 'dashicons-block-default'),
+            array('slug' => 'blog', 'title' => 'Blog', 'icon' => 'dashicons-block-default'),
         ),
-        array(
-            'slug'  => 'blog',
-            'title' => 'Blog',
-            'icon'  => 'dashicons-block-default',
+        'allowed' => array(
+            'post' => array(
+                'acf/block-post-header',
+                'acf/block-wysiwyg',
+                'acf/block-post-footer',
+                'acf/block-gallery',
+                'acf/block-video',
+            ),
+            'default' => array(
+                'acf/block-wysiwyg',
+                'acf/block-multicolumn',
+                'acf/block-split-content',
+                'acf/block-accordion',
+                'acf/block-gallery',
+                'acf/block-video',
+                'acf/block-hero-banner',
+                'acf/block-page-banner',
+                'acf/block-logo-slider',
+                'acf/block-post-feed',
+                'acf/block-testimonials',
+                'acf/block-instagram',
+                'acf/block-contact',
+                'acf/block-separator',
+                'core/shortcode',
+            ),
+        ),
+        'templates' => array(
+            'post' => array(
+                array('acf/block-post-header'),
+                array('acf/block-wysiwyg'),
+                array('acf/block-post-footer'),
+            ),
+        ),
+        'defaults' => array(
+            'background'     => 'none',
+            'container'      => 'lg',
+            'padding_top'    => 80,
+            'padding_bottom' => 80,
         ),
     );
-    return array_merge($categories, $custom_categories);
 }
-add_filter('block_categories_all', 'acf_create_custom_block_categories', 10, 2);
 
 /*-----------------------------------------------------------------------
-    Register ACF blocks
+    Block helpers
 -----------------------------------------------------------------------*/
 
-function acf_register_custom_blocks() {
-    /* Post Header */
-    acf_register_block_type(array(
-        'name' => 'block-post-header',
-        'title' => __('Post Header'),
-        'description' => __('Display title, date, and assigned categories for current post.'),
-        'keywords' => array('post', 'blog', 'wysiwyg'),
-        'render_template' => 'blocks/block-post-header.php',
-        'category' => 'blog',
-        'icon' => 'info',
-        'mode' => 'preview',
-        'supports' => array('anchor' => true, 'align' => false),
-        'validation' => true,
-        'api_version' => 3,
-        'acf_block_version' => 3,
-        'example' => array(
-            'attributes' => array(
-                'mode' => 'preview',
-                'data' => array(
-                    'preview_image' => 'block-post-header.jpg',
-                ),
-            ),
-        ),
-    ));
+/* Inserter preview — preview.jpg in the block folder only */
+function betterbase_block_preview($block) {
+    if (empty($block['data']['_is_preview'])) {
+        return false;
+    }
 
-    /* Post Content */
-    acf_register_block_type(array(
-        'name' => 'block-post-content',
-        'title' => __('Post Content'),
-        'description' => __('Use the WYSIWYG editor to create and format post content.'),
-        'keywords' => array('post', 'blog', 'wysiwyg'),
-        'render_template' => 'blocks/block-content.php',
-        'category' => 'blog',
-        'icon' => 'editor-paragraph',
-        'mode' => 'preview',
-        'supports' => array('anchor' => true, 'align' => false),
-        'validation' => true,
-        'api_version' => 3,
-        'acf_block_version' => 3,
-        'example' => array(
-            'attributes' => array(
-                'mode' => 'preview',
-                'data' => array(
-                    'preview_image' => 'block-content.jpg',
-                ),
-            ),
-        ),
-    ));
+    $file = ($block['path'] ?? '') . '/preview.jpg';
 
-    /* Post Footer */
-    acf_register_block_type(array(
-        'name' => 'block-post-footer',
-        'title' => __('Post Footer'),
-        'description' => __('Display post pagaintion and social media share icons.'),
-        'keywords' => array('post', 'blog', 'pagiantion', 'social', 'share'),
-        'render_template' => 'blocks/block-post-footer.php',
-        'category' => 'blog',
-        'icon' => 'share',
-        'mode' => 'preview',
-        'supports' => array('anchor' => true, 'align' => false),
-        'validation' => true,
-        'api_version' => 3,
-        'acf_block_version' => 3,
-        'example' => array(
-            'attributes' => array(
-                'mode' => 'preview',
-                'data' => array(
-                    'preview_image' => 'block-post-footer.jpg',
-                ),
-            ),
-        ),
-    ));
+    if (file_exists($file)) {
+        $url = get_template_directory_uri() . str_replace(get_template_directory(), '', $block['path']) . '/preview.jpg';
+        echo '<img src="' . esc_url($url) . '" alt="" style="width:100%;height:auto;display:block;">';
+    }
 
-    /* Related Posts */
-    acf_register_block_type(array(
-        'name' => 'block-related-posts',
-        'title' => __('Related Posts'),
-        'description' => __('Feed displaying related posts.'),
-        'keywords' => array('post', 'blog', 'feed'),
-        'render_template' => 'blocks/block-related-posts.php',
-        'category' => 'blog',
-        'icon' => 'admin-post',
-        'mode' => 'edit',
-        'supports' => array('anchor' => true, 'align' => false),
-        'validation' => true,
-        'api_version' => 3,
-        'acf_block_version' => 3,
-        'example' => array(
-            'attributes' => array(
-                'mode' => 'preview',
-                'data' => array(
-                    'preview_image' => 'block-post-feed.jpg',
-                ),
-            ),
-        ),
-    ));
-
-    /* Content */
-    acf_register_block_type(array(
-        'name' => 'block-content',
-        'title' => __('Content'),
-        'description' => __('Use the WYSIWYG editor to create and format content.'),
-        'keywords' => array('content', 'wysiwyg'),
-        'render_template' => 'blocks/block-content.php',
-        'category' => 'general',
-        'icon' => 'editor-paragraph',
-        'mode' => 'preview',
-        'supports' => array('anchor' => true, 'align' => false),
-        'validation' => true,
-        'api_version' => 3,
-        'acf_block_version' => 3,
-        'example' => array(
-            'attributes' => array(
-                'mode' => 'preview',
-                'data' => array(
-                    'preview_image' => 'block-content.jpg',
-                ),
-            ),
-        ),
-    ));
-
-    /* Multicolumn */
-    acf_register_block_type(array(
-        'name' => 'block-multicolumn',
-        'title' => __('Multicolumn'),
-        'description' => __('Multicolumn layout with WYSIWYG editor and optional buttons.'),
-        'keywords' => array('content', 'wysiwyg', 'image', 'column'),
-        'render_template' => 'blocks/block-multicolumn.php',
-        'category' => 'general',
-        'icon' => 'columns',
-        'mode' => 'preview',
-        'supports' => array('anchor' => true, 'align' => false),
-        'validation' => true,
-        'api_version' => 3,
-        'acf_block_version' => 3,
-    ));
-
-    /* Split Content */
-    acf_register_block_type(array(
-        'name' => 'block-split-content',
-        'title' => __('Split Content'),
-        'description' => __('Two column layout with image and WYSIWYG editor options.'),
-        'keywords' => array('columns', 'image', 'content', 'split', 'wysiwyg'),
-        'render_template' => 'blocks/block-split-content.php',
-        'category' => 'general',
-        'icon' => 'align-left',
-        'mode' => 'preview',
-        'supports' => array('anchor' => true, 'align' => false),
-        'validation' => true,
-        'api_version' => 3,
-        'acf_block_version' => 3,
-        'example' => array(
-            'attributes' => array(
-                'mode' => 'preview',
-                'data' => array(
-                    'preview_image' => 'block-split-content.jpg',
-                ),
-            ),
-        ),
-    ));
-
-    /* Gallery */
-    acf_register_block_type(array(
-        'name' => 'block-image-gallery',
-        'title' => __('Gallery'),
-        'description' => __('Sliding image carousel.'),
-        'keywords' => array('carousel', 'image', 'gallery', 'slider'),
-        'render_template' => 'blocks/block-image-gallery.php',
-        'category' => 'general',
-        'icon' => 'format-gallery',
-        'mode' => 'preview',
-        'supports' => array('anchor' => true, 'align' => false),
-        'validation' => true,
-        'api_version' => 3,
-        'acf_block_version' => 3,
-        'example' => array(
-            'attributes' => array(
-                'mode' => 'preview',
-                'data' => array(
-                    'preview_image' => 'block-image-gallery.jpg',
-                ),
-            ),
-        ),
-    ));
-
-    /* Image */
-    acf_register_block_type(array(
-        'name' => 'block-image',
-        'title' => __('Image'),
-        'description' => __('Feature large image.'),
-        'keywords' => array('image'),
-        'render_template' => 'blocks/block-image.php',
-        'category' => 'general',
-        'icon' => 'format-image',
-        'mode' => 'preview',
-        'supports' => array('anchor' => true, 'align' => false),
-        'validation' => true,
-        'api_version' => 3,
-        'acf_block_version' => 3,
-        'example' => array(
-            'attributes' => array(
-                'mode' => 'preview',
-                'data' => array(
-                    'preview_image' => 'block-image.jpg',
-                ),
-            ),
-        ),
-    ));
-
-    /* Video */
-    acf_register_block_type(array(
-        'name' => 'block-video',
-        'title' => __('Video'),
-        'description' => __('Embed or upload a video.'),
-        'keywords' => array('video', 'embed'),
-        'render_template' => 'blocks/block-video.php',
-        'category' => 'general',
-        'icon' => 'video-alt2',
-        'mode' => 'preview',
-        'supports' => array('anchor' => true, 'align' => false),
-        'validation' => true,
-        'api_version' => 3,
-        'acf_block_version' => 3,
-        'example' => array(
-            'attributes' => array(
-                'mode' => 'preview',
-                'data' => array(
-                    'preview_image' => 'block-video.jpg',
-                ),
-            ),
-        ),
-    ));
-
-    /* Hero Banner */
-    acf_register_block_type(array(
-        'name' => 'block-hero-banner',
-        'title' => __('Hero Banner'),
-        'description' => __('Large hero banner with text, buttons, and background image.'),
-        'keywords' => array('banner', 'hero', 'image', 'text'),
-        'render_template' => 'blocks/block-hero-banner.php',
-        'category' => 'general',
-        'icon' => 'welcome-view-site',
-        'mode' => 'preview',
-        'supports' => array('anchor' => true, 'align' => false),
-        'validation' => true,
-        'api_version' => 3,
-        'acf_block_version' => 3,
-        'example' => array(
-            'attributes' => array(
-                'mode' => 'preview',
-                'data' => array(
-                    'preview_image' => 'block-hero-banner.jpg',
-                ),
-            ),
-        ),
-    ));
-
-    /* Page Banner */
-    acf_register_block_type(array(
-        'name' => 'block-page-banner',
-        'title' => __('Page Banner'),
-        'description' => __('Internal page banner with title and background image.'),
-        'keywords' => array('banner', 'inner', 'image'),
-        'render_template' => 'blocks/block-page-banner.php',
-        'category' => 'general',
-        'icon' => 'welcome-view-site',
-        'mode' => 'preview',
-        'supports' => array('anchor' => true, 'align' => false),
-        'validation' => true,
-        'api_version' => 3,
-        'acf_block_version' => 3,
-        'example' => array(
-            'attributes' => array(
-                'mode' => 'preview',
-                'data' => array(
-                    'preview_image' => 'block-page-banner.jpg',
-                ),
-            ),
-        ),
-    ));
-
-    /* Accordion */
-    acf_register_block_type(array(
-        'name' => 'block-accordion',
-        'title' => __('Accordion'),
-        'description' => __('Repeatable accordion fields for additional information.'),
-        'keywords' => array('accordion', 'faq', 'content'),
-        'render_template' => 'blocks/block-accordion.php',
-        'category' => 'general',
-        'icon' => 'align-center',
-        'mode' => 'preview',
-        'supports' => array('anchor' => true, 'align' => false),
-        'validation' => true,
-        'api_version' => 3,
-        'acf_block_version' => 3,
-        'example' => array(
-            'attributes' => array(
-                'mode' => 'preview',
-                'data' => array(
-                    'preview_image' => 'block-accordion.jpg',
-                ),
-            ),
-        ),
-    ));
-
-    /* Reviews */
-    acf_register_block_type(array(
-        'name' => 'block-reviews',
-        'title' => __('Reviews'),
-        'description' => __('Carousel displaying selected reviews.'),
-        'keywords' => array('carousel', 'review', 'feed'),
-        'render_template' => 'blocks/block-reviews.php',
-        'category' => 'general',
-        'icon' => 'admin-comments',
-        'mode' => 'preview',
-        'supports' => array('anchor' => true, 'align' => false),
-        'validation' => true,
-        'api_version' => 3,
-        'acf_block_version' => 3,
-        'example' => array(
-            'attributes' => array(
-                'mode' => 'preview',
-                'data' => array(
-                    'preview_image' => 'block-reviews.jpg',
-                ),
-            ),
-        ),
-    ));
-
-    /* Post Feed */
-    acf_register_block_type(array(
-        'name' => 'block-post-feed',
-        'title' => __('Post Feed'),
-        'description' => __('Feed displaying selected posts.'),
-        'keywords' => array('blog', 'post', 'feed'),
-        'render_template' => 'blocks/block-post-feed.php',
-        'category' => 'general',
-        'icon' => 'admin-post',
-        'mode' => 'preview',
-        'supports' => array('anchor' => true, 'align' => false),
-        'validation' => true,
-        'api_version' => 3,
-        'acf_block_version' => 3,
-        'example' => array(
-            'attributes' => array(
-                'mode' => 'preview',
-                'data' => array(
-                    'preview_image' => 'block-post-feed.jpg',
-                ),
-            ),
-        ),
-    ));
-
-    /* Contact */
-    acf_register_block_type(array(
-        'name' => 'block-contact',
-        'title' => __('Contact'),
-        'description' => __('Embed a form built in Gravity Forms with your contact details.'),
-        'keywords' => array('form', 'contact', 'Gravity Forms', 'embed'),
-        'render_template' => 'blocks/block-contact.php',
-        'category' => 'general',
-        'icon' => 'feedback',
-        'mode' => 'preview',
-        'supports' => array('anchor' => true, 'align' => false),
-        'validation' => true,
-        'api_version' => 3,
-        'acf_block_version' => 3,
-        'example' => array(
-            'attributes' => array(
-                'mode' => 'preview',
-                'data' => array(
-                    'preview_image' => 'block-contact.jpg',
-                ),
-            ),
-        ),
-    ));
-
-    /* Instagram */
-    acf_register_block_type(array(
-        'name' => 'block-instagram',
-        'title' => __('Instagram'),
-        'description' => __('Embed a an Instagram feed displaying your latest posts.'),
-        'keywords' => array('embed', 'social', 'Instagram'),
-        'render_template' => 'blocks/block-instagram.php',
-        'category' => 'general',
-        'icon' => 'instagram',
-        'mode' => 'preview',
-        'supports' => array('anchor' => true, 'align' => false),
-        'validation' => true,
-        'api_version' => 3,
-        'acf_block_version' => 3,
-    ));
-
-    /* Separator */
-    acf_register_block_type(array(
-        'name' => 'block-separator',
-        'title' => __('Separator'),
-        'description' => __(''),
-        'keywords' => array('separator', 'break'),
-        'render_template' => 'blocks/block-separator.php',
-        'category' => 'general',
-        'icon' => 'minus',
-        'mode' => 'preview',
-        'supports' => array('anchor' => true, 'align' => false),
-        'validation' => true,
-        'api_version' => 3,
-        'acf_block_version' => 3,
-    ));
+    return true;
 }
-add_action('acf/init', 'acf_register_custom_blocks');
+
+/* Empty block placeholder */
+function betterbase_block_empty($message = 'Add content to preview this block.') {
+    if (!is_admin()) {
+        return;
+    }
+
+    echo '<div class="block-empty"><p>' . esc_html($message) . '</p></div>';
+}
+
+/* Shared settings vars for block templates */
+function betterbase_block_settings($block) {
+    $slug = str_replace('acf/', '', $block['name'] ?? '');
+    $defaults = betterbase_blocks_config()['defaults'];
+
+    $padding_top = $block['settings_padding_top'] ?? $defaults['padding_top'];
+    $padding_bottom = $block['settings_padding_bottom'] ?? $defaults['padding_bottom'];
+    $background_color = $block['settings_background_color'] ?? $defaults['background'];
+    $container = $block['settings_container'] ?? $defaults['container'];
+
+    $allowed_backgrounds = array_merge(array('none'), array_keys(betterbase_colors()));
+    if (!in_array($background_color, $allowed_backgrounds, true)) {
+        $background_color = 'none';
+    }
+
+    $allowed_containers = array('xs', 'sm', 'md', 'lg', 'xl');
+    if (!in_array($container, $allowed_containers, true)) {
+        $container = $defaults['container'];
+    }
+
+    return array(
+        'block_name'       => $slug,
+        'block_classes'    => array_filter(array('betterbase-theme', $slug, $block['className'] ?? null)),
+        'block_anchor'     => $block['anchor'] ?? '',
+        'block_css'        => $block['css'] ?? '',
+        'padding_top'      => $padding_top,
+        'padding_bottom'   => $padding_bottom,
+        'background_color' => $background_color,
+        'container'        => $container,
+        'setting_classes'  => array('block-setting-padding', 'block-setting-background-color'),
+        'setting_styles'   => array(
+            '--block-padding-top: ' . intval($padding_top) . 'px',
+            '--block-padding-bottom: ' . intval($padding_bottom) . 'px',
+            '--block-background-color: var(--' . sanitize_html_class($background_color) . ')',
+        ),
+    );
+}
 
 /*-----------------------------------------------------------------------
-    List selected blocks in backend editor
+    Register blocks and settings
 -----------------------------------------------------------------------*/
 
-function acf_custom_block_list($allowed_block_types, $post) {
-    $post_type = $post->post->post_type;
+function betterbase_register_block_categories($categories) {
+    return array_merge(betterbase_blocks_config()['categories'], $categories);
+}
+add_filter('block_categories_all', 'betterbase_register_block_categories', 10, 1);
 
-    if (!empty($post_type) && $post_type === 'post') {
-        $allowed_blocks = array(
-            'acf/block-post-header',
-            'acf/block-post-content',
-            'acf/block-post-footer',
-            'acf/block-related-posts',
-            'acf/block-image-gallery',
-            'acf/block-image',
-            'acf/block-video',
-        );
-    } else {
-        $allowed_blocks = array(
-            'acf/block-content',
-            'acf/block-multicolumn',
-            'acf/block-split-content',
-            'acf/block-image-gallery',
-            'acf/block-image',
-            'acf/block-video',
-            'acf/block-hero-banner',
-            'acf/block-page-banner',
-            'acf/block-accordion',
-            'acf/block-reviews',
-            'acf/block-post-feed',
-            'acf/block-contact',
-            'acf/block-instagram',
-            'acf/block-separator',
-            // 'core/shortcode',
+function betterbase_register_blocks() {
+    $config = betterbase_blocks_config();
+    $default = $config['allowed']['default'];
+    $insert_after = 'acf/block-page-banner';
+    $before = array();
+    $after = array();
+    $passed_slot = false;
+
+    foreach ($default as $name) {
+        if (!$passed_slot) {
+            $before[] = $name;
+            if ($name === $insert_after) {
+                $passed_slot = true;
+            }
+        } else {
+            $after[] = $name;
+        }
+    }
+
+    $known = array_values(array_unique(array_merge($before, $after, $config['allowed']['post'])));
+    $registered = array();
+
+    $register = function ($name) use (&$registered) {
+        $slug = str_replace('acf/', '', $name);
+        $dir = get_template_directory() . '/blocks/' . $slug;
+
+        if (!is_dir($dir) || $slug === 'block-TEMPLATE' || in_array($slug, $registered, true)) {
+            return;
+        }
+
+        register_block_type($dir);
+        $registered[] = $slug;
+    };
+
+    foreach ($before as $name) {
+        $register($name);
+    }
+
+    /* Unlisted block folders register in the new-block slot (after Page Banner) */
+    foreach (glob(get_template_directory() . '/blocks/block-*/block.json') as $block_json) {
+        $slug = basename(dirname($block_json));
+        $name = 'acf/' . $slug;
+
+        if ($slug === 'block-TEMPLATE' || in_array($name, $known, true)) {
+            continue;
+        }
+
+        $register($name);
+    }
+
+    foreach ($after as $name) {
+        $register($name);
+    }
+
+    foreach ($config['allowed']['post'] as $name) {
+        $register($name);
+    }
+}
+add_action('init', 'betterbase_register_blocks');
+
+/* Name, template, setting defaults, preview example */
+function betterbase_block_type_metadata($metadata) {
+    if (!str_starts_with($metadata['name'] ?? '', 'acf/block-')) {
+        return $metadata;
+    }
+
+    $slug = str_replace('acf/', '', $metadata['name']);
+    $dir = get_template_directory() . '/blocks/' . $slug;
+
+    if (!is_dir($dir) || $slug === 'block-TEMPLATE') {
+        return $metadata;
+    }
+
+    $metadata['name'] = 'acf/' . $slug;
+    $metadata['acf'] = array_merge($metadata['acf'] ?? array(), array(
+        'renderTemplate' => $slug . '.php',
+    ));
+
+    $settings = array_merge(
+        betterbase_blocks_config()['defaults'],
+        (isset($metadata['betterbase']['settings']) && is_array($metadata['betterbase']['settings']))
+            ? $metadata['betterbase']['settings']
+            : array()
+    );
+
+    $metadata['attributes'] = array_merge(array(
+        'settings_background_color' => array('type' => 'string', 'default' => $settings['background']),
+        'settings_container'        => array('type' => 'string', 'default' => $settings['container']),
+        'settings_padding_top'      => array('type' => 'number', 'default' => $settings['padding_top']),
+        'settings_padding_bottom'   => array('type' => 'number', 'default' => $settings['padding_bottom']),
+    ), $metadata['attributes'] ?? array());
+
+    if ($slug === 'block-multicolumn') {
+        $metadata['attributes'] = array_merge($metadata['attributes'], array(
+            'multicolumn_count'     => array('type' => 'number', 'default' => 2),
+            'multicolumn_alignment' => array('type' => 'string', 'default' => 'align-start'),
+        ));
+    }
+
+    unset($metadata['example']);
+
+    if (file_exists($dir . '/preview.jpg')) {
+        $metadata['example'] = array(
+            'attributes' => array(
+                'mode' => 'preview',
+                'data' => array('_is_preview' => true),
+            ),
         );
     }
 
-    return $allowed_blocks;
+    return $metadata;
 }
-add_filter('allowed_block_types_all', 'acf_custom_block_list', 10, 2);
+add_filter('block_type_metadata', 'betterbase_block_type_metadata');
 
-/*-----------------------------------------------------------------------
-    Set default blocks per post type
------------------------------------------------------------------------*/
+/* Allowlist — after blocks are registered */
+function betterbase_allowed_block_types($allowed_block_types, $editor_context) {
+    $allowed = betterbase_blocks_config()['allowed'];
+    $post_type = $editor_context->post->post_type ?? '';
 
-function acf_set_default_blocks($args, $post_type) {
-    if ($post_type === 'post') {
-        $args['template'] = array(
-            array('acf/block-post-header'),
-            array('acf/block-post-content',
-                array(
-                    'data' => ['field_661490a216965' => '<p>Enter post content here...</p>'],
-                    'settings_padding_top' => 40,
-                ),
-            ),
-            array('acf/block-post-footer'),
-        );
+    return ($post_type === 'post') ? $allowed['post'] : $allowed['default'];
+}
+add_filter('allowed_block_types_all', 'betterbase_allowed_block_types', 10, 2);
+
+function betterbase_default_block_templates($args, $post_type) {
+    $templates = betterbase_blocks_config()['templates'];
+
+    if (!empty($templates[$post_type])) {
+        $args['template'] = $templates[$post_type];
     }
+
     return $args;
 }
-add_filter('register_post_type_args', 'acf_set_default_blocks', 10, 2);
-
-/*-----------------------------------------------------------------------
-    Display message for empty block
------------------------------------------------------------------------*/
-
-function get_empty_block_message() {
-    if (is_admin()) {
-        echo '<div class="block-empty"><p>Add content to preview this block.</p></div>';
-    }
-}
+add_filter('register_post_type_args', 'betterbase_default_block_templates', 10, 2);

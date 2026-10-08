@@ -1,0 +1,28 @@
+{
+    "name": "acf/block-instagram",
+    "title": "Instagram",
+    "description": "Embed an Instagram feed displaying your latest posts.",
+    "category": "general",
+    "icon": "instagram",
+    "keywords": [
+        "embed",
+        "social",
+        "Instagram"
+    ],
+    "apiVersion": 3,
+    "acf": {
+        "mode": "preview",
+        "blockVersion": 3,
+        "renderTemplate": "block-instagram.php",
+        "validate": true
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    },
+    "betterbase": {
+        "settings": {
+            "container": "xl"
+        }
+    }
+}

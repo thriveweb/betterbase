@@ -1,11 +1,10 @@
 <?php
 
 /*-----------------------------------------------------------------------
-    Register custom post types
+    Setup "Service" CPT
 -----------------------------------------------------------------------*/
 
-function register_custom_post_types() {
-    /* Post Type: Services */
+function betterbase_service_cpt() {
     $labels = array(
         'name'                  => __('Services'),
         'menu_name'             => __('Services'),
@@ -16,7 +15,7 @@ function register_custom_post_types() {
         'new_item'              => __('New Service'),
         'edit_item'             => __('Edit Service'),
         'all_items'             => __('All Services'),
-        'view_items'            => __('View Services'),
+        'view_item'             => __('View Service'),
     );
     $args = array(
         'labels'                => $labels,
@@ -26,18 +25,18 @@ function register_custom_post_types() {
         'show_ui'               => true,
         'show_in_menu'          => true,
         'query_var'             => true,
-        'has_archive'           => true,
-        'hierarchical'          => true,
+        'has_archive'           => 'services',
+        'hierarchical'          => false,
         'menu_position'         => null,
         'exclude_from_search'   => false,
         'show_in_rest'          => true,
-        'menu_icon'             => 'dashicons-sos',
+        'menu_icon'             => 'dashicons-hammer',
         'rewrite'               => array('slug' => 'service'),
-        'supports'              => array('title', 'thumbnail', 'excerpt', 'editor')
+        'supports'              => array('title', 'thumbnail', 'excerpt', 'editor'),
     );
     register_post_type('service', $args);
 
-    /* "Services" Taxonomy: Category */
+    /* Taxonomy: Category */
     $labels = array(
         'name'                  => __('Categories'),
         'menu_name'             => __('Categories'),
@@ -56,19 +55,24 @@ function register_custom_post_types() {
         'rewrite'               => array('slug' => 'service-category'),
     );
     register_taxonomy('service-category', 'service', $args);
+}
 
-    /* Post Type: Reviews */
+/*-----------------------------------------------------------------------
+    Setup "Testimonial" CPT
+-----------------------------------------------------------------------*/
+
+function betterbase_testimonial_cpt() {
     $labels = array(
-        'name'                  => __('Reviews'),
-        'menu_name'             => __('Reviews'),
-        'singular_name'         => __('Review'),
-        'name_admin_bar'        => __('Reviews'),
-        'add_new'               => __('Add New Review'),
+        'name'                  => __('Testimonials'),
+        'menu_name'             => __('Testimonials'),
+        'singular_name'         => __('Testimonial'),
+        'name_admin_bar'        => __('Testimonials'),
+        'add_new'               => __('Add New Testimonial'),
         'add_new_item'          => __('Add New'),
-        'new_item'              => __('New Review'),
-        'edit_item'             => __('Edit Review'),
-        'all_items'             => __('All Reviews'),
-        'view_items'            => __('View Reviews'),
+        'new_item'              => __('New Testimonial'),
+        'edit_item'             => __('Edit Testimonial'),
+        'all_items'             => __('All Testimonials'),
+        'view_item'             => __('View Testimonial'),
     );
     $args = array(
         'labels'                => $labels,
@@ -77,16 +81,25 @@ function register_custom_post_types() {
         'publicly_queryable'    => false,
         'show_ui'               => true,
         'show_in_menu'          => true,
-        'query_var'             => true,
+        'query_var'             => false,
         'has_archive'           => false,
         'hierarchical'          => false,
         'menu_position'         => null,
         'exclude_from_search'   => true,
         'show_in_rest'          => true,
-        'menu_icon'             => 'dashicons-admin-comments',
+        'menu_icon'             => 'dashicons-format-quote',
         'rewrite'               => false,
-        'supports'              => array('title', 'thumbnail')
+        'supports'              => array('title'),
     );
-    register_post_type('review', $args);
+    register_post_type('testimonial', $args);
 }
-add_action('init', 'register_custom_post_types', 0);
+
+/*-----------------------------------------------------------------------
+    Register all custom post types
+-----------------------------------------------------------------------*/
+
+function betterbase_register_custom_post_types() {
+    betterbase_service_cpt();
+    betterbase_testimonial_cpt();
+}
+add_action('init', 'betterbase_register_custom_post_types', 0);

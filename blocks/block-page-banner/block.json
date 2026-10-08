@@ -1,0 +1,31 @@
+{
+    "name": "acf/block-page-banner",
+    "title": "Page Banner",
+    "description": "Internal page banner with title and background image.",
+    "category": "general",
+    "icon": "welcome-view-site",
+    "keywords": [
+        "banner",
+        "inner",
+        "image"
+    ],
+    "apiVersion": 3,
+    "acf": {
+        "mode": "preview",
+        "blockVersion": 3,
+        "renderTemplate": "block-page-banner.php",
+        "validate": true
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    },
+    "betterbase": {
+        "settings": {
+            "background": "black",
+            "container": "lg",
+            "padding_top": 120,
+            "padding_bottom": 120
+        }
+    }
+}

@@ -7,19 +7,17 @@
 function betterbase_theme_support() {
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
+    add_theme_support('editor-styles');
+    add_theme_support('responsive-embeds');
+    add_theme_support('html5', array(
+        'search-form',
+        'gallery',
+        'caption',
+        'style',
+        'script',
+    ));
 }
 add_action('after_setup_theme', 'betterbase_theme_support');
-
-/* Disable post type support for comments */
-function betterbase_disable_post_support() {
-    foreach (get_post_types() as $post_type) {
-        remove_post_type_support($post_type, 'comments');
-    }
-}
-add_action('admin_init', 'betterbase_disable_post_support');
-add_filter('pings_open', '__return_false', 20, 2);
-add_filter('comments_open', '__return_false', 20, 2);
-add_filter('comments_array', '__return_empty_array', 10, 2);
 
 /*-----------------------------------------------------------------------
     Register custom menus
@@ -32,89 +30,10 @@ function betterbase_register_menus() {
 add_action('init', 'betterbase_register_menus');
 
 /*-----------------------------------------------------------------------
-    Customise login page logo
------------------------------------------------------------------------*/
-
-function betterbase_login_logo() { ?>
-    <style type="text/css">
-        #login h1 a {
-            background-image: url('<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/logo-theme.svg'); ?>');
-            background-size: contain;
-            width: 100%;
-            height: 80px;
-        }
-    </style>
-<?php }
-add_action('login_enqueue_scripts', 'betterbase_login_logo');
-
-/*-----------------------------------------------------------------------
-    Tidy admin dashboard menu
------------------------------------------------------------------------*/
-
-function betterbase_tidy_dashboard_menu_items($menu_ord) {
-    if (!$menu_ord) return true;
-
-    return array(
-        'index.php', // Dashboard
-        'user-manual', // User Manual
-        'acf-options-global-options', // ACF Options
-        
-        'separator1', // First separator
-
-        'upload.php', // Media
-        'gf_edit_forms', // Gravity Forms
-        'edit.php', // Posts
-        'edit.php?post_type=page', // Pages
-        'edit.php?post_type=service', // CPT: Services
-        'edit.php?post_type=review', // CPT: Reviews
-        
-        'separator2', // Second separator
-        
-        'options-general.php', // Settings
-        'themes.php', // Appearance
-        'plugins.php', // Plugins
-        'users.php', // Users
-        'tools.php', // Tools
-
-        'separator-last', // Last separator
-        
-        'edit.php?post_type=acf-field-group', // ACF
-        'itsec', // Security
-        'wpseo_dashboard', // Yoast SEO
-    );
-}
-add_filter('menu_order', 'betterbase_tidy_dashboard_menu_items', 10, 1);
-add_filter('custom_menu_order', 'betterbase_tidy_dashboard_menu_items', 10, 1);
-
-function betterbase_remove_dashboard_menu_items() {
-    remove_menu_page('edit-comments.php'); // Comments
-    remove_menu_page('password-protected'); // Password Protected
-    remove_menu_page('options-general.php?page=updraftplus'); // UpdraftPlus
-    remove_menu_page('wsal-auditlog'); // WP Activity Log
-}
-add_action('admin_menu', 'betterbase_remove_dashboard_menu_items', 100);
-
-/*-----------------------------------------------------------------------
     Customised menu output
 -----------------------------------------------------------------------*/
 
-function betterbase_add_submenu_icon($items, $args) {
-    if ($args->theme_location == 'header') {
-        foreach ($items as &$item) {
-            if (in_array('menu-item-has-children', $item->classes)) {
-                ob_start();
-                echo '<span class="trigger-sub-menu">';
-                include_asset('icon-plus.svg');
-                echo '</span>';
-                $item->title .= ob_get_clean();
-            }
-        }
-    }
-    return $items;
-}
-add_filter('wp_nav_menu_objects', 'betterbase_add_submenu_icon', 10, 2);
-
-class Submenu_Wrap extends Walker_Nav_Menu {
+class BetterBase_Submenu_Wrap extends Walker_Nav_Menu {
     function start_lvl(&$output, $depth = 0, $args = array()) {
         $indent = str_repeat("\t", $depth);
         $output .= "\n$indent<div class='sub-menu-wrap'><ul class='sub-menu'>\n";
@@ -125,33 +44,77 @@ class Submenu_Wrap extends Walker_Nav_Menu {
     }
 }
 
-/*-----------------------------------------------------------------------
-    Change text colour class based on background colour
------------------------------------------------------------------------*/
-
-function get_text_colour($background_color) {
-    $array = array('black');
-    return (in_array($background_color, $array) ? 'text-color-white' : 'text-default');
+function betterbase_add_submenu_icon($items, $args) {
+    if ($args->theme_location == 'header') {
+        foreach ($items as &$item) {
+            if (in_array('menu-item-has-children', $item->classes)) {
+                $icon = !empty($item->menu_item_parent) ? 'icon-chevron-right.svg' : 'icon-chevron-down.svg';
+                ob_start();
+                echo '<span class="trigger-sub-menu" aria-expanded="false" aria-hidden="true">';
+                betterbase_include_asset($icon);
+                echo '</span>';
+                $item->title .= ob_get_clean();
+            }
+        }
+    }
+    return $items;
 }
 
+function betterbase_nav_menu_link_attributes($atts, $item, $args) {
+    if (!empty($args->theme_location) && $args->theme_location === 'header' && in_array('menu-item-has-children', (array) $item->classes, true)) {
+        $atts['aria-haspopup'] = 'true';
+        $atts['aria-expanded'] = 'false';
+    }
+    return $atts;
+}
+add_filter('nav_menu_link_attributes', 'betterbase_nav_menu_link_attributes', 10, 3);
+add_filter('wp_nav_menu_objects', 'betterbase_add_submenu_icon', 10, 2);
+
 /*-----------------------------------------------------------------------
-    Add custom colour options to WYSIWYG editor
+    Customise login page
 -----------------------------------------------------------------------*/
 
-function betterbase_mce_text_colours($init) {
-    $custom_colours = '
-        "000000", "Black",
-        "838383", "Grey",
-    ';
+function betterbase_login_page_title() {
+    return get_bloginfo('title');
+}
+add_filter('login_headertext', 'betterbase_login_page_title');
 
-    $init['textcolor_map'] = '['.$custom_colours.']';
+function betterbase_login_title_url() {
+    return home_url();
+}
+add_filter('login_headerurl', 'betterbase_login_title_url');
+
+function betterbase_login_logo() { ?>
+    <style type="text/css">
+        #login h1 a {
+            background-image: url('<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/img/logo-betterbase.svg'); ?>');
+            background-size: contain;
+            width: 100%;
+            height: 80px;
+        }
+    </style>
+<?php }
+add_action('login_enqueue_scripts', 'betterbase_login_logo');
+
+/*-----------------------------------------------------------------------
+    Customise WYSIWYG editor
+-----------------------------------------------------------------------*/
+
+function betterbase_mce_text_colors($init) {
+    $map = array();
+
+    foreach (betterbase_colors() as $color) {
+        if ($color['tinymce'] ?? true) {
+            $map[] = '"' . ltrim($color['hex'], '#') . '"';
+            $map[] = '"' . $color['label'] . '"';
+        }
+    }
+
+    $init['textcolor_map'] = '[' . implode(', ', $map) . ']';
+    $init['content_style'] = betterbase_color_css() . ' ' . ($init['content_style'] ?? '');
     return $init;
 }
-add_filter('tiny_mce_before_init', 'betterbase_mce_text_colours');
-
-/*-----------------------------------------------------------------------
-    Add custom format options to WYSIWYG editor
------------------------------------------------------------------------*/
+add_filter('tiny_mce_before_init', 'betterbase_mce_text_colors');
 
 function betterbase_add_format_buttons($buttons) {
     array_unshift($buttons, 'styleselect');
@@ -173,8 +136,10 @@ function betterbase_custom_wysiwyg_formats($init_array) {
 add_filter('tiny_mce_before_init', 'betterbase_custom_wysiwyg_formats');
 
 /*-----------------------------------------------------------------------
-    Force attributes on Gravity Forms shortcodes
+    Gravity Forms defaults
 -----------------------------------------------------------------------*/
+
+add_filter('gform_confirmation_anchor', '__return_false');
 
 function betterbase_gf_force_shortcode_atts($form_args) {
     $form_args['display_title'] = false;
@@ -184,21 +149,21 @@ function betterbase_gf_force_shortcode_atts($form_args) {
 }
 add_filter('gform_form_args', 'betterbase_gf_force_shortcode_atts', 99);
 
-/*-----------------------------------------------------------------------
-    Customise Gravity Forms submit button output
------------------------------------------------------------------------*/
-
 function betterbase_gf_customise_submit_button($button, $form) {
-   if (!is_admin()) {
-        $label = ($form['button']['text'] ? $form['button']['text'] : 'Submit');
-        $icon = file_get_contents(get_template_directory().'/assets/img/icon-arrow-right.svg');
+    if (is_admin()) {
+        return $button;
+    }
 
-        $button = '<button type="submit" id="gform_submit_button_'.esc_attr($form['id']).'" class="gform_button button button-default" onclick="gform.submission.handleButtonClick(this);" data-submission-type="submit">';
-        $button .= esc_html($label);
-        $button .= $icon;
-        $button .= '</button>';
-   }
+    if (!empty($form['button']['type']) && $form['button']['type'] === 'image') {
+        return $button;
+    }
 
-   return $button;
+    $label = !empty($form['button']['text']) ? $form['button']['text'] : 'Submit';
+
+    ob_start();
+    betterbase_include_asset('icon-arrow-right.svg');
+    $icon = ob_get_clean();
+
+    return '<button type="submit" id="gform_submit_button_'.esc_attr($form['id']).'" class="gform_button button button-default" onclick="gform.submission.handleButtonClick(this);" data-submission-type="submit">'.esc_html($label).$icon.'</button>';
 }
 // add_filter('gform_submit_button', 'betterbase_gf_customise_submit_button', 10, 2);

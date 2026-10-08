@@ -1,0 +1,29 @@
+{
+    "name": "acf/block-testimonials",
+    "title": "Testimonials",
+    "description": "Carousel displaying selected testimonials.",
+    "category": "general",
+    "icon": "format-quote",
+    "keywords": [
+        "carousel",
+        "testimonial",
+        "review",
+        "feed"
+    ],
+    "apiVersion": 3,
+    "acf": {
+        "mode": "preview",
+        "blockVersion": 3,
+        "renderTemplate": "block-testimonials.php",
+        "validate": true
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    },
+    "betterbase": {
+        "settings": {
+            "container": "sm"
+        }
+    }
+}

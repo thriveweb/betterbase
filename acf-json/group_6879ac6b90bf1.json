@@ -1,11 +1,11 @@
 {
     "key": "group_6879ac6b90bf1",
-    "title": "Block — Reviews",
+    "title": "Block – Testimonials",
     "fields": [
         {
             "key": "field_69f17f32ce619",
             "label": "Title",
-            "name": "block_title",
+            "name": "title",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -25,11 +25,11 @@
         },
         {
             "key": "field_6879ac6b9e352",
-            "label": "Select Reviews",
-            "name": "block_select_reviews",
+            "label": "Select Testimonials",
+            "name": "select_testimonials",
             "aria-label": "",
             "type": "relationship",
-            "instructions": "Keep blank to show 5 latest reviews.",
+            "instructions": "Keep blank to show the 5 latest reviews.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -38,7 +38,7 @@
                 "id": ""
             },
             "post_type": [
-                "review"
+                "testimonial"
             ],
             "post_status": [
                 "publish"
@@ -61,7 +61,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/block-reviews"
+                "value": "acf\/block-testimonials"
             }
         ]
     ],
@@ -77,5 +77,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1777434440
+    "modified": 1790820815
 }

@@ -1,11 +1,11 @@
 {
     "key": "group_689157bbd3d1c",
-    "title": "Block — Page Banner",
+    "title": "Block – Page Banner",
     "fields": [
         {
             "key": "field_689157bc4e993",
             "label": "Title",
-            "name": "block_title",
+            "name": "title",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -26,7 +26,7 @@
         {
             "key": "field_689157c74e994",
             "label": "Image",
-            "name": "block_image",
+            "name": "image",
             "aria-label": "",
             "type": "image",
             "instructions": "",
@@ -69,5 +69,7 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1772070658
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1790816684
 }

@@ -7,28 +7,35 @@
     const { createHigherOrderComponent } = wp.compose;
     const { createElement, Fragment } = wp.element;
     const { InspectorControls } = wp.blockEditor;
-    const { PanelBody, SelectControl, RangeControl, TextControl, ButtonGroup, Button } = wp.components;
+    const { PanelBody, SelectControl, RangeControl, BaseControl, ColorPalette } = wp.components;
 
-    const allowedBlocks = [
-        "acf/block-post-header",
-        "acf/block-post-content",
-        "acf/block-post-footer",
-        "acf/block-related-posts",
-        "acf/block-content",
-        "acf/block-multicolumn",
-        "acf/block-split-content",
-        "acf/block-image-gallery",
-        "acf/block-image",
-        "acf/block-video",
-        "acf/block-hero-banner",
-        "acf/block-page-banner",
-        "acf/block-accordion",
-        "acf/block-reviews",
-        "acf/block-post-feed",
-        "acf/block-contact",
-        "acf/block-instagram",
-        "acf/block-separator",
+    const config = window.betterbaseBlocks || {};
+    const allowedBlocks = config.allowedBlocks || [];
+    const backgroundColors = config.backgroundColors || [];
+
+    const containerOptions = [
+        { label: "Extra Small", value: "xs" },
+        { label: "Small", value: "sm" },
+        { label: "Medium", value: "md" },
+        { label: "Large", value: "lg" },
+        { label: "Full Width", value: "xl" },
     ];
+
+    function getBackgroundHex(slug) {
+        const match = backgroundColors.find(function (color) {
+            return color.slug === (slug || "none");
+        });
+
+        return match ? match.color : backgroundColors[0] && backgroundColors[0].color;
+    }
+
+    function getBackgroundSlug(hex) {
+        const match = backgroundColors.find(function (color) {
+            return color.color && hex && color.color.toLowerCase() === hex.toLowerCase();
+        });
+
+        return match ? match.slug : "none";
+    }
 
     const globalBlockFields = createHigherOrderComponent(function (BlockEdit) {
         return function (props) {
@@ -53,31 +60,29 @@
                             initialOpen: false,
                         },
 
-                        createElement(SelectControl, {
-                            label: "Background Colour",
-                            value: attributes.settings_background_color || "",
-                            options: [
-                                { label: "None", value: "none" },
-                                { label: "Grey (#AAAAAA)", value: "grey" },
-                                { label: "Black (#000000)", value: "black" },
-                            ],
-                            onChange: function (value) {
-                                setAttributes({
-                                    settings_background_color: value,
-                                });
+                        createElement(
+                            BaseControl,
+                            {
+                                label: "Background Colour",
+                                id: "betterbase-block-background-colour",
                             },
-                        }),
+                            createElement(ColorPalette, {
+                                colors: backgroundColors,
+                                value: getBackgroundHex(attributes.settings_background_color),
+                                disableCustomColors: true,
+                                clearable: false,
+                                onChange: function (hex) {
+                                    setAttributes({
+                                        settings_background_color: getBackgroundSlug(hex) || "none",
+                                    });
+                                },
+                            }),
+                        ),
 
                         createElement(SelectControl, {
                             label: "Container Size",
                             value: attributes.settings_container || "",
-                            options: [
-                                { label: "Extra Small (620px)", value: "xs" },
-                                { label: "Small (820px)", value: "sm" },
-                                { label: "Medium (1040px)", value: "md" },
-                                { label: "Large (1240px)", value: "lg" },
-                                { label: "Full Width", value: "xl" },
-                            ],
+                            options: containerOptions,
                             onChange: function (value) {
                                 setAttributes({
                                     settings_container: value,
@@ -87,7 +92,7 @@
 
                         createElement(RangeControl, {
                             label: "Padding Top",
-                            value: attributes.settings_padding_top || 0,
+                            value: attributes.settings_padding_top ?? 0,
                             onChange: function (value) {
                                 setAttributes({
                                     settings_padding_top: value,
@@ -100,7 +105,7 @@
 
                         createElement(RangeControl, {
                             label: "Padding Bottom",
-                            value: attributes.settings_padding_bottom || 0,
+                            value: attributes.settings_padding_bottom ?? 0,
                             onChange: function (value) {
                                 setAttributes({
                                     settings_padding_bottom: value,
@@ -138,7 +143,7 @@
                                 value: attributes.multicolumn_alignment || "",
                                 options: [
                                     { label: "Top", value: "align-start" },
-                                    { label: "Center", value: "align-center" },
+                                    { label: "Centre", value: "align-center" },
                                     { label: "Bottom", value: "align-end" },
                                 ],
                                 onChange: function (value) {
@@ -155,134 +160,115 @@
         };
     }, "globalBlockFields");
 
-    const blockSettingDefaults = {
-        "acf/block-post-header": {
-            padding_top: 40,
-            padding_bottom: 40,
-        },
-        "acf/block-post-footer": {
-            padding_top: 40,
-            padding_bottom: 40,
-        },
-        "acf/block-image-gallery": {
-            container: "xl",
-        },
-        "acf/block-image": {
-            padding_top: 40,
-            padding_bottom: 40,
-        },
-        "acf/block-video": {
-            container: "sm",
-        },
-        "acf/block-page-banner": {
-            background: "black",
-            container: "lg",
-            padding_top: 120,
-            padding_bottom: 120,
-        },
-        "acf/block-reviews": {
-            container: "sm",
-        },
-        "acf/block-separator": {
-            background: "black",
-            container: "xl",
-            padding_top: 0,
-            padding_bottom: 0,
-        },
-    };
-
-    function addCustomAttributes(settings, name) {
-        if (!allowedBlocks.includes(name)) {
-            return settings;
-        }
-
-        const getDefault = (setting, standardDefault) => blockSettingDefaults[name]?.[setting] ?? standardDefault;
-
-        if (typeof settings.attributes !== "undefined") {
-            settings.attributes = Object.assign(settings.attributes, {
-                // Add default values to all blocks
-                settings_background_color: {
-                    type: "string",
-                    default: getDefault("background", "none"),
-                },
-                settings_container: {
-                    type: "string",
-                    default: getDefault("container", "md"),
-                },
-                settings_padding_top: {
-                    type: "number",
-                    default: getDefault("padding_top", 80),
-                },
-                settings_padding_bottom: {
-                    type: "number",
-                    default: getDefault("padding_bottom", 80),
-                },
-                // Add default values specific to 'multicolumn' block
-                ...(name === "acf/block-multicolumn" && {
-                    multicolumn_count: {
-                        type: "number",
-                        default: 2,
-                    },
-                    multicolumn_alignment: {
-                        type: "string",
-                        default: "align-start",
-                    },
-                }),
-            });
-        }
-        return settings;
-    }
-
-    addFilter("blocks.registerBlockType", "betterbase/custom-attributes", addCustomAttributes);
     addFilter("editor.BlockEdit", "betterbase/custom-fields", globalBlockFields);
 })(window.wp);
 
 /*-----------------------------------------------------------------------
-    Init block-specific scripts
+    Init block preview Swipers (autoplay disabled in editor)
 -----------------------------------------------------------------------*/
 
 jQuery(document).ready(function ($) {
-    var initializeBlock = function ($block) {
-        $block.find(".carousel-gallery").each(function (index, element) {
-            const $slider = $(element);
-            const $pagination = $slider.find(".swiper-pagination");
-            const $navPrev = $slider.find(".swiper-nav-prev");
-            const $navNext = $slider.find(".swiper-nav-next");
+    function betterbaseInitBlockSwipers($scope) {
+        if (typeof Swiper === "undefined") {
+            return;
+        }
+
+        $scope = $scope && $scope.length ? $scope : $(document);
+
+        $scope.find(".carousel-gallery").each(function (index, element) {
+            if (element.swiper) {
+                return;
+            }
+
+            var $slider = $(element);
+
             new Swiper(element, {
                 loop: false,
                 spaceBetween: 10,
                 slidesPerView: "auto",
                 pagination: {
-                    el: $pagination[0],
+                    el: $slider.find(".swiper-pagination")[0],
                     clickable: true,
                     type: "progressbar",
                 },
                 navigation: {
-                    prevEl: $navPrev[0],
-                    nextEl: $navNext[0],
+                    prevEl: $slider.find(".swiper-nav-prev")[0],
+                    nextEl: $slider.find(".swiper-nav-next")[0],
                 },
             });
         });
 
-        $block.find(".carousel-reviews").each(function (index, element) {
-            const $slider = $(element);
-            const $navPrev = $slider.find(".swiper-nav-prev");
-            const $navNext = $slider.find(".swiper-nav-next");
+        $scope.find(".carousel-split-gallery").each(function (index, element) {
+            if (element.swiper) {
+                return;
+            }
+
+            var $slider = $(element);
+
+            new Swiper(element, {
+                loop: false,
+                slidesPerView: 1,
+                pagination: {
+                    el: $slider.find(".swiper-pagination")[0],
+                    clickable: true,
+                    type: "bullets",
+                },
+            });
+        });
+
+        $scope.find(".carousel-testimonials").each(function (index, element) {
+            if (element.swiper) {
+                return;
+            }
+
+            var $slider = $(element);
+
             new Swiper(element, {
                 loop: true,
                 slidesPerView: 1,
                 spaceBetween: 20,
                 navigation: {
-                    prevEl: $navPrev[0],
-                    nextEl: $navNext[0],
+                    prevEl: $slider.find(".swiper-nav-prev")[0],
+                    nextEl: $slider.find(".swiper-nav-next")[0],
                 },
             });
         });
-    };
+
+        $scope.find(".carousel-logo-slider").each(function (index, element) {
+            if (element.swiper) {
+                return;
+            }
+
+            new Swiper(element, {
+                loop: true,
+                slidesPerView: 2,
+                spaceBetween: 32,
+                speed: 600,
+                allowTouchMove: true,
+                autoplay: false,
+                breakpoints: {
+                    640: {
+                        slidesPerView: 3,
+                        spaceBetween: 40,
+                    },
+                    782: {
+                        slidesPerView: 4,
+                        spaceBetween: 48,
+                    },
+                    1200: {
+                        slidesPerView: 6,
+                        spaceBetween: 56,
+                    },
+                },
+            });
+        });
+    }
+
+    betterbaseInitBlockSwipers($(document));
 
     if (window.acf) {
-        window.acf.addAction("render_block_preview", initializeBlock);
-    } else {
-        initializeBlock();
+        window.acf.addAction("render_block_preview", function ($block) {
+            betterbaseInitBlockSwipers($block);
+        });
     }
 });

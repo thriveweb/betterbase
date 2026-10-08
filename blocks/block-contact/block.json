@@ -1,0 +1,24 @@
+{
+    "name": "acf/block-contact",
+    "title": "Contact",
+    "description": "Embed a form built in Gravity Forms with your contact details.",
+    "category": "general",
+    "icon": "feedback",
+    "keywords": [
+        "form",
+        "contact",
+        "Gravity Forms",
+        "embed"
+    ],
+    "apiVersion": 3,
+    "acf": {
+        "mode": "preview",
+        "blockVersion": 3,
+        "renderTemplate": "block-contact.php",
+        "validate": true
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    }
+}

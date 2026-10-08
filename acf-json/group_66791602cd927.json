@@ -1,6 +1,6 @@
 {
     "key": "group_66791602cd927",
-    "title": "Global — Options",
+    "title": "Global \u2013 Options",
     "fields": [
         {
             "key": "field_66791603c2629",
@@ -38,7 +38,7 @@
             "maxlength": "",
             "allow_in_bindings": 1,
             "placeholder": "",
-            "prepend": "<span class=\"dashicons dashicons-phone\"><\/span>",
+            "prepend": "<span class=\"dashicons dashicons-phone\"></span>",
             "append": ""
         },
         {
@@ -59,7 +59,7 @@
             "maxlength": "",
             "allow_in_bindings": 1,
             "placeholder": "",
-            "prepend": "<span class=\"dashicons dashicons-email\"><\/span>",
+            "prepend": "<span class=\"dashicons dashicons-email\"></span>",
             "append": ""
         },
         {
@@ -80,7 +80,7 @@
             "maxlength": "",
             "allow_in_bindings": 0,
             "placeholder": "",
-            "prepend": "<span class=\"dashicons dashicons-location\"><\/span>",
+            "prepend": "<span class=\"dashicons dashicons-location\"></span>",
             "append": ""
         },
         {
@@ -139,13 +139,13 @@
                     "choices": {
                         "facebook": "Facebook",
                         "instagram": "Instagram",
-                        "linkedin": "Linkedin",
+                        "linkedin": "LinkedIn",
                         "pinterest": "Pinterest",
                         "tiktok": "TikTok",
                         "twitter-x": "Twitter (X)",
                         "vimeo": "Vimeo",
-                        "whatsapp": "Whatsapp",
-                        "youtube": "Youtube"
+                        "whatsapp": "WhatsApp",
+                        "youtube": "YouTube"
                     },
                     "default_value": false,
                     "return_format": "array",
@@ -408,5 +408,7 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1772071045
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1759365600
 }

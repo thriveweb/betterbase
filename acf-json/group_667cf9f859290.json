@@ -1,11 +1,11 @@
 {
     "key": "group_667cf9f859290",
-    "title": "Block — Post Feed",
+    "title": "Block – Post Feed",
     "fields": [
         {
             "key": "field_69f163a05952e",
             "label": "Title",
-            "name": "block_title",
+            "name": "title",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -26,10 +26,10 @@
         {
             "key": "field_667cf9f85bfb3",
             "label": "Select Posts",
-            "name": "block_select_posts",
+            "name": "select_posts",
             "aria-label": "",
             "type": "relationship",
-            "instructions": "Keep blank to show 3 latest posts.",
+            "instructions": "Keep blank to show the 3 latest posts.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -51,7 +51,9 @@
             "min": "",
             "max": "",
             "allow_in_bindings": 1,
-            "elements": "",
+            "elements": [
+                "featured_image"
+            ],
             "bidirectional": 0,
             "bidirectional_target": []
         }
@@ -77,5 +79,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1777427393
+    "modified": 1790817816
 }

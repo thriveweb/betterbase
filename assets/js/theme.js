@@ -30,12 +30,14 @@ jQuery(document).ready(function ($) {
     /* Toggle responsive menu on hamburger click */
 
     $(".trigger-menu").on("click", function () {
-        $("body").toggleClass("has-active-menu");
+        var isOpen = $("body").toggleClass("has-active-menu").hasClass("has-active-menu");
+        $(this).attr("aria-expanded", isOpen ? "true" : "false");
+        $("#site-responsive-menu").attr("aria-hidden", isOpen ? "false" : "true");
     });
 
     /* Toggle responsive submenus on click */
 
-    $(".site-responsive-menu li.menu-item-has-children > a ").on("click", function (e) {
+    $(".site-responsive-menu li.menu-item-has-children > a").on("click", function (e) {
         var $link = $(this);
         var href = $link.attr("href");
 
@@ -43,11 +45,11 @@ jQuery(document).ready(function ($) {
             return;
         }
 
-        if ($link.next(".sub-menu-").is(":visible")) {
-            $link.parent().removeClass("has-active-sub-menu");
-        } else {
-            $link.parent().toggleClass("has-active-sub-menu");
-        }
+        var $item = $link.parent();
+        var isOpen = !$item.hasClass("has-active-sub-menu");
+        $item.toggleClass("has-active-sub-menu", isOpen);
+        $link.attr("aria-expanded", isOpen ? "true" : "false");
+        $link.find(".trigger-sub-menu").attr("aria-expanded", isOpen ? "true" : "false");
 
         e.stopPropagation();
         e.preventDefault();
@@ -55,7 +57,7 @@ jQuery(document).ready(function ($) {
 
     /* Toggle search form on click */
 
-    $(".trigger-search, .site-search .close-search").click(function () {
+    $(".trigger-search, .site-search .close-search").on("click", function () {
         $(".site-search").slideToggle(200);
     });
 
@@ -64,99 +66,66 @@ jQuery(document).ready(function ($) {
     -----------------------------------------------------------------------*/
 
     function clipboardCopy() {
-        let clipboard = $(".copy-to-clipboard");
-        let tooltip = $(".copy-to-clipboard .tooltip");
-
-        clipboard.on("click", function (e) {
+        $(".copy-to-clipboard").on("click", function (e) {
             e.preventDefault();
-            let value = clipboard.attr("data-url");
-            tooltip.html("Copied!");
+
+            var $button = $(this);
+            var $tooltip = $button.find(".tooltip");
+            var value = $button.attr("data-url");
+
+            if (!value || !navigator.clipboard) {
+                return;
+            }
+
             navigator.clipboard.writeText(value);
+            $tooltip.html("Copied!");
         });
 
-        clipboard.on("mouseleave", function (e) {
-            e.preventDefault();
+        $(".copy-to-clipboard").on("mouseleave", function () {
+            var $tooltip = $(this).find(".tooltip");
+
             setTimeout(function () {
-                if (!clipboard.is(":hover")) {
-                    tooltip.html("Copy to clipboard");
-                }
+                $tooltip.html("Copy to clipboard");
             }, 250);
         });
     }
     clipboardCopy();
 
     /*-----------------------------------------------------------------------
-        Animate numbers to count up
-    -----------------------------------------------------------------------*/
-
-    if ($(".block-counter").length) {
-        var $counters = $(".anim-count");
-
-        function countUp($el) {
-            var target = parseInt($el.data("target"), 10);
-            var current = 0;
-            var increment = target / 100;
-
-            function updateCount() {
-                current += increment;
-                if (current < target) {
-                    $el.text(Math.ceil(current));
-                    requestAnimationFrame(updateCount);
-                } else {
-                    $el.text(target);
-                }
-            }
-            updateCount();
-        }
-
-        function inViewport($el) {
-            var rect = $el[0].getBoundingClientRect();
-            return rect.top >= 0 && rect.bottom <= $(window).height();
-        }
-
-        $(window).on("load scroll", function () {
-            $counters.each(function () {
-                var $counter = $(this);
-                if (inViewport($counter) && $counter.text() === "0") {
-                    countUp($counter);
-                }
-            });
-        });
-    }
-
-    /*-----------------------------------------------------------------------
         Init popups
     -----------------------------------------------------------------------*/
 
     function initPopups() {
-        $(".trigger-popup").each(function (i) {
-            let trigger = $(this).attr("data-popup-id");
-            let modal = $("#" + trigger);
+        $(".trigger-popup").each(function () {
+            var trigger = $(this).attr("data-popup-id");
+            var $modal = $("#" + trigger);
 
-            $(modal).appendTo(".site-popups");
+            if (!$modal.length) {
+                return;
+            }
 
-            $(this).click(function () {
-                $(modal).show();
+            $modal.appendTo(".site-popups");
+
+            $(this).on("click", function () {
+                $modal.show();
             });
 
-            $(modal)
-                .find(".close-popup")
-                .click(function (e) {
-                    $(modal).hide();
-                });
+            $modal.find(".close-popup").on("click", function () {
+                $modal.hide();
+            });
 
-            $(modal)
-                .find(".popup-overlay")
-                .click(function () {
-                    if (event.target !== this) return;
-                    $(modal).hide();
-                });
-
-            $(document).keydown(function (e) {
-                if (e.key === "Escape") {
-                    $(modal).hide();
+            $modal.find(".popup-overlay").on("click", function (e) {
+                if (e.target !== this) {
+                    return;
                 }
+                $modal.hide();
             });
+        });
+
+        $(document).on("keydown", function (e) {
+            if (e.key === "Escape") {
+                $(".site-popups .popup:visible, .site-popups [id]:visible").hide();
+            }
         });
     }
     initPopups();
@@ -165,11 +134,29 @@ jQuery(document).ready(function ($) {
         Init accordions
     -----------------------------------------------------------------------*/
 
+    function toggleAccordion($trigger) {
+        var $entry = $trigger.closest(".entry-accordion");
+        var $panel = $entry.find(".inner-entry-content").first();
+        var isOpen = !$entry.hasClass("is-active");
+
+        $entry.toggleClass("is-active", isOpen);
+        $trigger.attr("aria-expanded", isOpen ? "true" : "false");
+        $panel.attr("aria-hidden", isOpen ? "false" : "true");
+        $panel.not(":animated").slideToggle();
+    }
+
     function initAccordions() {
         $(".entry-accordion").on("click", ".trigger-accordion", function (e) {
             e.preventDefault();
-            $(this).closest(".entry-accordion").toggleClass("is-active");
-            $(this).closest(".entry-accordion").find(".inner-entry-content").first().not(":animated").slideToggle();
+            toggleAccordion($(this));
+        });
+
+        $(".entry-accordion").on("keydown", ".trigger-accordion", function (e) {
+            if (e.key !== "Enter" && e.key !== " ") {
+                return;
+            }
+            e.preventDefault();
+            toggleAccordion($(this));
         });
     }
     initAccordions();
@@ -180,11 +167,17 @@ jQuery(document).ready(function ($) {
 
     function initVideoEmbed() {
         $(".video-wrapper").each(function () {
-            const $wrapper = $(this);
-            const video = $wrapper.find("video").get(0);
+            var $wrapper = $(this);
+            var video = $wrapper.find("video").get(0);
+
+            if (!video) {
+                return;
+            }
 
             $wrapper.on("click", function () {
-                if (!$wrapper.hasClass("is-paused")) return;
+                if (!$wrapper.hasClass("is-paused")) {
+                    return;
+                }
 
                 $wrapper.removeClass("is-paused");
                 video.controls = true;
@@ -202,17 +195,21 @@ jQuery(document).ready(function ($) {
         $(".toggle-read-more").on("click", function (e) {
             e.preventDefault();
 
-            var toggle = $(this);
-            var $container = toggle.closest(".has-read-more");
+            var $toggle = $(this);
+            var $container = $toggle.closest(".has-read-more");
             var $short = $container.find(".short-content");
             var $full = $container.find(".full-content");
 
-            $short.toggle();
-            $full.toggle();
+            $container.toggleClass("is-expanded");
 
-            var toggleText = toggle.attr("data-text");
-            toggle.attr("data-text", toggle.text());
-            toggle.text(toggleText);
+            if ($short.length && $full.length) {
+                $short.toggle();
+                $full.toggle();
+            }
+
+            var toggleText = $toggle.attr("data-text");
+            $toggle.attr("data-text", $toggle.text());
+            $toggle.text(toggleText);
         });
     }
     initReadMore();
@@ -221,48 +218,114 @@ jQuery(document).ready(function ($) {
         Init Swiper
     -----------------------------------------------------------------------*/
 
-    $(".carousel-gallery").each(function (index, element) {
-        const $slider = $(element);
-        const $pagination = $slider.find(".swiper-pagination");
-        const $navPrev = $slider.find(".swiper-nav-prev");
-        const $navNext = $slider.find(".swiper-nav-next");
-        new Swiper(element, {
-            loop: false,
-            spaceBetween: 10,
-            slidesPerView: "auto",
-            pagination: {
-                el: $pagination[0],
-                clickable: true,
-                type: "progressbar",
-            },
-            navigation: {
-                prevEl: $navPrev[0],
-                nextEl: $navNext[0],
-            },
-        });
-    });
+    if (typeof Swiper !== "undefined") {
+        $(".carousel-gallery").each(function (index, element) {
+            if (element.swiper) {
+                return;
+            }
 
-    $(".carousel-reviews").each(function (index, element) {
-        const $slider = $(element);
-        const $navPrev = $slider.find(".swiper-nav-prev");
-        const $navNext = $slider.find(".swiper-nav-next");
-        new Swiper(element, {
-            loop: true,
-            slidesPerView: 1,
-            spaceBetween: 20,
-            navigation: {
-                prevEl: $navPrev[0],
-                nextEl: $navNext[0],
-            },
+            var $slider = $(element);
+
+            new Swiper(element, {
+                loop: false,
+                spaceBetween: 10,
+                slidesPerView: "auto",
+                pagination: {
+                    el: $slider.find(".swiper-pagination")[0],
+                    clickable: true,
+                    type: "progressbar",
+                },
+                navigation: {
+                    prevEl: $slider.find(".swiper-nav-prev")[0],
+                    nextEl: $slider.find(".swiper-nav-next")[0],
+                },
+            });
         });
-    });
+
+        $(".carousel-split-gallery").each(function (index, element) {
+            if (element.swiper) {
+                return;
+            }
+
+            var $slider = $(element);
+
+            new Swiper(element, {
+                loop: false,
+                slidesPerView: 1,
+                pagination: {
+                    el: $slider.find(".swiper-pagination")[0],
+                    clickable: true,
+                    type: "bullets",
+                },
+            });
+        });
+
+        $(".carousel-testimonials").each(function (index, element) {
+            if (element.swiper) {
+                return;
+            }
+
+            var $slider = $(element);
+
+            new Swiper(element, {
+                loop: true,
+                slidesPerView: 1,
+                spaceBetween: 20,
+                navigation: {
+                    prevEl: $slider.find(".swiper-nav-prev")[0],
+                    nextEl: $slider.find(".swiper-nav-next")[0],
+                },
+            });
+        });
+
+        $(".carousel-logo-slider").each(function (index, element) {
+            if (element.swiper) {
+                return;
+            }
+
+            var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            new Swiper(element, {
+                loop: true,
+                slidesPerView: 2,
+                spaceBetween: 32,
+                speed: reduceMotion ? 600 : 5000,
+                allowTouchMove: true,
+                autoplay: reduceMotion
+                    ? false
+                    : {
+                          delay: 0,
+                          disableOnInteraction: false,
+                          pauseOnMouseEnter: true,
+                      },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 3,
+                        spaceBetween: 40,
+                    },
+                    782: {
+                        slidesPerView: 4,
+                        spaceBetween: 48,
+                    },
+                    1200: {
+                        slidesPerView: 6,
+                        spaceBetween: 56,
+                    },
+                },
+            });
+        });
+    }
 
     /*-----------------------------------------------------------------------
         Init AOS
     -----------------------------------------------------------------------*/
 
-    // AOS.init({
-    //   duration: 600,
-    //   easing: 'ease',
-    // });
+    if (typeof AOS !== "undefined") {
+        var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        AOS.init({
+            duration: reduceMotion ? 0 : 600,
+            easing: "ease",
+            disable: reduceMotion,
+        });
+    }
 });

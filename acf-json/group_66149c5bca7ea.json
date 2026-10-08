@@ -1,11 +1,11 @@
 {
     "key": "group_66149c5bca7ea",
-    "title": "Block — Accordion",
+    "title": "Block \u2013 Accordion",
     "fields": [
         {
-            "key": "field_69f15d0e66077",
+            "key": "field_6abca87ac307d",
             "label": "Title",
-            "name": "block_title",
+            "name": "title",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -20,13 +20,13 @@
             "maxlength": "",
             "allow_in_bindings": 0,
             "placeholder": "",
-            "prepend": "<span class=\"dashicons dashicons-heading\"><\/span>",
+            "prepend": "<i class=\"dashicons dashicons-heading\"></i>",
             "append": ""
         },
         {
             "key": "field_66149c6cd3380",
             "label": "Add Accordion",
-            "name": "block_add_accordion",
+            "name": "add_accordion",
             "aria-label": "",
             "type": "repeater",
             "instructions": "",
@@ -63,7 +63,7 @@
                     "maxlength": "",
                     "allow_in_bindings": 1,
                     "placeholder": "",
-                    "prepend": "<span class=\"dashicons dashicons-heading\"><\/span>",
+                    "prepend": "<span class=\"dashicons dashicons-heading\"></span>",
                     "append": "",
                     "parent_repeater": "field_66149c6cd3380"
                 },
@@ -90,8 +90,8 @@
                 },
                 {
                     "key": "field_6614d7f7027ed",
-                    "label": "Button Group",
-                    "name": "button_group",
+                    "label": "Add Button",
+                    "name": "",
                     "aria-label": "",
                     "type": "clone",
                     "instructions": "",
@@ -103,7 +103,7 @@
                         "id": ""
                     },
                     "clone": [
-                        "field_661491f5daa29"
+                        "group_661491f489c42"
                     ],
                     "display": "seamless",
                     "layout": "block",
@@ -112,6 +112,26 @@
                     "parent_repeater": "field_66149c6cd3380"
                 }
             ]
+        },
+        {
+            "key": "field_68dc1a0e4f001",
+            "label": "Enable Schema?",
+            "name": "enable_schema",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
         }
     ],
     "location": [
@@ -119,7 +139,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/block-accordion"
+                "value": "acf/block-accordion"
             }
         ]
     ],
@@ -135,5 +155,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1782363765
+    "modified": 1759366200
 }

@@ -1,11 +1,11 @@
 {
     "key": "group_667babdfb8af8",
-    "title": "Block — Hero Banner",
+    "title": "Block \u2013 Hero Banner",
     "fields": [
         {
             "key": "field_69f156feab74e",
             "label": "Title",
-            "name": "block_title",
+            "name": "title",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -20,13 +20,13 @@
             "maxlength": "",
             "allow_in_bindings": 0,
             "placeholder": "",
-            "prepend": "<span class=\"dashicons dashicons-heading\"><\/span>",
+            "prepend": "<span class=\"dashicons dashicons-heading\"></span>",
             "append": ""
         },
         {
             "key": "field_667babdfbf6de",
-            "label": "Description",
-            "name": "block_description",
+            "label": "Excerpt",
+            "name": "excerpt",
             "aria-label": "",
             "type": "textarea",
             "instructions": "",
@@ -42,12 +42,12 @@
             "allow_in_bindings": 0,
             "rows": 3,
             "placeholder": "",
-            "new_lines": "br"
+            "new_lines": ""
         },
         {
             "key": "field_667babdfbf728",
             "label": "Add Button",
-            "name": "block",
+            "name": "",
             "aria-label": "",
             "type": "clone",
             "instructions": "",
@@ -59,17 +59,17 @@
                 "id": ""
             },
             "clone": [
-                "field_661491f5daa29"
+                "group_661491f489c42"
             ],
             "display": "seamless",
             "layout": "block",
             "prefix_label": 0,
-            "prefix_name": 1
+            "prefix_name": 0
         },
         {
             "key": "field_689436c3a2aa8",
-            "label": "Background Media",
-            "name": "block_background_media",
+            "label": "Background Type",
+            "name": "background_type",
             "aria-label": "",
             "type": "button_group",
             "instructions": "",
@@ -81,8 +81,8 @@
                 "id": ""
             },
             "choices": {
-                "image": "Image",
-                "video": "Video"
+                "image": "<i class=\"dashicons dashicons-format-image\"></i> Image",
+                "video": "<i class=\"dashicons dashicons-format-video\"></i> Video"
             },
             "default_value": "image",
             "return_format": "value",
@@ -92,8 +92,8 @@
         },
         {
             "key": "field_667babdfbf76f",
-            "label": "Background Image",
-            "name": "block_background_image",
+            "label": "Image",
+            "name": "image",
             "aria-label": "",
             "type": "image",
             "instructions": "",
@@ -126,8 +126,8 @@
         },
         {
             "key": "field_6894368ea2aa6",
-            "label": "Background Video",
-            "name": "block_background_video",
+            "label": "Upload Video",
+            "name": "video",
             "aria-label": "",
             "type": "file",
             "instructions": "",
@@ -150,13 +150,13 @@
             "library": "all",
             "min_size": "",
             "max_size": "",
-            "mime_types": "",
+            "mime_types": "mp4",
             "allow_in_bindings": 0
         },
         {
             "key": "field_6894369ca2aa7",
-            "label": "Video Thumbnail",
-            "name": "block_video_thumbnail",
+            "label": "Thumbnail",
+            "name": "video_thumbnail",
             "aria-label": "",
             "type": "image",
             "instructions": "",
@@ -193,7 +193,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/block-hero-banner"
+                "value": "acf/block-hero-banner"
             }
         ]
     ],
@@ -209,5 +209,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1777424170
+    "modified": 1759366200
 }

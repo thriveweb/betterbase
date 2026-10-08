@@ -1,0 +1,23 @@
+{
+    "name": "acf/block-post-feed",
+    "title": "Post Feed",
+    "description": "Feed displaying selected posts.",
+    "category": "general",
+    "icon": "admin-post",
+    "keywords": [
+        "blog",
+        "post",
+        "feed"
+    ],
+    "apiVersion": 3,
+    "acf": {
+        "mode": "preview",
+        "blockVersion": 3,
+        "renderTemplate": "block-post-feed.php",
+        "validate": true
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    }
+}

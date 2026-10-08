@@ -1,0 +1,22 @@
+{
+    "name": "acf/block-wysiwyg",
+    "title": "WYSIWYG",
+    "description": "Use the WYSIWYG editor to create and format content.",
+    "category": "general",
+    "icon": "editor-paragraph",
+    "keywords": [
+        "content",
+        "wysiwyg"
+    ],
+    "apiVersion": 3,
+    "acf": {
+        "mode": "preview",
+        "blockVersion": 3,
+        "renderTemplate": "block-wysiwyg.php",
+        "validate": true
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "name": "acf/block-TEMPLATE",
+    "title": "TEMPLATE",
+    "description": "Copy folder to block-{slug}/, rename PHP to block-{slug}.php, update title. Optional preview.jpg for inserter.",
+    "category": "general",
+    "icon": "block-default",
+    "keywords": [
+        "template"
+    ],
+    "apiVersion": 3,
+    "acf": {
+        "mode": "preview",
+        "blockVersion": 3,
+        "renderTemplate": "block-TEMPLATE.php",
+        "validate": true
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    },
+    "betterbase": {
+        "settings": {}
+    }
+}

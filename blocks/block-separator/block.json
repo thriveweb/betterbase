@@ -1,0 +1,30 @@
+{
+    "name": "acf/block-separator",
+    "title": "Separator",
+    "description": "Visual separator between sections.",
+    "category": "general",
+    "icon": "minus",
+    "keywords": [
+        "separator",
+        "break"
+    ],
+    "apiVersion": 3,
+    "acf": {
+        "mode": "preview",
+        "blockVersion": 3,
+        "renderTemplate": "block-separator.php",
+        "validate": true
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    },
+    "betterbase": {
+        "settings": {
+            "background": "black",
+            "container": "xl",
+            "padding_top": 0,
+            "padding_bottom": 0
+        }
+    }
+}

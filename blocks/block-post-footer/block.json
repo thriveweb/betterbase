@@ -1,0 +1,31 @@
+{
+    "name": "acf/block-post-footer",
+    "title": "Post Footer",
+    "description": "Display post pagination and social media share icons.",
+    "category": "blog",
+    "icon": "share",
+    "keywords": [
+        "post",
+        "blog",
+        "pagination",
+        "social",
+        "share"
+    ],
+    "apiVersion": 3,
+    "acf": {
+        "mode": "preview",
+        "blockVersion": 3,
+        "renderTemplate": "block-post-footer.php",
+        "validate": true
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    },
+    "betterbase": {
+        "settings": {
+            "padding_top": 40,
+            "padding_bottom": 40
+        }
+    }
+}

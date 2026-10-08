@@ -1,11 +1,11 @@
 {
     "key": "group_667d0a85f24ae",
-    "title": "Block — Contact",
+    "title": "Block – Contact",
     "fields": [
         {
             "key": "field_667d0a8604937",
             "label": "Title",
-            "name": "block_title",
+            "name": "title",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -25,8 +25,8 @@
         },
         {
             "key": "field_69f16cf939ffc",
-            "label": "Description",
-            "name": "block_description",
+            "label": "Excerpt",
+            "name": "excerpt",
             "aria-label": "",
             "type": "textarea",
             "instructions": "",
@@ -42,12 +42,12 @@
             "allow_in_bindings": 0,
             "rows": 3,
             "placeholder": "",
-            "new_lines": "br"
+            "new_lines": ""
         },
         {
             "key": "field_671af0500d6b1",
             "label": "Show Contact Information",
-            "name": "block_show_contact",
+            "name": "show_contact",
             "aria-label": "",
             "type": "checkbox",
             "instructions": "",
@@ -80,8 +80,8 @@
         },
         {
             "key": "field_667d0aa29ee79",
-            "label": "Form ID",
-            "name": "block_form_id",
+            "label": "Gravity Forms ID",
+            "name": "gravity_forms_id",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -94,8 +94,9 @@
             },
             "default_value": "",
             "maxlength": "",
+            "allow_in_bindings": 1,
             "placeholder": "",
-            "prepend": "",
+            "prepend": "<i class=\"dashicons dashicons-shortcode\"><\/i>",
             "append": ""
         }
     ],
@@ -120,5 +121,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1777429830
+    "modified": 1790820929
 }

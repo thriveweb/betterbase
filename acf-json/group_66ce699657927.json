@@ -1,11 +1,11 @@
 {
     "key": "group_66ce699657927",
-    "title": "Block — Multicolumn",
+    "title": "Block – Multicolumn",
     "fields": [
         {
             "key": "field_66ce6ad1dba8a",
             "label": "Add Column",
-            "name": "block_add_column",
+            "name": "add_column",
             "aria-label": "",
             "type": "repeater",
             "instructions": "",
@@ -27,7 +27,7 @@
                 {
                     "key": "field_66ce69965f7e2",
                     "label": "Content",
-                    "name": "column_content",
+                    "name": "content",
                     "aria-label": "",
                     "type": "wysiwyg",
                     "instructions": "",
@@ -39,6 +39,7 @@
                         "id": ""
                     },
                     "default_value": "",
+                    "allow_in_bindings": 1,
                     "tabs": "all",
                     "toolbar": "full",
                     "media_upload": 1,
@@ -47,8 +48,8 @@
                 },
                 {
                     "key": "field_66ce69965f83c",
-                    "label": "Button Group",
-                    "name": "button_group",
+                    "label": "Add Button",
+                    "name": "",
                     "aria-label": "",
                     "type": "clone",
                     "instructions": "",
@@ -92,5 +93,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1782363783
+    "modified": 1790816144
 }

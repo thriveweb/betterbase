@@ -1,11 +1,11 @@
 {
     "key": "group_68799b2802f05",
-    "title": "Single — Review",
+    "title": "Single – Testimonial",
     "fields": [
         {
             "key": "field_68799b2830251",
             "label": "Rating",
-            "name": "review_rating",
+            "name": "rating",
             "aria-label": "",
             "type": "range",
             "instructions": "",
@@ -25,41 +25,11 @@
             "append": ""
         },
         {
-            "key": "field_68799b3530252",
-            "label": "Source",
-            "name": "review_source",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "none": "None",
-                "facebook": "Facebook",
-                "google": "Google"
-            },
-            "default_value": "none",
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "allow_in_bindings": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
-        },
-        {
             "key": "field_68799b6130253",
             "label": "Quote",
-            "name": "review_quote",
+            "name": "quote",
             "aria-label": "",
-            "type": "textarea",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -71,14 +41,14 @@
             "default_value": "",
             "maxlength": "",
             "allow_in_bindings": 0,
-            "rows": 3,
             "placeholder": "",
-            "new_lines": ""
+            "prepend": "<i class=\"dashicons dashicons-format-quote\"><\/i>",
+            "append": ""
         },
         {
             "key": "field_68799b6d30254",
             "label": "Byline",
-            "name": "review_byline",
+            "name": "byline",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -102,7 +72,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "review"
+                "value": "testimonial"
             }
         ]
     ],
@@ -118,5 +88,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1777434325
+    "modified": 1790820581
 }

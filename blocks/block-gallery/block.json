@@ -1,0 +1,29 @@
+{
+    "name": "acf/block-gallery",
+    "title": "Gallery",
+    "description": "Sliding image carousel.",
+    "category": "general",
+    "icon": "format-gallery",
+    "keywords": [
+        "carousel",
+        "image",
+        "gallery",
+        "slider"
+    ],
+    "apiVersion": 3,
+    "acf": {
+        "mode": "preview",
+        "blockVersion": 3,
+        "renderTemplate": "block-gallery.php",
+        "validate": true
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    },
+    "betterbase": {
+        "settings": {
+            "container": "xl"
+        }
+    }
+}

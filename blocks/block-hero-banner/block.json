@@ -1,0 +1,29 @@
+{
+    "name": "acf/block-hero-banner",
+    "title": "Hero Banner",
+    "description": "Large hero banner with text, buttons, and background image.",
+    "category": "general",
+    "icon": "welcome-view-site",
+    "keywords": [
+        "banner",
+        "hero",
+        "image",
+        "text"
+    ],
+    "apiVersion": 3,
+    "acf": {
+        "mode": "preview",
+        "blockVersion": 3,
+        "renderTemplate": "block-hero-banner.php",
+        "validate": true
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    },
+    "betterbase": {
+        "settings": {
+            "background": "black"
+        }
+    }
+}

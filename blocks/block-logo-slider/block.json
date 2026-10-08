@@ -1,0 +1,32 @@
+{
+    "name": "acf/block-logo-slider",
+    "title": "Logo Slider",
+    "description": "Autoscrolling row of logos from a gallery.",
+    "category": "general",
+    "icon": "slides",
+    "keywords": [
+        "logo",
+        "slider",
+        "carousel",
+        "brands",
+        "partners"
+    ],
+    "apiVersion": 3,
+    "acf": {
+        "mode": "preview",
+        "blockVersion": 3,
+        "renderTemplate": "block-logo-slider.php",
+        "validate": true
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    },
+    "betterbase": {
+        "settings": {
+            "container": "xl",
+            "padding_top": 40,
+            "padding_bottom": 40
+        }
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "name": "acf/block-multicolumn",
+    "title": "Multicolumn",
+    "description": "Multicolumn layout with WYSIWYG editor and optional buttons.",
+    "category": "general",
+    "icon": "columns",
+    "keywords": [
+        "content",
+        "wysiwyg",
+        "image",
+        "column"
+    ],
+    "apiVersion": 3,
+    "acf": {
+        "mode": "preview",
+        "blockVersion": 3,
+        "renderTemplate": "block-multicolumn.php",
+        "validate": true
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    }
+}

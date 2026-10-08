@@ -1,0 +1,29 @@
+{
+    "name": "acf/block-post-header",
+    "title": "Post Header",
+    "description": "Display title, date, and assigned categories for current post.",
+    "category": "blog",
+    "icon": "info",
+    "keywords": [
+        "post",
+        "blog",
+        "wysiwyg"
+    ],
+    "apiVersion": 3,
+    "acf": {
+        "mode": "preview",
+        "blockVersion": 3,
+        "renderTemplate": "block-post-header.php",
+        "validate": true
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    },
+    "betterbase": {
+        "settings": {
+            "padding_top": 40,
+            "padding_bottom": 40
+        }
+    }
+}

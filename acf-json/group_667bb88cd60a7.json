@@ -1,11 +1,32 @@
 {
     "key": "group_667bb88cd60a7",
-    "title": "Block — Gallery",
+    "title": "Block – Gallery",
     "fields": [
+        {
+            "key": "field_6abdade856c92",
+            "label": "Title",
+            "name": "title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "<span class=\"dashicons dashicons-heading\"><\/span>",
+            "append": ""
+        },
         {
             "key": "field_667bb88cdf4c6",
             "label": "Add Images",
-            "name": "block_add_images",
+            "name": "add_images",
             "aria-label": "",
             "type": "gallery",
             "instructions": "",
@@ -28,7 +49,7 @@
             "max_size": "",
             "mime_types": "",
             "insert": "append",
-            "preview_size": "medium"
+            "preview_size": "thumbnail"
         }
     ],
     "location": [
@@ -36,7 +57,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/block-image-gallery"
+                "value": "acf\/block-gallery"
             }
         ]
     ],
@@ -52,5 +73,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1777427915
+    "modified": 1790815843
 }

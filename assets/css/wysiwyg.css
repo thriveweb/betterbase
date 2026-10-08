@@ -1,33 +1,15 @@
 /*-----------------------------------------------------------------------
-    Fonts
------------------------------------------------------------------------*/
-
-@import url("https://use.typekit.net/vql0cno.css");
-
-/*-----------------------------------------------------------------------
     Variables
 -----------------------------------------------------------------------*/
 
 :root {
-    --font-primary: "proxima-nova", sans-serif;
+    --font-primary: "Google Sans", sans-serif;
 
-    --white: #ffffff;
-    --white-rgb: 255, 255, 255;
+    --border-radius-sm: 4px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 24px;
 
-    --grey: #aaaaaa;
-    --grey-rgb: 170, 170, 170;
-
-    --black: #000000;
-    --black-rgb: 0, 0, 0;
-
-    --red: #ff1414;
-    --red-rgb: 255, 20, 20;
-
-    --border-radius-sm: 5px;
-    --border-radius-md: 15px;
-    --border-radius-lg: 30px;
-
-    --transition: 0.25s ease;
+    --transition: 0.3s ease;
 }
 
 /*-----------------------------------------------------------------------
@@ -65,7 +47,7 @@
 }
 
 #tinymce li:not(:last-child) {
-    margin: 0 0 5px !important;
+    margin: 0 0 4px !important;
 }
 
 /* Typography */
@@ -74,36 +56,41 @@
 #tinymce h1 * {
     font-size: 60px;
     line-height: 1.2;
+    font-weight: 500;
 }
 
 #tinymce h2,
 #tinymce h2 * {
-    font-size: 50px;
+    font-size: 48px;
     line-height: 1.2;
+    font-weight: 500;
 }
 
 #tinymce h3,
 #tinymce h3 * {
     font-size: 40px;
     line-height: 1.2;
+    font-weight: 500;
 }
 
 #tinymce h4,
 #tinymce h4 * {
-    font-size: 24px;
+    font-size: 32px;
     line-height: 1.2;
+    font-weight: 500;
 }
 
 #tinymce h5,
 #tinymce h5 * {
-    font-size: 18px;
+    font-size: 20px;
     line-height: 1.2;
+    font-weight: 400;
 }
 
 #tinymce h6,
 #tinymce h6 * {
-    font-size: 11px;
-    letter-spacing: 0.1em;
+    font-size: 12px;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     font-weight: 500;
 }
@@ -125,8 +112,17 @@
 #tinymce a,
 #tinymce a:hover,
 #tinymce a:focus {
-    text-underline-offset: 3px !important;
-    text-decoration-thickness: 1px !important;
+    text-decoration: underline;
+}
+
+#tinymce u {
+    text-decoration: underline;
+}
+
+#tinymce :is(h1, h2, h3, h4, h5, h6) a,
+#tinymce :is(h1, h2, h3, h4, h5, h6) a:hover,
+#tinymce :is(h1, h2, h3, h4, h5, h6) a:focus {
+    text-decoration: none !important;
 }
 
 #tinymce a:hover,
@@ -154,24 +150,26 @@
     content: "";
     display: block;
     position: absolute;
-    top: 9px;
-    left: 3px;
-    width: 3px;
-    height: 3px;
-    border-radius: 3px;
+    top: 8px;
+    left: 4px;
+    width: 4px;
+    height: 4px;
+    border-radius: 4px;
     background: var(--black);
 }
 
 #tinymce ul.list-style-checkmark li {
-    padding: 0 0 0 25px;
+    padding: 0 0 0 24px;
 }
 
 #tinymce ul.list-style-checkmark > li:before {
-    top: 5px;
-    width: 14px;
-    height: 14px;
-    background: url(../img/icon-checkmark.svg) 50% no-repeat;
-    background-size: 14px;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    background-color: var(--black);
+    background-image: none;
+    -webkit-mask: url(../img/icon-checkmark.svg) center / 16px no-repeat;
+    mask: url(../img/icon-checkmark.svg) center / 16px no-repeat;
 }
 
 #tinymce ol {
@@ -194,7 +192,7 @@
     margin-left: 0;
     margin-right: 0;
     padding: 20px 0 20px 20px;
-    border-left: 1px solid var(--black);
+    border-left: 3px solid var(--blue);
 }
 
 /* Images */
@@ -227,7 +225,7 @@
 /* Misc */
 
 #tinymce code {
-    padding: 10px;
+    padding: 8px;
     color: var(--white);
     background: var(--black);
 }

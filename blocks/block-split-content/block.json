@@ -1,0 +1,25 @@
+{
+    "name": "acf/block-split-content",
+    "title": "Split Content",
+    "description": "Two column layout with image and WYSIWYG editor options.",
+    "category": "general",
+    "icon": "align-left",
+    "keywords": [
+        "columns",
+        "image",
+        "content",
+        "split",
+        "wysiwyg"
+    ],
+    "apiVersion": 3,
+    "acf": {
+        "mode": "preview",
+        "blockVersion": 3,
+        "renderTemplate": "block-split-content.php",
+        "validate": true
+    },
+    "supports": {
+        "anchor": true,
+        "align": false
+    }
+}
