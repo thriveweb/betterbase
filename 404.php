@@ -2,7 +2,7 @@
 
 <div class="page-error">
     <div class="block-404">
-        <div class="block-setting-padding block-setting-background-color" style="--block-padding-top 120px; --block-padding-bottom: 120px; --block-background-color: var(--light-grey);">
+        <div class="block-setting-padding block-setting-background-color" style="--block-padding-top: 120px; --block-padding-bottom: 120px; --block-background-color: var(--light-grey);">
             <div class="container-sm">
                 <div class="wysiwyg-content text-align-center">
                     <h1>404 Not Found</h1>
